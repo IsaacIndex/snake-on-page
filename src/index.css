@@ -1,0 +1,12 @@
+body {
+  /* overflow: hidden; */
+}
+
+p {
+  margin: 10vh;
+}
+
+#snakeGame {
+  position: fixed;
+  top: 0;
+}
