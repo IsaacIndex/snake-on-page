@@ -14,13 +14,14 @@ const DIRECTIONS = {
 };
 
 // New ==============================
-const VELOCITY = 0.25
-const SIZE = 50
+const SIZE = 20
 // [x, y]
 const SNAKE = [
   [Math.round(window.innerWidth / 2), Math.round(window.innerHeight / 2)],
-  [Math.round(window.innerWidth / 2) - SIZE - 1, Math.round(window.innerHeight / 2)],
+  [Math.round(window.innerWidth / 2) - SIZE, Math.round(window.innerHeight / 2)],
+  [Math.round(window.innerWidth / 2) - SIZE * 2, Math.round(window.innerHeight / 2)],
 ];
+const FRAME = 120
 
 export {
   CANVAS_SIZE,
@@ -30,7 +31,7 @@ export {
   SPEED,
   DIRECTIONS,
 
-  VELOCITY,
   SNAKE,
-  SIZE
+  SIZE,
+  FRAME
 };
