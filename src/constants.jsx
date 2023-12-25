@@ -13,11 +13,23 @@ const DIRECTIONS = {
   39: [1, 0] // right
 };
 
+// New
+const VELOCITY = 0.025
+// [x, y]
+const SNAKE_BODY = [
+  [window.innerWidth / 2, window.innerHeight / 2],
+];
+const SIZE = 10
+
 export {
   CANVAS_SIZE,
   SNAKE_START,
   APPLE_START,
   SCALE,
   SPEED,
-  DIRECTIONS
+  DIRECTIONS,
+
+  VELOCITY,
+  SNAKE_BODY,
+  SIZE
 };

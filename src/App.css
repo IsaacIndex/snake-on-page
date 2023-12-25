@@ -1,0 +1,49 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+#snakeGame {
+  position: fixed;
+  top: 0;
+}
+
+#board {
+  position: fixed;
+  top: 0;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+p {
+  line-height: 1.5;
+  color: #555;
+}
+
+.bg-red {
+  background-color: #FF4136;
+  color: #FFF;
+}
+
+.bg-blue {
+  background-color: #0074D9;
+  color: #FFF;
+}
+
+.bg-green {
+  background-color: #2ECC40;
+  color: #FFF;
+}
