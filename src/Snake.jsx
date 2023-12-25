@@ -9,29 +9,35 @@ const Snake = () => {
   const boardRef = useRef();
   const timeRef = useRef(0);
   const snakeRef = useRef(SNAKE);
-  const directionRef = useRef([1, 0]); // [x, y]
+  const directionRef = useRef("right");
 
 
   const moveSnake = () => {
+    const dirMap = {
+      "right": [1, 0],
+      "left": [-1, 0],
+      "up": [0, -1],
+      "down": [0, 1],
+    }
     // snakeRef.current.unshift(
     //   [snakeRef.current[0][0] + Math.round(directionRef.current[0] * VELOCITY * delta) * SIZE,
     //   snakeRef.current[0][1] + Math.round(directionRef.current[1] * VELOCITY * delta) * SIZE]
     // );
     snakeRef.current.unshift(
-      [snakeRef.current[0][0] + directionRef.current[0] * SIZE,
-      snakeRef.current[0][1] + directionRef.current[1] * SIZE]
+      [snakeRef.current[0][0] + dirMap[directionRef.current][0] * SIZE,
+      snakeRef.current[0][1] + dirMap[directionRef.current][1] * SIZE]
     );
 
     // offset for centre
-    console.log("before:", snakeRef.current)
-    if (directionRef.current[1] = 1) {
-      snakeRef.current.forEach(s => s[1] -= SIZE)
-      // scrollBy(0, SIZE)
-    } else if (directionRef.current[1] = -1) {
-      snakeRef.current.forEach(s => s[1] += SIZE)
-      // scrollBy(0, -SIZE)
-    }
-    console.log("after:", snakeRef.current)
+    // console.log("before:", snakeRef.current)
+    // if (directionRef.current[1] = 1) {
+    //   snakeRef.current.forEach(s => s[1] -= SIZE)
+    //   // scrollBy(0, SIZE)
+    // } else if (directionRef.current[1] = -1) {
+    //   snakeRef.current.forEach(s => s[1] += SIZE)
+    //   // scrollBy(0, -SIZE)
+    // }
+    // console.log("after:", snakeRef.current)
 
     snakeRef.current.pop()
   }
@@ -68,23 +74,19 @@ const Snake = () => {
     const keyUpdate = e => {
       switch (e.key) {
         case "ArrowLeft":
-          if (directionRef.current[0] != 1) directionRef.current[0] = -1
-          directionRef.current[1] = 0
+          if (directionRef.current != "right") directionRef.current = "left"
           break;
         case "ArrowRight":
-          if (directionRef.current[0] != -1) directionRef.current[0] = 1
-          directionRef.current[1] = 0
+          if (directionRef.current != "left") directionRef.current = "right"
           break;
         case "ArrowUp":
-          if (directionRef.current[1] != 1) directionRef.current[1] = -1
-          directionRef.current[0] = 0
+          if (directionRef.current != "down") directionRef.current = "up"
           break;
         case "ArrowDown":
-          if (directionRef.current[1] != -1) directionRef.current[1] = 1
-          directionRef.current[0] = 0
+          if (directionRef.current != "up") directionRef.current = "down"
           break;
       }
-      console.log(e.key, directionRef.current)
+      // console.log(e.key, directionRef.current)
     }
 
     window.addEventListener("keydown", keyUpdate);
