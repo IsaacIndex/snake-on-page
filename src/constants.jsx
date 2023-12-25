@@ -21,7 +21,7 @@ const SNAKE = [
   [Math.round(window.innerWidth / 2) - SIZE, Math.round(window.innerHeight / 2)],
   [Math.round(window.innerWidth / 2) - SIZE * 2, Math.round(window.innerHeight / 2)],
 ];
-const FRAME = 120
+const FRAME = 60
 
 export {
   CANVAS_SIZE,

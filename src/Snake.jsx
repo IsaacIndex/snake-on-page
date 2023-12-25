@@ -19,27 +19,27 @@ const Snake = () => {
       "up": [0, -1],
       "down": [0, 1],
     }
-    // snakeRef.current.unshift(
-    //   [snakeRef.current[0][0] + Math.round(directionRef.current[0] * VELOCITY * delta) * SIZE,
-    //   snakeRef.current[0][1] + Math.round(directionRef.current[1] * VELOCITY * delta) * SIZE]
-    // );
+
+    console.log("============", directionRef.current)
+    console.log("before Move:", snakeRef.current)
     snakeRef.current.unshift(
       [snakeRef.current[0][0] + dirMap[directionRef.current][0] * SIZE,
       snakeRef.current[0][1] + dirMap[directionRef.current][1] * SIZE]
     );
+    snakeRef.current.pop()
+    console.log("after Move:", snakeRef.current)
 
     // offset for centre
-    // console.log("before:", snakeRef.current)
-    // if (directionRef.current[1] = 1) {
-    //   snakeRef.current.forEach(s => s[1] -= SIZE)
-    //   // scrollBy(0, SIZE)
-    // } else if (directionRef.current[1] = -1) {
-    //   snakeRef.current.forEach(s => s[1] += SIZE)
-    //   // scrollBy(0, -SIZE)
-    // }
-    // console.log("after:", snakeRef.current)
+    console.log("before:", snakeRef.current)
+    if (directionRef.current == "down") {
+      snakeRef.current.forEach(s => s[1] -= SIZE)
+      scrollBy(0, SIZE)
+    } else if (directionRef.current == "up") {
+      snakeRef.current.forEach(s => s[1] += SIZE)
+      scrollBy(0, -SIZE)
+    }
+    console.log("after:", snakeRef.current)
 
-    snakeRef.current.pop()
   }
 
   // Game Loop
