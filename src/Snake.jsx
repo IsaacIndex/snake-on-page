@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import {
-  SNAKE_BODY,
+  SNAKE,
   VELOCITY,
   SIZE
 } from "./constants";
@@ -8,35 +8,45 @@ import {
 const Snake = () => {
   const boardRef = useRef();
   const timeRef = useRef(null);
-  const snakeBodyRef = useRef();
+  const snakeRef = useRef(SNAKE);
+  const directionRef = useRef("left");
+
 
   const moveSnake = (delta, count) => {
-    // console.log(delta)
-    const canvas = boardRef.current
-    const context = canvas.getContext('2d')
-    context.clearRect(0, 0, context.canvas.width, context.canvas.height)
-    context.fillStyle = 'grey'
-    const d = count % 800
-    context.fillRect(10 + count, 10, 100, 100)
+    console.log(snakeRef.current)
+    snakeRef.current.forEach(s => {
+      switch (directionRef.current) {
+        case "left":
+          s[0] -= Math.round(VELOCITY * delta)
+          break;
+        case "right":
+          s[0] += Math.round(VELOCITY * delta)
+          break;
+        case "up":
+          s[1] -= Math.round(VELOCITY * delta)
+          break;
+        case "down":
+          s[1] += Math.round(VELOCITY * delta)
+          break;
+      }
+    })
   }
-  // const update = (time) => {
-  //   if (timeRef.current != null) {
-  //     moveSnake(time - timeRef.current)
-  //   }
-  //   timeRef.current = time;
-  //   requestAnimationFrame(update)
-  // }
-
 
   useEffect(() => {
 
-    let count = 0
     let animationId
 
-    const renderer = (time) => {
+    const renderer = time => {
       if (timeRef.current != null) {
-        count++
-        moveSnake(time - timeRef.current, count)
+        // changes
+        moveSnake(time - timeRef.current)
+
+        // render
+        const canvas = boardRef.current
+        const context = canvas.getContext('2d')
+        context.clearRect(0, 0, context.canvas.width, context.canvas.height)
+        context.fillStyle = "lightblue";
+        snakeRef.current.forEach(s => context.fillRect(s[0], s[1], SIZE, SIZE))
       }
       timeRef.current = time;
       animationId = window.requestAnimationFrame(renderer)
