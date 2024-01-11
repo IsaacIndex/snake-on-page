@@ -3,13 +3,15 @@ import SnakeSprite from "./assets/snake-graphics.png"
 import {
   SNAKE,
   SIZE,
-  FRAME
+  FRAME,
+  APPLE
 } from "./constants";
 
 const Snake = () => {
   const boardRef = useRef();
   const timeRef = useRef(0);
   const snakeRef = useRef(SNAKE);
+  const appleRef = useRef(APPLE);
   const directionRef = useRef("right");
   const SnakeSpriteImg = new Image();
   SnakeSpriteImg.src = SnakeSprite;
@@ -36,7 +38,24 @@ const Snake = () => {
       snakeRef.current[0][0] = 0
     }
 
-    snakeRef.current.pop()
+    // TODO: add eat apple -> no pop
+    var appleEaten = -1
+    appleRef.current.forEach((currApple, index) => {
+      // check width height
+      console.log(snakeRef.current[0][0], currApple[0], snakeRef.current[0][1] + scrollY, currApple[1])
+      if (Math.abs(snakeRef.current[0][0] - currApple[0]) < SIZE &&
+        Math.abs(snakeRef.current[0][1] + scrollY - currApple[1]) < SIZE) {
+        appleEaten = true
+        console.log("eaten")
+      }
+    })
+
+    if (appleEaten >= 0) {
+      appleRef.current = appleRef.current.splice(appleEaten, 1)
+      appleEaten = -1
+    } else {
+      snakeRef.current.pop()
+    }
 
     // offset to stay in the centre
     if (directionRef.current == "down") {
@@ -81,6 +100,7 @@ const Snake = () => {
           clipx = 3; clipy = 2;
         } else if (pseg[0] > segx) {
           // Right
+          // TODO: problem when across board
           clipx = 4; clipy = 2;
         } else if (pseg[1] > segy) {
           // Down
@@ -132,13 +152,19 @@ const Snake = () => {
     }
   }
 
+  const drawApple = (context) => {
+    appleRef.current.forEach(a => {
+      context.drawImage(SnakeSpriteImg, 0 * 64, 3 * 64, 64, 64, a[0], a[1] - scrollY, SIZE, SIZE)
+    })
+  }
+
   // Game Loop
   useEffect(() => {
     let animationId
     const renderer = time => {
       if (time - timeRef.current >= FRAME) {
         // changes
-        moveSnake(time - timeRef.current)
+        moveSnake()
 
         // start to draw the objects
         const canvas = boardRef.current
@@ -147,6 +173,8 @@ const Snake = () => {
         // context.fillSclipyle = "lightblue";
         // snakeRef.current.forEach(s => context.fillRect(s[0], s[1], SIZE, SIZE))
         drawSnake(context)
+
+        drawApple(context)
 
         timeRef.current = time;
       }
@@ -161,8 +189,6 @@ const Snake = () => {
 
   // Setup useEffect
   useEffect(() => {
-    // console.log("setup useEffect")
-
     // resize canvas
     const canvas = boardRef.current;
     const resizeCanvas = () => {

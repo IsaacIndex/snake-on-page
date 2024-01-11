@@ -14,7 +14,7 @@ const DIRECTIONS = {
 };
 
 // New =================================================================================================
-const SIZE = 20
+const SIZE = 30
 // [x, y]
 const SNAKE = [
   [Math.round(window.innerWidth / 2), Math.round(window.innerHeight / 2)],
@@ -26,6 +26,9 @@ const SNAKE = [
   [Math.round(window.innerWidth / 2) - SIZE * 6, Math.round(window.innerHeight / 2)],
 ];
 const FRAME = 40
+const APPLE = [
+  [0, 463 * 2]
+]
 
 export {
   CANVAS_SIZE,
@@ -37,5 +40,6 @@ export {
 
   SNAKE,
   SIZE,
-  FRAME
+  FRAME,
+  APPLE
 };
