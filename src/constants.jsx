@@ -13,15 +13,19 @@ const DIRECTIONS = {
   39: [1, 0] // right
 };
 
-// New ==============================
+// New =================================================================================================
 const SIZE = 20
 // [x, y]
 const SNAKE = [
   [Math.round(window.innerWidth / 2), Math.round(window.innerHeight / 2)],
   [Math.round(window.innerWidth / 2) - SIZE, Math.round(window.innerHeight / 2)],
   [Math.round(window.innerWidth / 2) - SIZE * 2, Math.round(window.innerHeight / 2)],
+  [Math.round(window.innerWidth / 2) - SIZE * 3, Math.round(window.innerHeight / 2)],
+  [Math.round(window.innerWidth / 2) - SIZE * 4, Math.round(window.innerHeight / 2)],
+  [Math.round(window.innerWidth / 2) - SIZE * 5, Math.round(window.innerHeight / 2)],
+  [Math.round(window.innerWidth / 2) - SIZE * 6, Math.round(window.innerHeight / 2)],
 ];
-const FRAME = 60
+const FRAME = 40
 
 export {
   CANVAS_SIZE,

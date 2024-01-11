@@ -23,17 +23,22 @@ const Snake = () => {
       "down": [0, 1],
     }
 
-    // console.log("============", directionRef.current)
-    // console.log("before Move:", snakeRef.current)
+    // add new head
     snakeRef.current.unshift(
       [snakeRef.current[0][0] + dirMap[directionRef.current][0] * SIZE,
       snakeRef.current[0][1] + dirMap[directionRef.current][1] * SIZE]
     );
+
+    // if collide with wall
+    if (snakeRef.current[0][0] < 0) {
+      snakeRef.current[0][0] = window.innerWidth
+    } else if (snakeRef.current[0][0] > window.innerWidth) {
+      snakeRef.current[0][0] = 0
+    }
+
     snakeRef.current.pop()
-    // console.log("after Move:", snakeRef.current)
 
     // offset to stay in the centre
-    // console.log("before:", snakeRef.current)
     if (directionRef.current == "down") {
       snakeRef.current.forEach(s => s[1] -= SIZE)
       scrollBy(0, SIZE)
@@ -41,13 +46,10 @@ const Snake = () => {
       snakeRef.current.forEach(s => s[1] += SIZE)
       scrollBy(0, -SIZE)
     }
-    // console.log("after:", snakeRef.current)
-
   }
 
   const drawSnake = (context) => {
     // credits to https://github.com/rembound/Snake-Game-HTML5/blob/master/snake.js
-
     for (var i = 0; i < snakeRef.current.length; i++) {
       var clipx = 0
       var clipy = 0
@@ -109,6 +111,9 @@ const Snake = () => {
         } else if (pseg[1] > segy && nseg[0] > segx || nseg[1] > segy && pseg[0] > segx) {
           // Angle Down-Right
           clipx = 0; clipy = 0;
+        } else {
+          // when across board
+          clipx = 1; clipy = 0;
         }
       }
 
