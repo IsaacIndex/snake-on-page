@@ -1,4 +1,5 @@
 import { useRef, useEffect } from "react";
+import { simulate } from '@bjornlu/colorblind'
 import SnakeSprite from "./assets/snake-graphics.png"
 import {
   SNAKE,
@@ -158,6 +159,35 @@ const Snake = () => {
     })
   }
 
+  const processImage = (context, deficiency) => {
+    const srcContext = context
+    const distContext = context
+
+    const imageData = srcContext.getImageData(
+      0,
+      0,
+      boardRef.current.width,
+      boardRef.current.height
+    )
+
+    const data = imageData.data
+
+    for (let i = 0; i < data.length; i += 4) {
+      const r = data[i]
+      const g = data[i + 1]
+      const b = data[i + 2]
+
+      const simColor = simulate({ r, g, b }, deficiency)
+
+      data[i] = simColor.r
+      data[i + 1] = simColor.g
+      data[i + 2] = simColor.b
+    }
+
+    distContext.clearRect(0, 0, boardRef.current.width, boardRef.current.height)
+    distContext.putImageData(imageData, 0, 0)
+  }
+
   // Game Loop
   useEffect(() => {
     let animationId
@@ -175,6 +205,8 @@ const Snake = () => {
         drawSnake(context)
 
         drawApple(context)
+
+        // processImage(context, "deuteranopia")
 
         timeRef.current = time;
       }

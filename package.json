@@ -10,9 +10,12 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "simulate": "node src/simulate.js"
   },
   "dependencies": {
+    "@bjornlu/colorblind": "^1.0.3",
+    "canvas": "^2.11.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
