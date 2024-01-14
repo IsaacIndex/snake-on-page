@@ -27,7 +27,7 @@ const SNAKE = [
 ];
 const FRAME = 40
 const APPLE = [
-  [0, 463 * 2]
+  [0.3, 0.3]
 ]
 
 export {

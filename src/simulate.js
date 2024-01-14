@@ -1,4 +1,5 @@
 import { createCanvas, loadImage } from 'canvas';
+import { simulate } from '@bjornlu/colorblind'
 import fs from 'fs';
 
 // URL of the image you want to import
@@ -6,7 +7,37 @@ import fs from 'fs';
 const imageUrl = './src/assets/snake-graphics.png';
 
 // Path where you want to save the output PNG file
-const outputPath = 'src/assets/output.png';
+const outputPath = 'src/assets/';
+
+// Function to simulate the image and export it as PNG inside a canvas
+const processImage = (context, image, deficiency) => {
+  const srcContext = context
+  const distContext = context
+
+  const imageData = srcContext.getImageData(
+    0,
+    0,
+    image.width,
+    image.height
+  )
+
+  const data = imageData.data
+
+  for (let i = 0; i < data.length; i += 4) {
+    const r = data[i]
+    const g = data[i + 1]
+    const b = data[i + 2]
+
+    const simColor = simulate({ r, g, b }, deficiency)
+
+    data[i] = simColor.r
+    data[i + 1] = simColor.g
+    data[i + 2] = simColor.b
+  }
+
+  distContext.clearRect(0, 0, image.width, image.height)
+  distContext.putImageData(imageData, 0, 0)
+}
 
 // Function to import the image and export it as PNG inside a canvas
 async function importAndExportImage() {
@@ -18,20 +49,29 @@ async function importAndExportImage() {
     const canvas = createCanvas(image.width, image.height);
     const context = canvas.getContext('2d');
 
-    // Draw the image on the canvas
-    context.drawImage(image, 0, 0);
 
-    // Export the canvas as a PNG file
-    const stream = canvas.createPNGStream();
-    const fileStream = fs.createWriteStream(outputPath);
-    stream.pipe(fileStream);
+    // simulate
+    const deficiencies = ["protanopia", "deuteranopia", "tritanopia", "achromatopsia"]
+    for (let deficiency of deficiencies) {
+      // Draw the image on the canvas
+      context.drawImage(image, 0, 0);
 
-    // Wait for the file to finish writing
-    await new Promise((resolve) => {
-      fileStream.on('finish', resolve);
-    });
+      processImage(context, image, deficiency)
 
-    console.log('Image exported successfully!');
+      // Export the canvas as a PNG file
+      const stream = canvas.createPNGStream();
+      const fileStream = fs.createWriteStream(outputPath + imageUrl.split('/').pop().split('.').shift() + "_" + deficiency + ".png");
+      stream.pipe(fileStream);
+
+      // Wait for the file to finish writing
+      await new Promise((resolve) => {
+        fileStream.on('finish', resolve);
+      });
+      context.clearRect(0, 0, canvas.width, canvas.height)
+
+      console.log('Image exported successfully!');
+    }
+
   } catch (error) {
     console.error('An error occurred:', error);
   }

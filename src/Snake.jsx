@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import { simulate } from '@bjornlu/colorblind'
-import SnakeSprite from "./assets/snake-graphics.png"
+import SnakeSprite from "./assets/snake_sprite/snake-graphics.png"
 import {
   SNAKE,
   SIZE,
@@ -41,9 +41,9 @@ const Snake = () => {
 
     // TODO: add eat apple -> no pop
     var appleEaten = -1
-    appleRef.current.forEach((currApple, index) => {
+    appleRef.current.forEach((currApple) => {
       // check width height
-      console.log(snakeRef.current[0][0], currApple[0], snakeRef.current[0][1] + scrollY, currApple[1])
+      // console.log(snakeRef.current[0][0], currApple[0], snakeRef.current[0][1] + scrollY, currApple[1])
       if (Math.abs(snakeRef.current[0][0] - currApple[0]) < SIZE &&
         Math.abs(snakeRef.current[0][1] + scrollY - currApple[1]) < SIZE) {
         appleEaten = true
@@ -155,37 +155,8 @@ const Snake = () => {
 
   const drawApple = (context) => {
     appleRef.current.forEach(a => {
-      context.drawImage(SnakeSpriteImg, 0 * 64, 3 * 64, 64, 64, a[0], a[1] - scrollY, SIZE, SIZE)
+      context.drawImage(SnakeSpriteImg, 0 * 64, 3 * 64, 64, 64, a[0] * window.innerWidth, a[1] * document.documentElement.scrollHeight - scrollY, SIZE, SIZE)
     })
-  }
-
-  const processImage = (context, deficiency) => {
-    const srcContext = context
-    const distContext = context
-
-    const imageData = srcContext.getImageData(
-      0,
-      0,
-      boardRef.current.width,
-      boardRef.current.height
-    )
-
-    const data = imageData.data
-
-    for (let i = 0; i < data.length; i += 4) {
-      const r = data[i]
-      const g = data[i + 1]
-      const b = data[i + 2]
-
-      const simColor = simulate({ r, g, b }, deficiency)
-
-      data[i] = simColor.r
-      data[i + 1] = simColor.g
-      data[i + 2] = simColor.b
-    }
-
-    distContext.clearRect(0, 0, boardRef.current.width, boardRef.current.height)
-    distContext.putImageData(imageData, 0, 0)
   }
 
   // Game Loop
@@ -205,8 +176,6 @@ const Snake = () => {
         drawSnake(context)
 
         drawApple(context)
-
-        // processImage(context, "deuteranopia")
 
         timeRef.current = time;
       }
