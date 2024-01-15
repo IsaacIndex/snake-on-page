@@ -17,7 +17,7 @@ const Snake = () => {
   const appleRef = useRef(APPLE);
   const directionRef = useRef("right");
   const [mapImg, setMapImg] = useState(mapImages["normal"])
-  const [snakeSpriteImg, setSnakeSpriteImg] = useState(null);
+  const snakeSpriteImgRef = useRef(null);
 
 
   const moveSnake = () => {
@@ -57,7 +57,7 @@ const Snake = () => {
         appleRef.current.splice(index, 1)
         const SnakeSpriteImg = new Image()
         SnakeSpriteImg.src = snakeImages[deficiency]
-        setSnakeSpriteImg(SnakeSpriteImg)
+        snakeSpriteImgRef.current = SnakeSpriteImg
         setMapImg(mapImages[deficiency])
         index--
       }
@@ -158,13 +158,13 @@ const Snake = () => {
       }
 
       // Draw snake
-      context.drawImage(snakeSpriteImg, clipx * 64, clipy * 64, 64, 64, snakeRef.current[i][0] + randomNumber[0], snakeRef.current[i][1] + randomNumber[1], SIZE, SIZE)
+      context.drawImage(snakeSpriteImgRef.current, clipx * 64, clipy * 64, 64, 64, snakeRef.current[i][0] + randomNumber[0], snakeRef.current[i][1] + randomNumber[1], SIZE, SIZE)
     }
   }
 
   const drawApple = (context) => {
     appleRef.current.forEach(([deficiency, applePosition]) => {
-      context.drawImage(snakeSpriteImg, 0 * 64, 3 * 64, 64, 64, applePosition[0] * document.documentElement.scrollWidth, applePosition[1] * document.documentElement.scrollHeight - scrollY, SIZE, SIZE)
+      context.drawImage(snakeSpriteImgRef.current, 0 * 64, 3 * 64, 64, 64, applePosition[0] * document.documentElement.scrollWidth, applePosition[1] * document.documentElement.scrollHeight - scrollY, SIZE, SIZE)
       context.font = "20px Georgia";
       context.fillStyle = "white"
       context.fillText(deficiency, applePosition[0] * document.documentElement.scrollWidth, applePosition[1] * document.documentElement.scrollHeight - scrollY + SIZE)
@@ -207,7 +207,7 @@ const Snake = () => {
     // snake image
     const SnakeSpriteImg = new Image()
     SnakeSpriteImg.src = snakeImages.normal
-    setSnakeSpriteImg(SnakeSpriteImg)
+    snakeSpriteImgRef.current = SnakeSpriteImg
 
     // resize canvas
     const canvas = boardRef.current;
