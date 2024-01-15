@@ -1,21 +1,22 @@
-import { useRef, useEffect } from "react";
-import { simulate } from '@bjornlu/colorblind'
-import SnakeSprite from "./assets/snake_sprite/snake-graphics.png"
+import { useRef, useEffect, useState } from "react";
+import React from 'react';
 import {
   SNAKE,
   SIZE,
   FRAME,
   APPLE
 } from "./constants";
+import { snakeSprite } from "./canvasImages";
 
 const Snake = () => {
+  console.log("Snake")
   const boardRef = useRef();
   const timeRef = useRef(0);
   const snakeRef = useRef(SNAKE);
   const appleRef = useRef(APPLE);
   const directionRef = useRef("right");
-  const SnakeSpriteImg = new Image();
-  SnakeSpriteImg.src = SnakeSprite;
+  const SnakeSpriteImg = new Image()
+  SnakeSpriteImg.src = snakeSprite.normal
 
 
   const moveSnake = () => {
@@ -39,22 +40,26 @@ const Snake = () => {
       snakeRef.current[0][0] = 0
     }
 
-    // TODO: add eat apple -> no pop
-    var appleEaten = -1
-    appleRef.current.forEach((currApple) => {
-      // check width height
-      // console.log(snakeRef.current[0][0], currApple[0], snakeRef.current[0][1] + scrollY, currApple[1])
-      if (Math.abs(snakeRef.current[0][0] - currApple[0]) < SIZE &&
-        Math.abs(snakeRef.current[0][1] + scrollY - currApple[1]) < SIZE) {
-        appleEaten = true
-        console.log("eaten")
-      }
-    })
+    const apples = appleRef.current;
+    let appleEaten = false
+    for (let index = 0; index < apples.length; index++) {
+      const [deficiency, applePosition] = apples[index];
 
-    if (appleEaten >= 0) {
-      appleRef.current = appleRef.current.splice(appleEaten, 1)
-      appleEaten = -1
-    } else {
+      // Check width and height
+      console.log((snakeRef.current[0][1] + scrollY), (applePosition[1] * document.documentElement.scrollHeight + scrollY))
+      if (
+        Math.abs(snakeRef.current[0][0] - applePosition[0] * document.documentElement.scrollWidth) < SIZE &&
+        Math.abs(snakeRef.current[0][1] - applePosition[1] * document.documentElement.scrollHeight) < (SIZE + scrollY)
+      ) {
+        console.log("eaten")
+        appleEaten = true
+        appleRef.current.splice(index, 1)
+        SnakeSpriteImg.src = snakeSprite[deficiency]
+        index--
+      }
+    }
+
+    if (!appleEaten) {
       snakeRef.current.pop()
     }
 
@@ -154,8 +159,8 @@ const Snake = () => {
   }
 
   const drawApple = (context) => {
-    appleRef.current.forEach(a => {
-      context.drawImage(SnakeSpriteImg, 0 * 64, 3 * 64, 64, 64, a[0] * window.innerWidth, a[1] * document.documentElement.scrollHeight - scrollY, SIZE, SIZE)
+    appleRef.current.forEach(([deficiency, applePosition]) => {
+      context.drawImage(SnakeSpriteImg, 0 * 64, 3 * 64, 64, 64, applePosition[0] * window.innerWidth, applePosition[1] * document.documentElement.scrollHeight - scrollY, SIZE, SIZE)
     })
   }
 

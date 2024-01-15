@@ -26,8 +26,11 @@ const SNAKE = [
   [Math.round(window.innerWidth / 2) - SIZE * 6, Math.round(window.innerHeight / 2)],
 ];
 const FRAME = 40
+
+// position based on ratio on map
 const APPLE = [
-  [0.3, 0.3]
+  ["protanopia", [0.3, 0.3]],
+  ["deuteranopia", [0.4, 0.35]]
 ]
 
 export {
