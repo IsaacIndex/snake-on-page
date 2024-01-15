@@ -164,7 +164,10 @@ const Snake = () => {
 
   const drawApple = (context) => {
     appleRef.current.forEach(([deficiency, applePosition]) => {
-      context.drawImage(snakeSpriteImg, 0 * 64, 3 * 64, 64, 64, applePosition[0] * window.innerWidth, applePosition[1] * document.documentElement.scrollHeight - scrollY, SIZE, SIZE)
+      context.drawImage(snakeSpriteImg, 0 * 64, 3 * 64, 64, 64, applePosition[0] * document.documentElement.scrollWidth, applePosition[1] * document.documentElement.scrollHeight - scrollY, SIZE, SIZE)
+      context.font = "20px Georgia";
+      context.fillStyle = "white"
+      context.fillText(deficiency, applePosition[0] * document.documentElement.scrollWidth, applePosition[1] * document.documentElement.scrollHeight - scrollY + SIZE)
     })
   }
 
