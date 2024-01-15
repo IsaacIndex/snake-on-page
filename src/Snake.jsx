@@ -6,7 +6,8 @@ import {
   FRAME,
   APPLE
 } from "./constants";
-import { snakeSprite } from "./canvasImages";
+import snakeImages from "./snakeImages";
+import mapImages from "./mapImages";
 
 const Snake = () => {
   console.log("Snake")
@@ -15,8 +16,8 @@ const Snake = () => {
   const snakeRef = useRef(SNAKE);
   const appleRef = useRef(APPLE);
   const directionRef = useRef("right");
-  const SnakeSpriteImg = new Image()
-  SnakeSpriteImg.src = snakeSprite.normal
+  const [mapImg, setMapImg] = useState(mapImages["normal"])
+  const [snakeSpriteImg, setSnakeSpriteImg] = useState(null);
 
 
   const moveSnake = () => {
@@ -54,7 +55,10 @@ const Snake = () => {
         console.log("eaten")
         appleEaten = true
         appleRef.current.splice(index, 1)
-        SnakeSpriteImg.src = snakeSprite[deficiency]
+        const SnakeSpriteImg = new Image()
+        SnakeSpriteImg.src = snakeImages[deficiency]
+        setSnakeSpriteImg(SnakeSpriteImg)
+        setMapImg(mapImages[deficiency])
         index--
       }
     }
@@ -154,13 +158,13 @@ const Snake = () => {
       }
 
       // Draw snake
-      context.drawImage(SnakeSpriteImg, clipx * 64, clipy * 64, 64, 64, snakeRef.current[i][0] + randomNumber[0], snakeRef.current[i][1] + randomNumber[1], SIZE, SIZE)
+      context.drawImage(snakeSpriteImg, clipx * 64, clipy * 64, 64, 64, snakeRef.current[i][0] + randomNumber[0], snakeRef.current[i][1] + randomNumber[1], SIZE, SIZE)
     }
   }
 
   const drawApple = (context) => {
     appleRef.current.forEach(([deficiency, applePosition]) => {
-      context.drawImage(SnakeSpriteImg, 0 * 64, 3 * 64, 64, 64, applePosition[0] * window.innerWidth, applePosition[1] * document.documentElement.scrollHeight - scrollY, SIZE, SIZE)
+      context.drawImage(snakeSpriteImg, 0 * 64, 3 * 64, 64, 64, applePosition[0] * window.innerWidth, applePosition[1] * document.documentElement.scrollHeight - scrollY, SIZE, SIZE)
     })
   }
 
@@ -195,6 +199,13 @@ const Snake = () => {
 
   // Setup useEffect
   useEffect(() => {
+    console.log("setup")
+
+    // snake image
+    const SnakeSpriteImg = new Image()
+    SnakeSpriteImg.src = snakeImages.normal
+    setSnakeSpriteImg(SnakeSpriteImg)
+
     // resize canvas
     const canvas = boardRef.current;
     const resizeCanvas = () => {
@@ -237,6 +248,7 @@ const Snake = () => {
   return (
     <>
       <canvas id="board" ref={boardRef} />
+      <img src={mapImg} style={{ maxWidth: '100%' }} />
     </>
   )
 }

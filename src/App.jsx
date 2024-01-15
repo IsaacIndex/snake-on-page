@@ -10,7 +10,6 @@ function App() {
   return (
     <>
       <Snake />
-      <img src={Map} style={{ maxWidth: '100%' }} />
     </>
   )
 }
