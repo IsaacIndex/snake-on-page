@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useMemo } from "react";
 import React from 'react';
 import {
   SNAKE,
@@ -18,8 +18,18 @@ const Snake = () => {
   const appleRef = useRef(APPLE);
   const directionRef = useRef("right");
   const snakeSpriteImgRef = useRef(null);
-  const mapRef = useRef("normal")
+  const [mapDeficiency, setMapDeficiency] = useState("normal")
 
+  // may be a overkill
+  const hidden = useMemo(() => {
+    return {
+      normal: mapDeficiency !== 'normal',
+      achromatopsia: mapDeficiency !== 'achromatopsia',
+      deuteranopia: mapDeficiency !== 'deuteranopia',
+      protanopia: mapDeficiency !== 'protanopia',
+      tritanopia: mapDeficiency !== 'tritanopia',
+    };
+  }, [mapDeficiency]);
 
   const moveSnake = () => {
     const dirMap = {
@@ -48,10 +58,10 @@ const Snake = () => {
       const [deficiency, applePosition] = apples[index];
 
       // Check width and height
-      console.log((snakeRef.current[0][1] + scrollY), (applePosition[1] * document.documentElement.scrollHeight + scrollY))
+      // console.log(snakeRef.current[0][1], applePosition[1] * document.documentElement.scrollHeight)
       if (
         Math.abs(snakeRef.current[0][0] - applePosition[0] * document.documentElement.scrollWidth) < SIZE &&
-        Math.abs(snakeRef.current[0][1] - applePosition[1] * document.documentElement.scrollHeight) < (SIZE + scrollY)
+        Math.abs((snakeRef.current[0][1] + scrollY) - applePosition[1] * document.documentElement.scrollHeight) < (SIZE)
       ) {
         console.log("eaten")
         appleEaten = true
@@ -59,7 +69,7 @@ const Snake = () => {
         const SnakeSpriteImg = new Image()
         SnakeSpriteImg.src = snakeImages[deficiency]
         snakeSpriteImgRef.current = SnakeSpriteImg
-        mapRef.current = mapImages[deficiency]
+        setMapDeficiency(deficiency)
         index--
       }
     }
@@ -252,11 +262,11 @@ const Snake = () => {
   return (
     <>
       <canvas id="board" ref={boardRef} />
-      <ImageLoader src={mapImages["normal"]} hidden={mapRef.current == "normal" ? false : true} alt="Normal" />
-      <ImageLoader src={mapImages["achromatopsia"]} hidden={mapRef.current == "achromatopsia" ? false : true} alt="Normal" />
-      <ImageLoader src={mapImages["deuteranopia"]} hidden={mapRef.current == "deuteranopia" ? false : true} alt="Normal" />
-      <ImageLoader src={mapImages["protanopia"]} hidden={mapRef.current == "protanopia" ? false : true} alt="Normal" />
-      <ImageLoader src={mapImages["tritanopia"]} hidden={mapRef.current == "tritanopia" ? false : true} alt="Normal" />
+      <ImageLoader src={mapImages["normal"]} hidden={hidden.normal} alt="normal" />
+      <ImageLoader src={mapImages["achromatopsia"]} hidden={hidden.achromatopsia} alt="achromatopsia" />
+      <ImageLoader src={mapImages["deuteranopia"]} hidden={hidden.deuteranopia} alt="deuteranopia" />
+      <ImageLoader src={mapImages["protanopia"]} hidden={hidden.protanopia} alt="protanopia" />
+      <ImageLoader src={mapImages["tritanopia"]} hidden={hidden.tritanopia} alt="tritanopia" />
     </>
   )
 }

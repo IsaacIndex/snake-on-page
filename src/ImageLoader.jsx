@@ -16,9 +16,9 @@ function ImageLoader({ src, alt, hidden }) {
     };
   }, [src]);
 
-  if (!loaded) {
-    return null; // Render nothing while the image is loading
-  }
+  // if (!loaded) {
+  //   return null; // Render nothing while the image is loading
+  // }
 
   return (
     <img src={src} alt={alt} style={{ maxWidth: '100%' }} hidden={hidden} />
