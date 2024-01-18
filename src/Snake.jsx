@@ -8,6 +8,7 @@ import {
 } from "./constants";
 import snakeImages from "./snakeImages";
 import mapImages from "./mapImages";
+import ImageLoader from "./ImageLoader";
 
 const Snake = () => {
   console.log("Snake")
@@ -16,8 +17,8 @@ const Snake = () => {
   const snakeRef = useRef(SNAKE);
   const appleRef = useRef(APPLE);
   const directionRef = useRef("right");
-  const [mapImg, setMapImg] = useState(mapImages["normal"])
   const snakeSpriteImgRef = useRef(null);
+  const mapRef = useRef("normal")
 
 
   const moveSnake = () => {
@@ -58,7 +59,7 @@ const Snake = () => {
         const SnakeSpriteImg = new Image()
         SnakeSpriteImg.src = snakeImages[deficiency]
         snakeSpriteImgRef.current = SnakeSpriteImg
-        setMapImg(mapImages[deficiency])
+        mapRef.current = mapImages[deficiency]
         index--
       }
     }
@@ -251,7 +252,11 @@ const Snake = () => {
   return (
     <>
       <canvas id="board" ref={boardRef} />
-      <img src={mapImg} style={{ maxWidth: '100%' }} />
+      <ImageLoader src={mapImages["normal"]} hidden={mapRef.current == "normal" ? false : true} alt="Normal" />
+      <ImageLoader src={mapImages["achromatopsia"]} hidden={mapRef.current == "achromatopsia" ? false : true} alt="Normal" />
+      <ImageLoader src={mapImages["deuteranopia"]} hidden={mapRef.current == "deuteranopia" ? false : true} alt="Normal" />
+      <ImageLoader src={mapImages["protanopia"]} hidden={mapRef.current == "protanopia" ? false : true} alt="Normal" />
+      <ImageLoader src={mapImages["tritanopia"]} hidden={mapRef.current == "tritanopia" ? false : true} alt="Normal" />
     </>
   )
 }
