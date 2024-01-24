@@ -9,6 +9,7 @@ import {
 import snakeImages from "./snakeImages";
 import mapImages from "./mapImages";
 import ImageLoader from "./ImageLoader";
+import MobileControl from "./MobileControl";
 
 const Snake = () => {
   console.log("Snake")
@@ -19,6 +20,7 @@ const Snake = () => {
   const directionRef = useRef("right");
   const snakeSpriteImgRef = useRef(null);
   const [mapDeficiency, setMapDeficiency] = useState("normal")
+  const [isMobile, setIsMobile] = useState(false);
 
   // may be a overkill
   const hidden = useMemo(() => {
@@ -182,6 +184,10 @@ const Snake = () => {
     })
   }
 
+  const handleDirectionChange = (direction) => {
+    directionRef.current = direction;
+  }
+
   // Game Loop
   useEffect(() => {
     let animationId
@@ -225,8 +231,7 @@ const Snake = () => {
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      // Additional logic for redrawing or updating the canvas content
-      // should go here if necessary
+      setIsMobile(window.innerWidth <= 768);
     };
 
     resizeCanvas();
@@ -267,6 +272,7 @@ const Snake = () => {
       <ImageLoader src={mapImages["deuteranopia"]} hidden={hidden.deuteranopia} alt="deuteranopia" />
       <ImageLoader src={mapImages["protanopia"]} hidden={hidden.protanopia} alt="protanopia" />
       <ImageLoader src={mapImages["tritanopia"]} hidden={hidden.tritanopia} alt="tritanopia" />
+      {isMobile && <MobileControl onDirectionChange={handleDirectionChange} />}
     </>
   )
 }
