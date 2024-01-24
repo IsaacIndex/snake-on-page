@@ -185,7 +185,20 @@ const Snake = () => {
   }
 
   const handleDirectionChange = (direction) => {
-    directionRef.current = direction;
+    switch (direction) {
+      case "left":
+        if (directionRef.current != "right") directionRef.current = "left"
+        break;
+      case "right":
+        if (directionRef.current != "left") directionRef.current = "right"
+        break;
+      case "up":
+        if (directionRef.current != "down") directionRef.current = "up"
+        break;
+      case "down":
+        if (directionRef.current != "up") directionRef.current = "down"
+        break;
+    }
   }
 
   // Game Loop
