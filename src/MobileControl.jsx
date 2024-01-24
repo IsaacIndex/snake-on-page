@@ -1,10 +1,11 @@
+import styles from "./MobileControl.module.css"
 const MobileControl = ({ onDirectionChange }) => {
   const componentStyle = {
     position: 'fixed',
     bottom: 0,
     left: 0,
     width: '100%',
-    backgroundColor: 'blue',
+    // backgroundColor: 'blue',
     color: 'white',
     fontSize: '16px',
     padding: '10px',
@@ -16,11 +17,13 @@ const MobileControl = ({ onDirectionChange }) => {
   }
 
   return (
-    <div className="mobile-control" style={componentStyle}>
-      <button onClick={() => handleButtonClick('up')}>up</button>
-      <button onClick={() => handleButtonClick('down')}>down</button>
-      <button onClick={() => handleButtonClick('left')}>left</button>
-      <button onClick={() => handleButtonClick('right')}>right</button>
+    <div className={styles.container} style={componentStyle}>
+      <div className={styles['arrow-key-container']}>
+        <div className={`${styles['arrow-key']} ${styles.up}`} onClick={() => handleButtonClick('up')}></div>
+        <div className={`${styles['arrow-key']} ${styles.left}`} onClick={() => handleButtonClick('left')}></div>
+        <div className={`${styles['arrow-key']} ${styles.down}`} onClick={() => handleButtonClick('down')}></div>
+        <div className={`${styles['arrow-key']} ${styles.right}`} onClick={() => handleButtonClick('right')}></div>
+      </div>
     </div>
   )
 }
