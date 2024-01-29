@@ -21,6 +21,21 @@ const Snake = () => {
   const snakeSpriteImgRef = useRef(null);
   const [mapDeficiency, setMapDeficiency] = useState("normal")
   const [isMobile, setIsMobile] = useState(false);
+  const [loading, setLoading] = useState(true)
+  const onComplete = after(Object.keys(mapImages).length, () => {
+    setLoading(false);
+    console.log("loaded");
+  })
+
+  function after(count, f) {
+    let noOfCalls = 0;
+    return function (...rest) {
+      noOfCalls = noOfCalls + 1;
+      if (count === noOfCalls) {
+        f(...rest);
+      }
+    };
+  }
 
   // may be a overkill
   const hidden = useMemo(() => {
@@ -279,12 +294,13 @@ const Snake = () => {
 
   return (
     <>
+      {loading && <span>Loading...</span>}
       <canvas id="board" ref={boardRef} />
-      <ImageLoader src={mapImages["normal"]} hidden={hidden.normal} alt="normal" />
-      <ImageLoader src={mapImages["achromatopsia"]} hidden={hidden.achromatopsia} alt="achromatopsia" />
-      <ImageLoader src={mapImages["deuteranopia"]} hidden={hidden.deuteranopia} alt="deuteranopia" />
-      <ImageLoader src={mapImages["protanopia"]} hidden={hidden.protanopia} alt="protanopia" />
-      <ImageLoader src={mapImages["tritanopia"]} hidden={hidden.tritanopia} alt="tritanopia" />
+      <ImageLoader src={mapImages["normal"]} hidden={hidden.normal} alt="normal" onLoad={onComplete} />
+      <ImageLoader src={mapImages["achromatopsia"]} hidden={hidden.achromatopsia} alt="achromatopsia" onLoad={onComplete} />
+      <ImageLoader src={mapImages["deuteranopia"]} hidden={hidden.deuteranopia} alt="deuteranopia" onLoad={onComplete} />
+      <ImageLoader src={mapImages["protanopia"]} hidden={hidden.protanopia} alt="protanopia" onLoad={onComplete} />
+      <ImageLoader src={mapImages["tritanopia"]} hidden={hidden.tritanopia} alt="tritanopia" onLoad={onComplete} />
       {isMobile && <MobileControl onDirectionChange={handleDirectionChange} />}
     </>
   )

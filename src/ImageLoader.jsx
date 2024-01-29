@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-function ImageLoader({ src, alt, hidden }) {
-  const [loaded, setLoaded] = useState(false);
+function ImageLoader({ src, alt, hidden, onLoad }) {
 
   useEffect(() => {
     const image = new Image();
     image.src = src;
     image.onload = () => {
-      setLoaded(true);
+      onLoad()
     };
 
     return () => {
