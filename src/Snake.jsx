@@ -10,6 +10,7 @@ import snakeImages from "./snakeImages";
 import mapImages from "./mapImages";
 import ImageLoader from "./ImageLoader";
 import MobileControl from "./MobileControl";
+import { Joystick } from 'react-joystick-component'
 
 const Snake = () => {
   console.log("Snake")
