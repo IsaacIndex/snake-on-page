@@ -1,8 +1,9 @@
 import { useRef, useEffect, useState, useMemo } from "react";
 import React from 'react';
+import styles from './Snake.module.css'
 import {
   SNAKE,
-  SIZE,
+  // snakeSize,
   FRAME,
   APPLE
 } from "./constants";
@@ -10,7 +11,6 @@ import snakeImages from "./snakeImages";
 import mapImages from "./mapImages";
 import ImageLoader from "./ImageLoader";
 import MobileControl from "./MobileControl";
-import { Joystick } from 'react-joystick-component'
 
 const Snake = () => {
   console.log("Snake")
@@ -20,6 +20,8 @@ const Snake = () => {
   const appleRef = useRef(APPLE);
   const directionRef = useRef("right");
   const snakeSpriteImgRef = useRef(null);
+
+  const [spriteSize, setSpriteSize] = useState(window.innerWidth * 0.03)
   const [mapDeficiency, setMapDeficiency] = useState("normal")
   const [isMobile, setIsMobile] = useState(false);
   const [loaded, setLoaded] = useState(false)
@@ -59,8 +61,8 @@ const Snake = () => {
 
     // add new head
     snakeRef.current.unshift(
-      [snakeRef.current[0][0] + dirMap[directionRef.current][0] * SIZE,
-      snakeRef.current[0][1] + dirMap[directionRef.current][1] * SIZE]
+      [snakeRef.current[0][0] + dirMap[directionRef.current][0] * spriteSize,
+      snakeRef.current[0][1] + dirMap[directionRef.current][1] * spriteSize]
     );
 
     // if collide with wall
@@ -78,8 +80,8 @@ const Snake = () => {
       // Check width and height
       // console.log(snakeRef.current[0][1], applePosition[1] * document.documentElement.scrollHeight)
       if (
-        Math.abs(snakeRef.current[0][0] - applePosition[0] * document.documentElement.scrollWidth) < SIZE &&
-        Math.abs((snakeRef.current[0][1] + scrollY) - applePosition[1] * document.documentElement.scrollHeight) < (SIZE)
+        Math.abs(snakeRef.current[0][0] - applePosition[0] * document.documentElement.scrollWidth) < spriteSize &&
+        Math.abs((snakeRef.current[0][1] + scrollY) - applePosition[1] * document.documentElement.scrollHeight) < (spriteSize)
       ) {
         console.log("eaten")
         appleEaten = true
@@ -98,11 +100,11 @@ const Snake = () => {
 
     // offset to stay in the centre
     if (directionRef.current == "down") {
-      snakeRef.current.forEach(s => s[1] -= SIZE)
-      scrollBy(0, SIZE)
+      snakeRef.current.forEach(s => s[1] -= spriteSize)
+      scrollBy(0, spriteSize)
     } else if (directionRef.current == "up") {
-      snakeRef.current.forEach(s => s[1] += SIZE)
-      scrollBy(0, -SIZE)
+      snakeRef.current.forEach(s => s[1] += spriteSize)
+      scrollBy(0, -spriteSize)
     }
   }
 
@@ -187,16 +189,16 @@ const Snake = () => {
       }
 
       // Draw snake
-      context.drawImage(snakeSpriteImgRef.current, clipx * 64, clipy * 64, 64, 64, snakeRef.current[i][0] + randomNumber[0], snakeRef.current[i][1] + randomNumber[1], SIZE, SIZE)
+      context.drawImage(snakeSpriteImgRef.current, clipx * 64, clipy * 64, 64, 64, snakeRef.current[i][0] + randomNumber[0], snakeRef.current[i][1] + randomNumber[1], spriteSize, spriteSize)
     }
   }
 
   const drawApple = (context) => {
     appleRef.current.forEach(([deficiency, applePosition]) => {
-      context.drawImage(snakeSpriteImgRef.current, 0 * 64, 3 * 64, 64, 64, applePosition[0] * document.documentElement.scrollWidth, applePosition[1] * document.documentElement.scrollHeight - scrollY, SIZE, SIZE)
+      context.drawImage(snakeSpriteImgRef.current, 0 * 64, 3 * 64, 64, 64, applePosition[0] * document.documentElement.scrollWidth, applePosition[1] * document.documentElement.scrollHeight - scrollY, spriteSize, spriteSize)
       context.font = "20px Georgia";
       context.fillStyle = "white"
-      context.fillText(deficiency, applePosition[0] * document.documentElement.scrollWidth, applePosition[1] * document.documentElement.scrollHeight - scrollY + SIZE)
+      context.fillText(deficiency, applePosition[0] * document.documentElement.scrollWidth, applePosition[1] * document.documentElement.scrollHeight - scrollY + spriteSize)
     })
   }
 
@@ -232,7 +234,7 @@ const Snake = () => {
           const context = canvas.getContext('2d')
           context.clearRect(0, 0, context.canvas.width, context.canvas.height)
           // context.fillSclipyle = "lightblue";
-          // snakeRef.current.forEach(s => context.fillRect(s[0], s[1], SIZE, SIZE))
+          // snakeRef.current.forEach(s => context.fillRect(s[0], s[1], snakeSize, snakeSize))
           drawSnake(context)
 
           drawApple(context)
@@ -261,9 +263,10 @@ const Snake = () => {
     // resize canvas
     const canvas = boardRef.current;
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
+      canvas.width = Math.min(window.innerWidth, 1920)
       canvas.height = window.innerHeight;
-      setIsMobile(window.innerWidth <= 768);
+      setIsMobile(window.innerWidth <= 768)
+      setSpriteSize(window.innerWidth * 0.03)
     };
 
     resizeCanvas();
@@ -299,12 +302,14 @@ const Snake = () => {
   return (
     <>
       {!loaded && <span>Loading...</span>}
-      <canvas id="board" ref={boardRef} />
-      <ImageLoader src={mapImages["normal"]} hidden={hidden.normal} alt="normal" onLoad={onComplete} />
-      <ImageLoader src={mapImages["achromatopsia"]} hidden={hidden.achromatopsia} alt="achromatopsia" onLoad={onComplete} />
-      <ImageLoader src={mapImages["deuteranopia"]} hidden={hidden.deuteranopia} alt="deuteranopia" onLoad={onComplete} />
-      <ImageLoader src={mapImages["protanopia"]} hidden={hidden.protanopia} alt="protanopia" onLoad={onComplete} />
-      <ImageLoader src={mapImages["tritanopia"]} hidden={hidden.tritanopia} alt="tritanopia" onLoad={onComplete} />
+      <div className={styles.mapDiv}>
+        <canvas id="board" ref={boardRef} />
+        <ImageLoader src={mapImages["normal"]} hidden={hidden.normal} alt="normal" onLoad={onComplete} />
+        <ImageLoader src={mapImages["achromatopsia"]} hidden={hidden.achromatopsia} alt="achromatopsia" onLoad={onComplete} />
+        <ImageLoader src={mapImages["deuteranopia"]} hidden={hidden.deuteranopia} alt="deuteranopia" onLoad={onComplete} />
+        <ImageLoader src={mapImages["protanopia"]} hidden={hidden.protanopia} alt="protanopia" onLoad={onComplete} />
+        <ImageLoader src={mapImages["tritanopia"]} hidden={hidden.tritanopia} alt="tritanopia" onLoad={onComplete} />
+      </div>
       {isMobile && <MobileControl onDirectionChange={handleDirectionChange} />}
     </>
   )

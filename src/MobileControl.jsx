@@ -1,4 +1,3 @@
-import styles from "./MobileControl.module.css"
 import { Joystick } from 'react-joystick-component'
 
 const MobileControl = ({ onDirectionChange }) => {

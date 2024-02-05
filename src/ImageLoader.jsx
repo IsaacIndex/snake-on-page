@@ -20,7 +20,7 @@ function ImageLoader({ src, alt, hidden, onLoad }) {
   // }
 
   return (
-    <img src={src} alt={alt} style={{ maxWidth: '100%' }} hidden={hidden} />
+    <img src={src} alt={alt} hidden={hidden} />
   );
 }
 export default ImageLoader

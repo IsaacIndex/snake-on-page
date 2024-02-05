@@ -1,0 +1,8 @@
+.mapDiv {
+  display: flex;
+  justify-content: center;
+}
+
+.mapDiv img {
+  width: min(1920px, 100%);
+}
