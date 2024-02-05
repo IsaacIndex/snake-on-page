@@ -22,9 +22,9 @@ const Snake = () => {
   const snakeSpriteImgRef = useRef(null);
   const [mapDeficiency, setMapDeficiency] = useState("normal")
   const [isMobile, setIsMobile] = useState(false);
-  const [loading, setLoading] = useState(true)
+  const [loaded, setLoaded] = useState(false)
   const onComplete = after(Object.keys(mapImages).length, () => {
-    setLoading(false);
+    setLoaded(true);
     console.log("loaded");
   })
 
@@ -219,32 +219,35 @@ const Snake = () => {
 
   // Game Loop
   useEffect(() => {
-    let animationId
-    const renderer = time => {
-      if (time - timeRef.current >= FRAME) {
-        // changes
-        moveSnake()
+    if (loaded) {
+      console.log("game loop")
+      let animationId
+      const renderer = time => {
+        if (time - timeRef.current >= FRAME) {
+          // changes
+          moveSnake()
 
-        // start to draw the objects
-        const canvas = boardRef.current
-        const context = canvas.getContext('2d')
-        context.clearRect(0, 0, context.canvas.width, context.canvas.height)
-        // context.fillSclipyle = "lightblue";
-        // snakeRef.current.forEach(s => context.fillRect(s[0], s[1], SIZE, SIZE))
-        drawSnake(context)
+          // start to draw the objects
+          const canvas = boardRef.current
+          const context = canvas.getContext('2d')
+          context.clearRect(0, 0, context.canvas.width, context.canvas.height)
+          // context.fillSclipyle = "lightblue";
+          // snakeRef.current.forEach(s => context.fillRect(s[0], s[1], SIZE, SIZE))
+          drawSnake(context)
 
-        drawApple(context)
+          drawApple(context)
 
-        timeRef.current = time;
+          timeRef.current = time;
+        }
+        animationId = window.requestAnimationFrame(renderer)
       }
-      animationId = window.requestAnimationFrame(renderer)
-    }
-    renderer()
+      renderer()
 
-    return () => {
-      window.cancelAnimationFrame(animationId)
+      return () => {
+        window.cancelAnimationFrame(animationId)
+      }
     }
-  }, [moveSnake])
+  }, [moveSnake, loaded])
 
   // Setup useEffect
   useEffect(() => {
@@ -295,7 +298,7 @@ const Snake = () => {
 
   return (
     <>
-      {loading && <span>Loading...</span>}
+      {!loaded && <span>Loading...</span>}
       <canvas id="board" ref={boardRef} />
       <ImageLoader src={mapImages["normal"]} hidden={hidden.normal} alt="normal" onLoad={onComplete} />
       <ImageLoader src={mapImages["achromatopsia"]} hidden={hidden.achromatopsia} alt="achromatopsia" onLoad={onComplete} />
