@@ -27,15 +27,6 @@ const SNAKE = [
 ];
 const FRAME = 40
 
-// position based on ratio on map
-const APPLE = [
-  ["protanopia", [0.3, 0.3]],
-  ["achromatopsia", [0.4, 0.35]],
-  ["deuteranopia", [0.4, 0.45]],
-  ["tritanopia", [0.4, 0.55]],
-  ["normal", [0.4, 0.25]]
-]
-
 export {
   CANVAS_SIZE,
   SNAKE_START,
@@ -46,6 +37,5 @@ export {
 
   SNAKE,
   SIZE,
-  FRAME,
-  APPLE
+  FRAME
 };

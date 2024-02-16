@@ -4,8 +4,7 @@ import styles from './Snake.module.css'
 import {
   SNAKE,
   // snakeSize,
-  FRAME,
-  APPLE
+  FRAME
 } from "./constants";
 import snakeImages from "./snakeImages";
 import mapImages from "./mapImages";
@@ -17,9 +16,10 @@ const Snake = () => {
   const boardRef = useRef();
   const timeRef = useRef(0);
   const snakeRef = useRef(SNAKE);
-  const appleRef = useRef(APPLE);
+  const appleRef = useRef();
   const directionRef = useRef("right");
   const snakeSpriteImgRef = useRef(null);
+  const mapDivRef = useRef()
 
   const [spriteSize, setSpriteSize] = useState(window.innerWidth * 0.03)
   const [mapDeficiency, setMapDeficiency] = useState("normal")
@@ -101,10 +101,19 @@ const Snake = () => {
     // offset to stay in the centre
     if (directionRef.current == "down") {
       snakeRef.current.forEach(s => s[1] -= spriteSize)
-      scrollBy(0, spriteSize)
+      if (scrollY != document.documentElement.scrollHeight) {
+        appleRef.current.forEach(s => s[1][1] -= spriteSize)
+      }
+
+      console.log(appleRef.current)
+      scrollBy(0, spriteSize + 1)
+      console.log(scrollY, spriteSize)
     } else if (directionRef.current == "up") {
       snakeRef.current.forEach(s => s[1] += spriteSize)
-      scrollBy(0, -spriteSize)
+      if (scrollY != 0) {
+        appleRef.current.forEach(s => s[1][1] += spriteSize)
+      }
+      scrollBy(0, -spriteSize + 1)
     }
   }
 
@@ -195,10 +204,10 @@ const Snake = () => {
 
   const drawApple = (context) => {
     appleRef.current.forEach(([deficiency, applePosition]) => {
-      context.drawImage(snakeSpriteImgRef.current, 0 * 64, 3 * 64, 64, 64, applePosition[0] * document.documentElement.scrollWidth, applePosition[1] * document.documentElement.scrollHeight - scrollY, spriteSize, spriteSize)
+      context.drawImage(snakeSpriteImgRef.current, 0 * 64, 3 * 64, 64, 64, applePosition[0], applePosition[1], spriteSize, spriteSize)
       context.font = "20px Georgia";
       context.fillStyle = "white"
-      context.fillText(deficiency, applePosition[0] * document.documentElement.scrollWidth, applePosition[1] * document.documentElement.scrollHeight - scrollY + spriteSize)
+      context.fillText(deficiency, applePosition[0], applePosition[1] - scrollY + spriteSize)
     })
   }
 
@@ -255,6 +264,22 @@ const Snake = () => {
   useEffect(() => {
     console.log("setup")
 
+    // apple position
+    appleRef.current = [
+      ["protanopia", [0.3, 0.3]],
+      ["achromatopsia", [0.4, 0.35]],
+      ["deuteranopia", [0.4, 0.45]],
+      ["tritanopia", [0.4, 0.55]],
+      ["normal", [0.4, 0.25]]
+    ]
+    // console.log(mapDivRef.current.height)
+    // console.log(document.documentElement.scrollWidth, document.documentElement.scrollHeight)
+    appleRef.current.forEach(a => {
+      a[1][0] *= document.documentElement.scrollWidth
+      a[1][1] *= document.documentElement.scrollHeight
+      // console.log(a)
+    })
+
     // snake image
     const SnakeSpriteImg = new Image()
     SnakeSpriteImg.src = snakeImages.normal
@@ -266,7 +291,7 @@ const Snake = () => {
       canvas.width = Math.min(window.innerWidth, 1920)
       canvas.height = window.innerHeight;
       setIsMobile(window.innerWidth <= 768)
-      setSpriteSize(window.innerWidth * 0.03)
+      setSpriteSize(Math.round(window.innerWidth * 0.03))
     };
 
     resizeCanvas();
@@ -297,12 +322,13 @@ const Snake = () => {
       window.removeEventListener('resize', resizeCanvas);
       window.removeEventListener("keydown", keyUpdate)
     };
-  }, [])
+
+  }, [loaded])
 
   return (
     <>
       {!loaded && <span>Loading...</span>}
-      <div className={styles.mapDiv}>
+      <div className={styles.mapDiv} ref={mapDivRef}>
         <canvas id="board" ref={boardRef} />
         <ImageLoader src={mapImages["normal"]} hidden={hidden.normal} alt="normal" onLoad={onComplete} />
         <ImageLoader src={mapImages["achromatopsia"]} hidden={hidden.achromatopsia} alt="achromatopsia" onLoad={onComplete} />
