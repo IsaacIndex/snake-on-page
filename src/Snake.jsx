@@ -13,7 +13,7 @@ import MobileControl from "./MobileControl";
 
 const Snake = () => {
   console.log("Snake")
-  const boardRef = useRef();
+  const snakeCanvasRef = useRef();
   const timeRef = useRef(0);
   const snakeRef = useRef(SNAKE);
   const appleRef = useRef();
@@ -239,7 +239,7 @@ const Snake = () => {
           moveSnake()
 
           // start to draw the objects
-          const canvas = boardRef.current
+          const canvas = snakeCanvasRef.current
           const context = canvas.getContext('2d')
           context.clearRect(0, 0, context.canvas.width, context.canvas.height)
           // context.fillSclipyle = "lightblue";
@@ -286,7 +286,7 @@ const Snake = () => {
     snakeSpriteImgRef.current = SnakeSpriteImg
 
     // resize canvas
-    const canvas = boardRef.current;
+    const canvas = snakeCanvasRef.current;
     const resizeCanvas = () => {
       canvas.width = Math.min(window.innerWidth, 1920)
       canvas.height = window.innerHeight;
@@ -327,9 +327,9 @@ const Snake = () => {
 
   return (
     <>
-      {!loaded && <span>Loading...</span>}
       <div className={styles.mapDiv} ref={mapDivRef}>
-        <canvas id="board" ref={boardRef} />
+        {!loaded && <span>Loading...</span>}
+        <canvas id="snakeCanvas" ref={snakeCanvasRef} />
         <ImageLoader src={mapImages["normal"]} hidden={hidden.normal} alt="normal" onLoad={onComplete} />
         <ImageLoader src={mapImages["achromatopsia"]} hidden={hidden.achromatopsia} alt="achromatopsia" onLoad={onComplete} />
         <ImageLoader src={mapImages["deuteranopia"]} hidden={hidden.deuteranopia} alt="deuteranopia" onLoad={onComplete} />
