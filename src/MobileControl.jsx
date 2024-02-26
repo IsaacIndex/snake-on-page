@@ -1,10 +1,11 @@
 import { Joystick } from 'react-joystick-component'
+import { useState } from "react";
 
 const MobileControl = ({ onDirectionChange }) => {
   const componentStyle = {
     position: 'fixed',
-    bottom: 0,
-    right: 0,
+    bottom: "5%",
+    right: "5%",
     // width: '100%',
     width: '20%',
     height: '10%',
@@ -15,26 +16,30 @@ const MobileControl = ({ onDirectionChange }) => {
     borderRadius: '4px'
   }
 
+  const [isMoving, setIsMoving] = useState(false);
+
+  // const handleMove = (event) => {
+  //   if (!isMoving) {
+  //     setIsMoving(true);
+
+  //     // Call the move function immediately
+  //     console.log(event)
+  //     onDirectionChange(event.direction)
+
+  //     // Set a timeout to reset the isMoving flag after a specific delay
+  //     setTimeout(() => {
+  //       setIsMoving(false);
+  //     }, 0);
+  //   }
+  // }
+
   const handleButtonClick = (direction) => {
     onDirectionChange(direction);
   }
 
   const handleMove = (event) => {
     console.log(event)
-    switch (event.direction) {
-      case "FORWARD":
-        onDirectionChange("up")
-        break;
-      case "BACKWARD":
-        onDirectionChange("down")
-        break;
-      case "LEFT":
-        onDirectionChange("left")
-        break;
-      case "RIGHT":
-        onDirectionChange("right")
-        break;
-    }
+    onDirectionChange(event.direction)
   }
 
   return (
@@ -49,7 +54,7 @@ const MobileControl = ({ onDirectionChange }) => {
       </div> */}
 
 
-      <Joystick minDistance={50} move={handleMove} throttle={50} />
+      <Joystick minDistance={50} move={handleMove} />
 
     </div>
   )

@@ -72,20 +72,18 @@ const SnakeGame = () => {
       }
 
     } else {
-      switch (e) {
-        // Mobile Control
-        case "left":
-          if (directionRef.current != "right") directionRef.current = "left"
-          break;
-        case "right":
-          if (directionRef.current != "left") directionRef.current = "right"
-          break;
-        case "up":
-          if (directionRef.current != "down") directionRef.current = "up"
-          break;
-        case "down":
-          if (directionRef.current != "up") directionRef.current = "down"
-          break;
+      // Mobile Control
+      console.log(e)
+      if (e == "RIGHT" && directionRef.current != "left") {
+        directionRef.current = "right"
+      } else if (e == "LEFT" && directionRef.current != "right") {
+        directionRef.current = "left"
+      } else if (e == "FORWARD" && directionRef.current != "down") {
+        directionRef.current = "up"
+      } else if (e == "BACKWARD" && directionRef.current != "up") {
+        directionRef.current = "down"
+      } else {
+        return
       }
     }
     gameLoop()
@@ -290,6 +288,14 @@ const SnakeGame = () => {
     const SnakeSpriteImg = new Image()
     SnakeSpriteImg.src = snakeImages.normal
     snakeSpriteImgRef.current = SnakeSpriteImg
+
+    const snakeCanvas = snakeCanvasRef.current
+    const snakeContext = snakeCanvas.getContext('2d')
+    // snakeContext.clearRect(0, 0, snakeContext.canvas.width, snakeContext.canvas.height)
+    console.log(snakeCanvasRef.current)
+    drawSnake(snakeContext)
+    snakeContext.fillStyle = "#FF0000";
+    snakeContext.fillRect(0, 0, 150, 75);
 
     // resize canvas
     const canvas = snakeCanvasRef.current;
