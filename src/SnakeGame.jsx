@@ -12,8 +12,9 @@ import snakeImages from "./snakeImages";
 import mapImages from "./mapImages";
 
 const SnakeGame = () => {
-  const snakeRef = useRef(SNAKE);
+  const snakeRef = useRef();
   const appleRef = useRef();
+  const directionRef = useRef("right");
 
   const snakeCanvasRef = useRef();
   const snakeSpriteImgRef = useRef(null);
@@ -48,6 +49,214 @@ const SnakeGame = () => {
     };
   }, [mapDeficiency]);
 
+  // Key Update
+  const keyUpdate = e => {
+    if ('key' in e) {
+      const keyboardMapping = {
+        "ArrowLeft": "left",
+        "ArrowRight": "right",
+        "ArrowUp": "up",
+        "ArrowDown": "down",
+      }
+      if (keyboardMapping[e.key] == "right" && directionRef.current != "left") {
+        directionRef.current = "right"
+      } else if (keyboardMapping[e.key] == "left" && directionRef.current != "right") {
+        directionRef.current = "left"
+      } else if (keyboardMapping[e.key] == "up" && directionRef.current != "down") {
+        directionRef.current = "up"
+      } else if (keyboardMapping[e.key] == "down" && directionRef.current != "up") {
+        directionRef.current = "down"
+      } else {
+        return
+      }
+
+    } else {
+      switch (e) {
+        // Mobile Control
+        case "left":
+          if (directionRef.current != "right") directionRef.current = "left"
+          break;
+        case "right":
+          if (directionRef.current != "left") directionRef.current = "right"
+          break;
+        case "up":
+          if (directionRef.current != "down") directionRef.current = "up"
+          break;
+        case "down":
+          if (directionRef.current != "up") directionRef.current = "down"
+          break;
+      }
+    }
+    gameLoop()
+  }
+
+  // move snake
+  const moveSnake = () => {
+    const dirMap = {
+      "right": [1, 0],
+      "left": [-1, 0],
+      "up": [0, -1],
+      "down": [0, 1],
+    }
+
+    // add new head
+    snakeRef.current.unshift(
+      [snakeRef.current[0][0] + dirMap[directionRef.current][0] * spriteSize,
+      snakeRef.current[0][1] + dirMap[directionRef.current][1] * spriteSize]
+    );
+
+    // if collide with wall
+    if (snakeRef.current[0][0] < 0) {
+      snakeRef.current[0][0] = window.innerWidth
+    } else if (snakeRef.current[0][0] > window.innerWidth) {
+      snakeRef.current[0][0] = 0
+    }
+
+    const apples = appleRef.current;
+    let appleEaten = false
+    for (let index = 0; index < apples.length; index++) {
+      const [deficiency, applePosition] = apples[index];
+
+      // Check width and height
+      // console.log(snakeRef.current[0][1], applePosition[1] * document.documentElement.scrollHeight)
+      if (
+        Math.abs(snakeRef.current[0][0] - applePosition[0] * document.documentElement.scrollWidth) < spriteSize &&
+        Math.abs((snakeRef.current[0][1] + scrollY) - applePosition[1] * document.documentElement.scrollHeight) < (spriteSize)
+      ) {
+        console.log("eaten")
+        appleEaten = true
+        appleRef.current.splice(index, 1)
+        const SnakeSpriteImg = new Image()
+        SnakeSpriteImg.src = snakeImages[deficiency]
+        snakeSpriteImgRef.current = SnakeSpriteImg
+        setMapDeficiency(deficiency)
+        index--
+      }
+    }
+
+    if (!appleEaten) {
+      snakeRef.current.pop()
+    }
+
+    // offset to stay in the centre
+    if (directionRef.current == "down") {
+      snakeRef.current.forEach(s => s[1] -= spriteSize)
+      if (scrollY != document.documentElement.scrollHeight) {
+        appleRef.current.forEach(s => s[1][1] -= spriteSize)
+      }
+
+      console.log(appleRef.current)
+      scrollBy(0, spriteSize + 1)
+      console.log(scrollY, spriteSize)
+    } else if (directionRef.current == "up") {
+      snakeRef.current.forEach(s => s[1] += spriteSize)
+      if (scrollY != 0) {
+        appleRef.current.forEach(s => s[1][1] += spriteSize)
+      }
+      scrollBy(0, -spriteSize + 1)
+    }
+  }
+
+  // Paint snake
+  const drawSnake = (context) => {
+    // credits to https://github.com/rembound/Snake-Game-HTML5/blob/master/snake.js
+    for (var i = 0; i < snakeRef.current.length; i++) {
+      var clipx = 0
+      var clipy = 0
+      var segment = snakeRef.current[i]
+      var segx = segment[0];
+      var segy = segment[1];
+
+      if (i == 0) {
+        // Head; Determine the correct image
+        var nseg = snakeRef.current[i + 1]; // Next segment
+        if (segy < nseg[1]) {
+          // Up
+          clipx = 3; clipy = 0;
+        } else if (segx > nseg[0]) {
+          // Right
+          clipx = 4; clipy = 0;
+        } else if (segy > nseg[1]) {
+          // Down
+          clipx = 4; clipy = 1;
+        } else if (segx < nseg[0]) {
+          // Left
+          clipx = 3; clipy = 1;
+        }
+      } else if (i == snakeRef.current.length - 1) {
+        // Tail; Determine the correct image
+        var pseg = snakeRef.current[i - 1]; // Prev segment
+        if (pseg[1] < segy) {
+          // Up
+          clipx = 3; clipy = 2;
+        } else if (pseg[0] > segx) {
+          // Right
+          // TODO: problem when across board
+          clipx = 4; clipy = 2;
+        } else if (pseg[1] > segy) {
+          // Down
+          clipx = 4; clipy = 3;
+        } else if (pseg[0] < segx) {
+          // Left
+          clipx = 3; clipy = 3;
+        }
+      } else {
+        // Body; Determine the correct image
+        var pseg = snakeRef.current[i - 1]; // Previous segment
+        var nseg = snakeRef.current[i + 1]; // Next segment
+        if (pseg[0] < segx && nseg[0] > segx || nseg[0] < segx && pseg[0] > segx) {
+          // Horizontal Left-Right
+          clipx = 1; clipy = 0;
+        } else if (pseg[0] < segx && nseg[1] > segy || nseg[0] < segx && pseg[1] > segy) {
+          // Angle Left-Down
+          clipx = 2; clipy = 0;
+        } else if (pseg[1] < segy && nseg[1] > segy || nseg[1] < segy && pseg[1] > segy) {
+          // Vertical Up-Down
+          clipx = 2; clipy = 1;
+        } else if (pseg[1] < segy && nseg[0] < segx || nseg[1] < segy && pseg[0] < segx) {
+          // Angle Top-Left
+          clipx = 2; clipy = 2;
+        } else if (pseg[0] > segx && nseg[1] < segy || nseg[0] > segx && pseg[1] < segy) {
+          // Angle Right-Up
+          clipx = 0; clipy = 1;
+        } else if (pseg[1] > segy && nseg[0] > segx || nseg[1] > segy && pseg[0] > segx) {
+          // Angle Down-Right
+          clipx = 0; clipy = 0;
+        } else {
+          // when across board
+          clipx = 1; clipy = 0;
+        }
+      }
+
+      // wiggle animation
+      var randomNumber = [0, 0]
+      // if (i != 0) {
+      //   if (["right", "left"].includes(directionRef.current)) {
+      //     randomNumber = [0, Math.random() - 0.5]
+      //   } else {
+      //     randomNumber = [Math.random() - 0.5, 0]
+      //   }
+      // }
+
+      // Draw snake
+      context.drawImage(snakeSpriteImgRef.current, clipx * 64, clipy * 64, 64, 64, snakeRef.current[i][0] + randomNumber[0], snakeRef.current[i][1] + randomNumber[1], spriteSize, spriteSize)
+    }
+  }
+
+  // Game Loop (triggered after directionRef updated)
+  const gameLoop = () => {
+    // get context and clear board
+    const snakeCanvas = snakeCanvasRef.current
+    const snakeContext = snakeCanvas.getContext('2d')
+    snakeContext.clearRect(0, 0, snakeContext.canvas.width, snakeContext.canvas.height)
+
+    // move snake
+    moveSnake()
+
+    drawSnake(snakeContext)
+    console.log(spriteSize)
+  }
+
   // Setup useEffect
   useEffect(() => {
     console.log("setup")
@@ -67,6 +276,16 @@ const SnakeGame = () => {
     })
 
     // snake image
+    snakeRef.current = [
+      [Math.round(window.innerWidth / 2), Math.round(window.innerHeight / 2)],
+      [Math.round(window.innerWidth / 2) - spriteSize, Math.round(window.innerHeight / 2)],
+      [Math.round(window.innerWidth / 2) - spriteSize * 2, Math.round(window.innerHeight / 2)],
+      [Math.round(window.innerWidth / 2) - spriteSize * 3, Math.round(window.innerHeight / 2)],
+      [Math.round(window.innerWidth / 2) - spriteSize * 4, Math.round(window.innerHeight / 2)],
+      [Math.round(window.innerWidth / 2) - spriteSize * 5, Math.round(window.innerHeight / 2)],
+      [Math.round(window.innerWidth / 2) - spriteSize * 6, Math.round(window.innerHeight / 2)],
+    ]
+
     const SnakeSpriteImg = new Image()
     SnakeSpriteImg.src = snakeImages.normal
     snakeSpriteImgRef.current = SnakeSpriteImg
@@ -83,33 +302,13 @@ const SnakeGame = () => {
     resizeCanvas();
 
     window.addEventListener('resize', resizeCanvas);
-
-    // Key Update
-    const keyUpdate = e => {
-      switch (e.key) {
-        case "ArrowLeft":
-          if (directionRef.current != "right") directionRef.current = "left"
-          break;
-        case "ArrowRight":
-          if (directionRef.current != "left") directionRef.current = "right"
-          break;
-        case "ArrowUp":
-          if (directionRef.current != "down") directionRef.current = "up"
-          break;
-        case "ArrowDown":
-          if (directionRef.current != "up") directionRef.current = "down"
-          break;
-      }
-      // console.log(e.key, directionRef.current)
-    }
-
     window.addEventListener("keydown", keyUpdate);
     return () => {
       window.removeEventListener('resize', resizeCanvas);
       window.removeEventListener("keydown", keyUpdate)
     };
 
-  }, [loaded])
+  }, [])
 
   return (
     <div className={styles.snakeGame}>
