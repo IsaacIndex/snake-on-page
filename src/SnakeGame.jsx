@@ -1,5 +1,6 @@
 import styles from './SnakeGame.module.css'
 import { useRef, useEffect, useState, useMemo } from "react";
+import MobileControl from "./MobileControl";
 
 import {
   SNAKE,
@@ -51,7 +52,7 @@ const SnakeGame = () => {
 
   // Key Update
   const keyUpdate = e => {
-    if ('key' in e) {
+    if (typeof e === 'object') {
       const keyboardMapping = {
         "ArrowLeft": "left",
         "ArrowRight": "right",
@@ -315,6 +316,7 @@ const SnakeGame = () => {
       <canvas className={styles.snakeCanvas} ref={snakeCanvasRef} />
       <canvas className={styles.mapCanvas} ref={mapCanvasRef} />
       <ImageLoader src={mapImages["normal"]} hidden={hidden.normal} alt="normal" onLoad={onComplete} />
+      {isMobile && <MobileControl onDirectionChange={keyUpdate} />}
     </div>
   )
 }

@@ -49,7 +49,7 @@ const MobileControl = ({ onDirectionChange }) => {
       </div> */}
 
 
-      <Joystick minDistance={50} move={handleMove} />
+      <Joystick minDistance={50} move={handleMove} throttle={50} />
 
     </div>
   )
