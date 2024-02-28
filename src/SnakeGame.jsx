@@ -73,7 +73,7 @@ const SnakeGame = () => {
 
     } else {
       // Mobile Control
-      console.log(e)
+      // console.log(e)
       if (e == "RIGHT" && directionRef.current != "left") {
         directionRef.current = "right"
       } else if (e == "LEFT" && directionRef.current != "right") {
@@ -253,7 +253,6 @@ const SnakeGame = () => {
     moveSnake()
 
     drawSnake(snakeContext)
-    console.log(spriteSize)
   }
 
   // Setup useEffect

@@ -1,5 +1,5 @@
 import { Joystick } from 'react-joystick-component'
-import { useState } from "react";
+import { useRef, useEffect } from "react";
 
 const MobileControl = ({ onDirectionChange }) => {
   const componentStyle = {
@@ -16,31 +16,41 @@ const MobileControl = ({ onDirectionChange }) => {
     borderRadius: '4px'
   }
 
-  const [isMoving, setIsMoving] = useState(false);
-
-  // const handleMove = (event) => {
-  //   if (!isMoving) {
-  //     setIsMoving(true);
-
-  //     // Call the move function immediately
-  //     console.log(event)
-  //     onDirectionChange(event.direction)
-
-  //     // Set a timeout to reset the isMoving flag after a specific delay
-  //     setTimeout(() => {
-  //       setIsMoving(false);
-  //     }, 0);
-  //   }
-  // }
+  const FRAME = 60
+  const movingRef = useRef(null);
+  const controlRef = useRef();
+  const timeRef = useRef(0);
 
   const handleButtonClick = (direction) => {
     onDirectionChange(direction);
   }
 
   const handleMove = (event) => {
-    console.log(event)
-    onDirectionChange(event.direction)
+    console
+    movingRef.current = event.direction
   }
+
+  const handleStop = () => {
+    movingRef.current = null
+  }
+
+  useEffect(() => {
+    let animationId
+    const renderer = time => {
+      if (time - timeRef.current >= FRAME) {
+        if (movingRef.current != null) {
+          onDirectionChange(movingRef.current)
+        }
+        timeRef.current = time;
+      }
+      animationId = window.requestAnimationFrame(renderer)
+    }
+    renderer()
+
+    return () => {
+      window.cancelAnimationFrame(animationId)
+    }
+  }, [])
 
   return (
     <div style={componentStyle}>
@@ -54,7 +64,7 @@ const MobileControl = ({ onDirectionChange }) => {
       </div> */}
 
 
-      <Joystick minDistance={50} move={handleMove} />
+      <Joystick ref={controlRef} minDistance={50} move={handleMove} stop={handleStop} />
 
     </div>
   )
