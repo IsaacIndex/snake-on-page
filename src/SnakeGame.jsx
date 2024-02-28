@@ -18,7 +18,7 @@ const SnakeGame = () => {
   const directionRef = useRef("right");
 
   const snakeCanvasRef = useRef();
-  const snakeSpriteImgRef = useRef(null);
+  const snakeSpriteImgRef = useRef();
   const mapCanvasRef = useRef();
   const [mapDeficiency, setMapDeficiency] = useState("normal")
   const [loaded, setLoaded] = useState(false)
@@ -144,7 +144,6 @@ const SnakeGame = () => {
         appleRef.current.forEach(s => s[1][1] -= spriteSize)
       }
 
-      console.log(appleRef.current)
       scrollBy(0, spriteSize + 1)
       console.log(scrollY, spriteSize)
     } else if (directionRef.current == "up") {
@@ -158,98 +157,103 @@ const SnakeGame = () => {
 
   // Paint snake
   const drawSnake = (context) => {
-    // credits to https://github.com/rembound/Snake-Game-HTML5/blob/master/snake.js
-    for (var i = 0; i < snakeRef.current.length; i++) {
-      var clipx = 0
-      var clipy = 0
-      var segment = snakeRef.current[i]
-      var segx = segment[0];
-      var segy = segment[1];
+    var img = new Image()
+    img.src = snakeSpriteImgRef.current.src
+    img.onload = () => {
+      // credits to https://github.com/rembound/Snake-Game-HTML5/blob/master/snake.js
+      for (var i = 0; i < snakeRef.current.length; i++) {
+        var clipx = 0
+        var clipy = 0
+        var segment = snakeRef.current[i]
+        var segx = segment[0];
+        var segy = segment[1];
 
-      if (i == 0) {
-        // Head; Determine the correct image
-        var nseg = snakeRef.current[i + 1]; // Next segment
-        if (segy < nseg[1]) {
-          // Up
-          clipx = 3; clipy = 0;
-        } else if (segx > nseg[0]) {
-          // Right
-          clipx = 4; clipy = 0;
-        } else if (segy > nseg[1]) {
-          // Down
-          clipx = 4; clipy = 1;
-        } else if (segx < nseg[0]) {
-          // Left
-          clipx = 3; clipy = 1;
-        }
-      } else if (i == snakeRef.current.length - 1) {
-        // Tail; Determine the correct image
-        var pseg = snakeRef.current[i - 1]; // Prev segment
-        if (pseg[1] < segy) {
-          // Up
-          clipx = 3; clipy = 2;
-        } else if (pseg[0] > segx) {
-          // Right
-          // TODO: problem when across board
-          clipx = 4; clipy = 2;
-        } else if (pseg[1] > segy) {
-          // Down
-          clipx = 4; clipy = 3;
-        } else if (pseg[0] < segx) {
-          // Left
-          clipx = 3; clipy = 3;
-        }
-      } else {
-        // Body; Determine the correct image
-        var pseg = snakeRef.current[i - 1]; // Previous segment
-        var nseg = snakeRef.current[i + 1]; // Next segment
-        if (pseg[0] < segx && nseg[0] > segx || nseg[0] < segx && pseg[0] > segx) {
-          // Horizontal Left-Right
-          clipx = 1; clipy = 0;
-        } else if (pseg[0] < segx && nseg[1] > segy || nseg[0] < segx && pseg[1] > segy) {
-          // Angle Left-Down
-          clipx = 2; clipy = 0;
-        } else if (pseg[1] < segy && nseg[1] > segy || nseg[1] < segy && pseg[1] > segy) {
-          // Vertical Up-Down
-          clipx = 2; clipy = 1;
-        } else if (pseg[1] < segy && nseg[0] < segx || nseg[1] < segy && pseg[0] < segx) {
-          // Angle Top-Left
-          clipx = 2; clipy = 2;
-        } else if (pseg[0] > segx && nseg[1] < segy || nseg[0] > segx && pseg[1] < segy) {
-          // Angle Right-Up
-          clipx = 0; clipy = 1;
-        } else if (pseg[1] > segy && nseg[0] > segx || nseg[1] > segy && pseg[0] > segx) {
-          // Angle Down-Right
-          clipx = 0; clipy = 0;
+        if (i == 0) {
+          // Head; Determine the correct image
+          var nseg = snakeRef.current[i + 1]; // Next segment
+          if (segy < nseg[1]) {
+            // Up
+            clipx = 3; clipy = 0;
+          } else if (segx > nseg[0]) {
+            // Right
+            clipx = 4; clipy = 0;
+          } else if (segy > nseg[1]) {
+            // Down
+            clipx = 4; clipy = 1;
+          } else if (segx < nseg[0]) {
+            // Left
+            clipx = 3; clipy = 1;
+          }
+        } else if (i == snakeRef.current.length - 1) {
+          // Tail; Determine the correct image
+          var pseg = snakeRef.current[i - 1]; // Prev segment
+          if (pseg[1] < segy) {
+            // Up
+            clipx = 3; clipy = 2;
+          } else if (pseg[0] > segx) {
+            // Right
+            // TODO: problem when across board
+            clipx = 4; clipy = 2;
+          } else if (pseg[1] > segy) {
+            // Down
+            clipx = 4; clipy = 3;
+          } else if (pseg[0] < segx) {
+            // Left
+            clipx = 3; clipy = 3;
+          }
         } else {
-          // when across board
-          clipx = 1; clipy = 0;
+          // Body; Determine the correct image
+          var pseg = snakeRef.current[i - 1]; // Previous segment
+          var nseg = snakeRef.current[i + 1]; // Next segment
+          if (pseg[0] < segx && nseg[0] > segx || nseg[0] < segx && pseg[0] > segx) {
+            // Horizontal Left-Right
+            clipx = 1; clipy = 0;
+          } else if (pseg[0] < segx && nseg[1] > segy || nseg[0] < segx && pseg[1] > segy) {
+            // Angle Left-Down
+            clipx = 2; clipy = 0;
+          } else if (pseg[1] < segy && nseg[1] > segy || nseg[1] < segy && pseg[1] > segy) {
+            // Vertical Up-Down
+            clipx = 2; clipy = 1;
+          } else if (pseg[1] < segy && nseg[0] < segx || nseg[1] < segy && pseg[0] < segx) {
+            // Angle Top-Left
+            clipx = 2; clipy = 2;
+          } else if (pseg[0] > segx && nseg[1] < segy || nseg[0] > segx && pseg[1] < segy) {
+            // Angle Right-Up
+            clipx = 0; clipy = 1;
+          } else if (pseg[1] > segy && nseg[0] > segx || nseg[1] > segy && pseg[0] > segx) {
+            // Angle Down-Right
+            clipx = 0; clipy = 0;
+          } else {
+            // when across board
+            clipx = 1; clipy = 0;
+          }
         }
+
+        // wiggle animation
+        var randomNumber = [0, 0]
+        // if (i != 0) {
+        //   if (["right", "left"].includes(directionRef.current)) {
+        //     randomNumber = [0, Math.random() - 0.5]
+        //   } else {
+        //     randomNumber = [Math.random() - 0.5, 0]
+        //   }
+        // }
+
+        // Draw snake
+        context.drawImage(snakeSpriteImgRef.current, clipx * 64, clipy * 64, 64, 64, snakeRef.current[i][0] + randomNumber[0], snakeRef.current[i][1] + randomNumber[1], spriteSize, spriteSize)
       }
-
-      // wiggle animation
-      var randomNumber = [0, 0]
-      // if (i != 0) {
-      //   if (["right", "left"].includes(directionRef.current)) {
-      //     randomNumber = [0, Math.random() - 0.5]
-      //   } else {
-      //     randomNumber = [Math.random() - 0.5, 0]
-      //   }
-      // }
-
-      // Draw snake
-      context.drawImage(snakeSpriteImgRef.current, clipx * 64, clipy * 64, 64, 64, snakeRef.current[i][0] + randomNumber[0], snakeRef.current[i][1] + randomNumber[1], spriteSize, spriteSize)
     }
   }
 
   // Game Loop (triggered after directionRef updated)
   const gameLoop = () => {
+
     // get context and clear board
     const snakeCanvas = snakeCanvasRef.current
     const snakeContext = snakeCanvas.getContext('2d')
     snakeContext.clearRect(0, 0, snakeContext.canvas.width, snakeContext.canvas.height)
 
-    // move snake
+    // // move snake
     moveSnake()
 
     drawSnake(snakeContext)
@@ -284,17 +288,10 @@ const SnakeGame = () => {
       [Math.round(window.innerWidth / 2) - spriteSize * 6, Math.round(window.innerHeight / 2)],
     ]
 
+
     const SnakeSpriteImg = new Image()
     SnakeSpriteImg.src = snakeImages.normal
     snakeSpriteImgRef.current = SnakeSpriteImg
-
-    const snakeCanvas = snakeCanvasRef.current
-    const snakeContext = snakeCanvas.getContext('2d')
-    // snakeContext.clearRect(0, 0, snakeContext.canvas.width, snakeContext.canvas.height)
-    console.log(snakeCanvasRef.current)
-    drawSnake(snakeContext)
-    snakeContext.fillStyle = "#FF0000";
-    snakeContext.fillRect(0, 0, 150, 75);
 
     // resize canvas
     const canvas = snakeCanvasRef.current;
@@ -304,16 +301,20 @@ const SnakeGame = () => {
       setIsMobile(window.innerWidth <= 768)
       setSpriteSize(Math.round(window.innerWidth * 0.03))
     };
-
     resizeCanvas();
+
+    // Draw
+    const snakeCanvas = snakeCanvasRef.current
+    const snakeContext = snakeCanvas.getContext('2d')
+    snakeContext.clearRect(0, 0, snakeContext.canvas.width, snakeContext.canvas.height)
+    drawSnake(snakeContext)
 
     window.addEventListener('resize', resizeCanvas);
     window.addEventListener("keydown", keyUpdate);
     return () => {
       window.removeEventListener('resize', resizeCanvas);
       window.removeEventListener("keydown", keyUpdate)
-    };
-
+    }
   }, [])
 
   return (
@@ -321,6 +322,10 @@ const SnakeGame = () => {
       <canvas className={styles.snakeCanvas} ref={snakeCanvasRef} />
       <canvas className={styles.mapCanvas} ref={mapCanvasRef} />
       <ImageLoader src={mapImages["normal"]} hidden={hidden.normal} alt="normal" onLoad={onComplete} />
+      <ImageLoader src={mapImages["achromatopsia"]} hidden={hidden.achromatopsia} alt="achromatopsia" onLoad={onComplete} />
+      <ImageLoader src={mapImages["deuteranopia"]} hidden={hidden.deuteranopia} alt="deuteranopia" onLoad={onComplete} />
+      <ImageLoader src={mapImages["protanopia"]} hidden={hidden.protanopia} alt="protanopia" onLoad={onComplete} />
+      <ImageLoader src={mapImages["tritanopia"]} hidden={hidden.tritanopia} alt="tritanopia" onLoad={onComplete} />
       {isMobile && <MobileControl onDirectionChange={keyUpdate} />}
     </div>
   )
