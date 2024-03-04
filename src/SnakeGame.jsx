@@ -119,8 +119,6 @@ const SnakeGame = () => {
       const [deficiency, applePosition] = apples[index];
 
       // Check width and height
-      console.log(Math.abs(snakeRef.current[0][0] - applePosition[0]) < (spriteSize / 2),
-        Math.abs((snakeRef.current[0][1]) - applePosition[1]) < (spriteSize / 2))
       if (
         Math.abs(snakeRef.current[0][0] - applePosition[0]) < (spriteSize / 2) &&
         Math.abs((snakeRef.current[0][1] + scrollY) - applePosition[1]) < (spriteSize / 2)
@@ -129,11 +127,11 @@ const SnakeGame = () => {
         appleEaten = true
         appleRef.current.splice(index, 1)
         drawApple()
-        // const SnakeSpriteImg = new Image()
-        // SnakeSpriteImg.src = snakeImages[deficiency]
-        // snakeSpriteImgRef.current = SnakeSpriteImg
-        // setMapDeficiency(deficiency)
-        // index--
+        const SnakeSpriteImg = new Image()
+        SnakeSpriteImg.src = snakeImages[deficiency]
+        snakeSpriteImgRef.current = SnakeSpriteImg
+        setMapDeficiency(deficiency)
+        index--
       }
     }
 
@@ -261,10 +259,6 @@ const SnakeGame = () => {
 
     // draw; apple only redraws when collision
     drawSnake()
-
-    console.log(scrollY)
-    console.log(snakeRef.current[0])
-    console.log(appleRef.current)
   }
 
 
@@ -278,7 +272,7 @@ const SnakeGame = () => {
       ["achromatopsia", [0.4, 0.35]],
       ["deuteranopia", [0.4, 0.45]],
       ["tritanopia", [0.4, 0.55]],
-      ["normal", [0.4, 0.25]]
+      ["normal", [0.4, 0.65]]
     ]
 
     appleRef.current.forEach(a => {
@@ -340,15 +334,13 @@ const SnakeGame = () => {
   useEffect(() => {
     console.log("snakesprite")
     const spriteImg = spriteRef.current
-    console.log(snakeSpriteImgRef.current.src)
     spriteImg.src = snakeSpriteImgRef.current.src
     spriteImg.onload = () => {
-      console.log(spriteImg)
       drawApple()
       drawSnake()
     }
 
-  }, [snakeSpriteImgRef])
+  }, [snakeSpriteImgRef.current])
 
   return (
     <div ref={containerRef} className={styles.snakeGame}>
