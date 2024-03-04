@@ -126,9 +126,6 @@ const SnakeGame = () => {
         Math.abs((snakeRef.current[0][1] + scrollY) - applePosition[1]) < (spriteSize / 2)
       ) {
         console.log("==========================eaten")
-        console.log(scrollY)
-        console.log(deficiency)
-        console.log(snakeRef.current[0][1], appleRef.current)
         appleEaten = true
         appleRef.current.splice(index, 1)
         drawApple()
@@ -251,7 +248,7 @@ const SnakeGame = () => {
       mapContext.drawImage(spriteRef.current, 0 * 64, 3 * 64, 64, 64, applePosition[0], applePosition[1], spriteSize, spriteSize)
       mapContext.font = "20px Georgia";
       mapContext.fillStyle = "white"
-      mapContext.fillText(deficiency, applePosition[0], applePosition[1] - scrollY + spriteSize)
+      mapContext.fillText(deficiency, applePosition[0], applePosition[1] + spriteSize)
     })
   }
 
@@ -262,17 +259,8 @@ const SnakeGame = () => {
     // // move snake
     moveSnake()
 
-    // get context and clear board
-    const snakeCanvas = snakeCanvasRef.current
-    const snakeContext = snakeCanvas.getContext('2d')
-    snakeContext.clearRect(0, 0, snakeContext.canvas.width, snakeContext.canvas.height)
+    // draw; apple only redraws when collision
     drawSnake()
-
-    // get context and clear board
-    const mapCanvas = mapCanvasRef.current
-    const mapContext = mapCanvas.getContext('2d')
-    // mapContext.clearRect(0, 0, mapContext.canvas.width, mapContext.canvas.height)
-    // drawApple()
 
     console.log(scrollY)
     console.log(snakeRef.current[0])
