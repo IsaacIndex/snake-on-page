@@ -23,6 +23,7 @@ const SnakeGame = () => {
   const [mapDeficiency, setMapDeficiency] = useState("normal")
   const [loaded, setLoaded] = useState(false)
   const containerRef = useRef()
+  const spriteRef = useRef()
 
   const [isMobile, setIsMobile] = useState(false);
   const [spriteSize, setSpriteSize] = useState(window.innerWidth * 0.03)
@@ -160,91 +161,87 @@ const SnakeGame = () => {
   const drawSnake = () => {
     const snakeCanvas = snakeCanvasRef.current
     const snakeContext = snakeCanvas.getContext('2d')
-    var img = new Image()
-    img.src = snakeSpriteImgRef.current.src
-    img.onload = () => {
-      // credits to https://github.com/rembound/Snake-Game-HTML5/blob/master/snake.js
-      for (var i = 0; i < snakeRef.current.length; i++) {
-        var clipx = 0
-        var clipy = 0
-        var segment = snakeRef.current[i]
-        var segx = segment[0];
-        var segy = segment[1];
+    // credits to https://github.com/rembound/Snake-Game-HTML5/blob/master/snake.js
+    for (var i = 0; i < snakeRef.current.length; i++) {
+      var clipx = 0
+      var clipy = 0
+      var segment = snakeRef.current[i]
+      var segx = segment[0];
+      var segy = segment[1];
 
-        if (i == 0) {
-          // Head; Determine the correct image
-          var nseg = snakeRef.current[i + 1]; // Next segment
-          if (segy < nseg[1]) {
-            // Up
-            clipx = 3; clipy = 0;
-          } else if (segx > nseg[0]) {
-            // Right
-            clipx = 4; clipy = 0;
-          } else if (segy > nseg[1]) {
-            // Down
-            clipx = 4; clipy = 1;
-          } else if (segx < nseg[0]) {
-            // Left
-            clipx = 3; clipy = 1;
-          }
-        } else if (i == snakeRef.current.length - 1) {
-          // Tail; Determine the correct image
-          var pseg = snakeRef.current[i - 1]; // Prev segment
-          if (pseg[1] < segy) {
-            // Up
-            clipx = 3; clipy = 2;
-          } else if (pseg[0] > segx) {
-            // Right
-            // TODO: problem when across board
-            clipx = 4; clipy = 2;
-          } else if (pseg[1] > segy) {
-            // Down
-            clipx = 4; clipy = 3;
-          } else if (pseg[0] < segx) {
-            // Left
-            clipx = 3; clipy = 3;
-          }
-        } else {
-          // Body; Determine the correct image
-          var pseg = snakeRef.current[i - 1]; // Previous segment
-          var nseg = snakeRef.current[i + 1]; // Next segment
-          if (pseg[0] < segx && nseg[0] > segx || nseg[0] < segx && pseg[0] > segx) {
-            // Horizontal Left-Right
-            clipx = 1; clipy = 0;
-          } else if (pseg[0] < segx && nseg[1] > segy || nseg[0] < segx && pseg[1] > segy) {
-            // Angle Left-Down
-            clipx = 2; clipy = 0;
-          } else if (pseg[1] < segy && nseg[1] > segy || nseg[1] < segy && pseg[1] > segy) {
-            // Vertical Up-Down
-            clipx = 2; clipy = 1;
-          } else if (pseg[1] < segy && nseg[0] < segx || nseg[1] < segy && pseg[0] < segx) {
-            // Angle Top-Left
-            clipx = 2; clipy = 2;
-          } else if (pseg[0] > segx && nseg[1] < segy || nseg[0] > segx && pseg[1] < segy) {
-            // Angle Right-Up
-            clipx = 0; clipy = 1;
-          } else if (pseg[1] > segy && nseg[0] > segx || nseg[1] > segy && pseg[0] > segx) {
-            // Angle Down-Right
-            clipx = 0; clipy = 0;
-          } else {
-            // when across board
-            clipx = 1; clipy = 0;
-          }
+      if (i == 0) {
+        // Head; Determine the correct image
+        var nseg = snakeRef.current[i + 1]; // Next segment
+        if (segy < nseg[1]) {
+          // Up
+          clipx = 3; clipy = 0;
+        } else if (segx > nseg[0]) {
+          // Right
+          clipx = 4; clipy = 0;
+        } else if (segy > nseg[1]) {
+          // Down
+          clipx = 4; clipy = 1;
+        } else if (segx < nseg[0]) {
+          // Left
+          clipx = 3; clipy = 1;
         }
-
-        // wiggle animation
-        var randomNumber = [0, 0]
-        // if (i != 0) {
-        //   if (["right", "left"].includes(directionRef.current)) {
-        //     randomNumber = [0, Math.random() - 0.5]
-        //   } else {
-        //     randomNumber = [Math.random() - 0.5, 0]
-        //   }
-        // }
-
-        // Draw snake
-        snakeContext.drawImage(snakeSpriteImgRef.current, clipx * 64, clipy * 64, 64, 64, snakeRef.current[i][0] + randomNumber[0], snakeRef.current[i][1] + randomNumber[1], spriteSize, spriteSize)
+      } else if (i == snakeRef.current.length - 1) {
+        // Tail; Determine the correct image
+        var pseg = snakeRef.current[i - 1]; // Prev segment
+        if (pseg[1] < segy) {
+          // Up
+          clipx = 3; clipy = 2;
+        } else if (pseg[0] > segx) {
+          // Right
+          // TODO: problem when across board
+          clipx = 4; clipy = 2;
+        } else if (pseg[1] > segy) {
+          // Down
+          clipx = 4; clipy = 3;
+        } else if (pseg[0] < segx) {
+          // Left
+          clipx = 3; clipy = 3;
+        }
+      } else {
+        // Body; Determine the correct image
+        var pseg = snakeRef.current[i - 1]; // Previous segment
+        var nseg = snakeRef.current[i + 1]; // Next segment
+        if (pseg[0] < segx && nseg[0] > segx || nseg[0] < segx && pseg[0] > segx) {
+          // Horizontal Left-Right
+          clipx = 1; clipy = 0;
+        } else if (pseg[0] < segx && nseg[1] > segy || nseg[0] < segx && pseg[1] > segy) {
+          // Angle Left-Down
+          clipx = 2; clipy = 0;
+        } else if (pseg[1] < segy && nseg[1] > segy || nseg[1] < segy && pseg[1] > segy) {
+          // Vertical Up-Down
+          clipx = 2; clipy = 1;
+        } else if (pseg[1] < segy && nseg[0] < segx || nseg[1] < segy && pseg[0] < segx) {
+          // Angle Top-Left
+          clipx = 2; clipy = 2;
+        } else if (pseg[0] > segx && nseg[1] < segy || nseg[0] > segx && pseg[1] < segy) {
+          // Angle Right-Up
+          clipx = 0; clipy = 1;
+        } else if (pseg[1] > segy && nseg[0] > segx || nseg[1] > segy && pseg[0] > segx) {
+          // Angle Down-Right
+          clipx = 0; clipy = 0;
+        } else {
+          // when across board
+          clipx = 1; clipy = 0;
+        }
       }
+
+      // wiggle animation
+      var randomNumber = [0, 0]
+      // if (i != 0) {
+      //   if (["right", "left"].includes(directionRef.current)) {
+      //     randomNumber = [0, Math.random() - 0.5]
+      //   } else {
+      //     randomNumber = [Math.random() - 0.5, 0]
+      //   }
+      // }
+
+      // Draw snake
+      snakeContext.drawImage(spriteRef.current, clipx * 64, clipy * 64, 64, 64, snakeRef.current[i][0] + randomNumber[0], snakeRef.current[i][1] + randomNumber[1], spriteSize, spriteSize)
     }
   }
 
@@ -253,21 +250,17 @@ const SnakeGame = () => {
 
     const mapCanvas = mapCanvasRef.current
     const mapContext = mapCanvas.getContext('2d')
-    var img = new Image()
-    img.src = snakeSpriteImgRef.current.src
-    img.onload = () => {
-      appleRef.current.forEach(([deficiency, applePosition]) => {
-        mapContext.drawImage(img, 0 * 64, 3 * 64, 64, 64, applePosition[0], applePosition[1], spriteSize, spriteSize)
-        mapContext.font = "20px Georgia";
-        mapContext.fillStyle = "white"
-        mapContext.fillText(deficiency, applePosition[0], applePosition[1] - scrollY + spriteSize)
-      })
-    }
+    appleRef.current.forEach(([deficiency, applePosition]) => {
+      mapContext.drawImage(spriteRef.current, 0 * 64, 3 * 64, 64, 64, applePosition[0], applePosition[1], spriteSize, spriteSize)
+      mapContext.font = "20px Georgia";
+      mapContext.fillStyle = "white"
+      mapContext.fillText(deficiency, applePosition[0], applePosition[1] - scrollY + spriteSize)
+    })
   }
 
   // Game Loop (triggered after directionRef updated)
   const gameLoop = () => {
-    console.log(gameLoop)
+    console.log("gameLoop")
 
     // // move snake
     moveSnake()
@@ -284,6 +277,7 @@ const SnakeGame = () => {
     // mapContext.clearRect(0, 0, mapContext.canvas.width, mapContext.canvas.height)
     // drawApple()
   }
+
 
   // Setup useEffect
   useEffect(() => {
@@ -360,8 +354,23 @@ const SnakeGame = () => {
     }
   }, [loaded])
 
+  // change snakesprite use Effect
+  useEffect(() => {
+    console.log("snakesprite")
+    const spriteImg = spriteRef.current
+    console.log(snakeSpriteImgRef.current.src)
+    spriteImg.src = snakeSpriteImgRef.current.src
+    spriteImg.onload = () => {
+      console.log(spriteImg)
+      drawApple()
+      drawSnake()
+    }
+
+  }, [snakeSpriteImgRef])
+
   return (
     <div ref={containerRef} className={styles.snakeGame}>
+      <img src="" hidden style={{ position: "fixed" }} ref={spriteRef} />
       <canvas className={styles.snakeCanvas} ref={snakeCanvasRef} />
       <canvas className={styles.mapCanvas} ref={mapCanvasRef} />
       <ImageLoader src={mapImages["normal"]} hidden={hidden.normal} alt="normal" onLoad={onComplete} />
