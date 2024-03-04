@@ -119,19 +119,24 @@ const SnakeGame = () => {
       const [deficiency, applePosition] = apples[index];
 
       // Check width and height
-      // console.log(snakeRef.current[0][1], applePosition[1] * document.documentElement.scrollHeight)
+      console.log(Math.abs(snakeRef.current[0][0] - applePosition[0]) < (spriteSize / 2),
+        Math.abs((snakeRef.current[0][1]) - applePosition[1]) < (spriteSize / 2))
       if (
-        Math.abs(snakeRef.current[0][0] - applePosition[0] * document.documentElement.scrollWidth) < spriteSize &&
-        Math.abs((snakeRef.current[0][1] + scrollY) - applePosition[1] * document.documentElement.scrollHeight) < (spriteSize)
+        Math.abs(snakeRef.current[0][0] - applePosition[0]) < (spriteSize / 2) &&
+        Math.abs((snakeRef.current[0][1] + scrollY) - applePosition[1]) < (spriteSize / 2)
       ) {
-        console.log("eaten")
+        console.log("==========================eaten")
+        console.log(scrollY)
+        console.log(deficiency)
+        console.log(snakeRef.current[0][1], appleRef.current)
         appleEaten = true
         appleRef.current.splice(index, 1)
-        const SnakeSpriteImg = new Image()
-        SnakeSpriteImg.src = snakeImages[deficiency]
-        snakeSpriteImgRef.current = SnakeSpriteImg
-        setMapDeficiency(deficiency)
-        index--
+        drawApple()
+        // const SnakeSpriteImg = new Image()
+        // SnakeSpriteImg.src = snakeImages[deficiency]
+        // snakeSpriteImgRef.current = SnakeSpriteImg
+        // setMapDeficiency(deficiency)
+        // index--
       }
     }
 
@@ -142,17 +147,9 @@ const SnakeGame = () => {
     // offset to stay in the centre
     if (directionRef.current == "down") {
       snakeRef.current.forEach(s => s[1] -= spriteSize)
-      if (scrollY != document.documentElement.scrollHeight) {
-        appleRef.current.forEach(s => s[1][1] -= spriteSize)
-      }
-
       scrollBy(0, spriteSize + 1)
-      console.log(scrollY, spriteSize)
     } else if (directionRef.current == "up") {
       snakeRef.current.forEach(s => s[1] += spriteSize)
-      if (scrollY != 0) {
-        appleRef.current.forEach(s => s[1][1] += spriteSize)
-      }
       scrollBy(0, -spriteSize + 1)
     }
   }
@@ -161,6 +158,7 @@ const SnakeGame = () => {
   const drawSnake = () => {
     const snakeCanvas = snakeCanvasRef.current
     const snakeContext = snakeCanvas.getContext('2d')
+    snakeContext.clearRect(0, 0, snakeContext.canvas.width, snakeContext.canvas.height)
     // credits to https://github.com/rembound/Snake-Game-HTML5/blob/master/snake.js
     for (var i = 0; i < snakeRef.current.length; i++) {
       var clipx = 0
@@ -246,10 +244,9 @@ const SnakeGame = () => {
   }
 
   const drawApple = () => {
-    console.log(appleRef.current)
-
     const mapCanvas = mapCanvasRef.current
     const mapContext = mapCanvas.getContext('2d')
+    mapContext.clearRect(0, 0, mapContext.canvas.width, mapContext.canvas.height)
     appleRef.current.forEach(([deficiency, applePosition]) => {
       mapContext.drawImage(spriteRef.current, 0 * 64, 3 * 64, 64, 64, applePosition[0], applePosition[1], spriteSize, spriteSize)
       mapContext.font = "20px Georgia";
@@ -276,6 +273,10 @@ const SnakeGame = () => {
     const mapContext = mapCanvas.getContext('2d')
     // mapContext.clearRect(0, 0, mapContext.canvas.width, mapContext.canvas.height)
     // drawApple()
+
+    console.log(scrollY)
+    console.log(snakeRef.current[0])
+    console.log(appleRef.current)
   }
 
 
@@ -336,14 +337,7 @@ const SnakeGame = () => {
     resizeCanvas();
 
     // Draw
-    const snakeCanvas = snakeCanvasRef.current
-    const snakeContext = snakeCanvas.getContext('2d')
-    snakeContext.clearRect(0, 0, snakeContext.canvas.width, snakeContext.canvas.height)
     drawSnake()
-
-    const mapCanvas = mapCanvasRef.current
-    const mapContext = mapCanvas.getContext('2d')
-    mapContext.clearRect(0, 0, mapContext.canvas.width, mapContext.canvas.height)
     drawApple()
 
     window.addEventListener('resize', resizeCanvas);
