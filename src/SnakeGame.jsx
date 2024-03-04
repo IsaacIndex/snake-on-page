@@ -22,6 +22,7 @@ const SnakeGame = () => {
   const mapCanvasRef = useRef();
   const [mapDeficiency, setMapDeficiency] = useState("normal")
   const [loaded, setLoaded] = useState(false)
+  const containerRef = useRef()
 
   const [isMobile, setIsMobile] = useState(false);
   const [spriteSize, setSpriteSize] = useState(window.innerWidth * 0.03)
@@ -156,7 +157,9 @@ const SnakeGame = () => {
   }
 
   // Paint snake
-  const drawSnake = (context) => {
+  const drawSnake = () => {
+    const snakeCanvas = snakeCanvasRef.current
+    const snakeContext = snakeCanvas.getContext('2d')
     var img = new Image()
     img.src = snakeSpriteImgRef.current.src
     img.onload = () => {
@@ -240,23 +243,46 @@ const SnakeGame = () => {
         // }
 
         // Draw snake
-        context.drawImage(snakeSpriteImgRef.current, clipx * 64, clipy * 64, 64, 64, snakeRef.current[i][0] + randomNumber[0], snakeRef.current[i][1] + randomNumber[1], spriteSize, spriteSize)
+        snakeContext.drawImage(snakeSpriteImgRef.current, clipx * 64, clipy * 64, 64, 64, snakeRef.current[i][0] + randomNumber[0], snakeRef.current[i][1] + randomNumber[1], spriteSize, spriteSize)
       }
+    }
+  }
+
+  const drawApple = () => {
+    console.log(appleRef.current)
+
+    const mapCanvas = mapCanvasRef.current
+    const mapContext = mapCanvas.getContext('2d')
+    var img = new Image()
+    img.src = snakeSpriteImgRef.current.src
+    img.onload = () => {
+      appleRef.current.forEach(([deficiency, applePosition]) => {
+        mapContext.drawImage(img, 0 * 64, 3 * 64, 64, 64, applePosition[0], applePosition[1], spriteSize, spriteSize)
+        mapContext.font = "20px Georgia";
+        mapContext.fillStyle = "white"
+        mapContext.fillText(deficiency, applePosition[0], applePosition[1] - scrollY + spriteSize)
+      })
     }
   }
 
   // Game Loop (triggered after directionRef updated)
   const gameLoop = () => {
+    console.log(gameLoop)
+
+    // // move snake
+    moveSnake()
 
     // get context and clear board
     const snakeCanvas = snakeCanvasRef.current
     const snakeContext = snakeCanvas.getContext('2d')
     snakeContext.clearRect(0, 0, snakeContext.canvas.width, snakeContext.canvas.height)
+    drawSnake()
 
-    // // move snake
-    moveSnake()
-
-    drawSnake(snakeContext)
+    // get context and clear board
+    const mapCanvas = mapCanvasRef.current
+    const mapContext = mapCanvas.getContext('2d')
+    // mapContext.clearRect(0, 0, mapContext.canvas.width, mapContext.canvas.height)
+    // drawApple()
   }
 
   // Setup useEffect
@@ -273,8 +299,8 @@ const SnakeGame = () => {
     ]
 
     appleRef.current.forEach(a => {
-      a[1][0] *= mapCanvasRef.current.offsetWidth
-      a[1][1] *= mapCanvasRef.current.offsetHeight
+      a[1][0] *= containerRef.current.offsetWidth
+      a[1][1] *= containerRef.current.offsetHeight
     })
 
     // snake image
@@ -294,12 +320,24 @@ const SnakeGame = () => {
     snakeSpriteImgRef.current = SnakeSpriteImg
 
     // resize canvas
-    const canvas = snakeCanvasRef.current;
     const resizeCanvas = () => {
-      canvas.width = Math.min(window.innerWidth, 1920)
-      canvas.height = window.innerHeight;
+      const snakeCanvas = snakeCanvasRef.current
+      const mapCanvas = mapCanvasRef.current
+      const container = containerRef.current
+
+      snakeCanvas.width = Math.min(window.innerWidth, 1920)
+      snakeCanvas.height = window.innerHeight;
+
+      mapCanvas.width = container.offsetWidth
+      mapCanvas.height = container.offsetHeight
+
       setIsMobile(window.innerWidth <= 768)
       setSpriteSize(Math.round(window.innerWidth * 0.03))
+
+      // TODO: Conversion from position a (screen size 1) to position b (screen size 2)
+
+      drawSnake()
+      drawApple()
     };
     resizeCanvas();
 
@@ -307,7 +345,12 @@ const SnakeGame = () => {
     const snakeCanvas = snakeCanvasRef.current
     const snakeContext = snakeCanvas.getContext('2d')
     snakeContext.clearRect(0, 0, snakeContext.canvas.width, snakeContext.canvas.height)
-    drawSnake(snakeContext)
+    drawSnake()
+
+    const mapCanvas = mapCanvasRef.current
+    const mapContext = mapCanvas.getContext('2d')
+    mapContext.clearRect(0, 0, mapContext.canvas.width, mapContext.canvas.height)
+    drawApple()
 
     window.addEventListener('resize', resizeCanvas);
     window.addEventListener("keydown", keyUpdate);
@@ -315,10 +358,10 @@ const SnakeGame = () => {
       window.removeEventListener('resize', resizeCanvas);
       window.removeEventListener("keydown", keyUpdate)
     }
-  }, [])
+  }, [loaded])
 
   return (
-    <div className={styles.snakeGame}>
+    <div ref={containerRef} className={styles.snakeGame}>
       <canvas className={styles.snakeCanvas} ref={snakeCanvasRef} />
       <canvas className={styles.mapCanvas} ref={mapCanvasRef} />
       <ImageLoader src={mapImages["normal"]} hidden={hidden.normal} alt="normal" onLoad={onComplete} />
