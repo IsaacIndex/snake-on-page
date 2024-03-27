@@ -4,10 +4,10 @@ import fs from 'fs';
 
 // URL of the image you want to import
 // const imageUrl = 'https://img.freepik.com/free-vector/large-school-building-scene_1308-32058.jpg';
-const imageUrl = './src/assets/map/map.png';
+const imageUrl = './src/assets/desert_map/map.png';
 
 // Path where you want to save the output PNG file
-const outputPath = 'src/assets/map/';
+const outputPath = 'src/assets/desert_map/';
 
 // Function to simulate the image and export it as PNG inside a canvas
 const processImage = (context, image, deficiency) => {

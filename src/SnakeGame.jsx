@@ -2,12 +2,6 @@ import styles from './SnakeGame.module.css'
 import { useRef, useEffect, useState, useMemo } from "react";
 import MobileControl from "./MobileControl";
 
-import {
-  SNAKE,
-  // snakeSize,
-  FRAME
-} from "./constants";
-
 import ImageLoader from "./ImageLoader";
 import snakeImages from "./snakeImages";
 import mapImages from "./mapImages";
