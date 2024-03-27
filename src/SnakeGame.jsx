@@ -4,9 +4,11 @@ import MobileControl from "./MobileControl";
 
 import ImageLoader from "./ImageLoader";
 import snakeImages from "./snakeImages";
-import mapImages from "./mapImages";
+// import mapImages from "./mapImages";
 
-const SnakeGame = () => {
+const SnakeGame = ({ mapLocations }) => {
+
+  const [mapImages, setMapImages] = useState("")
   const snakeRef = useRef();
   const appleRef = useRef();
   const directionRef = useRef("right");
@@ -22,7 +24,7 @@ const SnakeGame = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [spriteSize, setSpriteSize] = useState(window.innerWidth * 0.03)
 
-  const onComplete = after(Object.keys(mapImages).length, () => {
+  const onComplete = after(5, () => {
     setLoaded(true);
     console.log("loaded");
   })
@@ -260,6 +262,18 @@ const SnakeGame = () => {
   useEffect(() => {
     console.log("setup")
 
+    const loadMapImages = async () => {
+      console.log(mapLocations)
+      try {
+        const module = await import(mapLocations);
+        setMapImages(module.default);
+      } catch (error) {
+        console.error(`Failed to dynamically load component`);
+      }
+    };
+
+    loadMapImages();
+
     // apple position
     appleRef.current = [
       ["protanopia", [0.3, 0.3]],
@@ -338,14 +352,18 @@ const SnakeGame = () => {
 
   return (
     <div ref={containerRef} className={styles.snakeGame}>
+      {!loaded && <span>Loading...</span>}
       <img src="" hidden style={{ position: "fixed" }} ref={spriteRef} />
       <canvas className={styles.snakeCanvas} ref={snakeCanvasRef} />
       <canvas className={styles.mapCanvas} ref={mapCanvasRef} />
-      <ImageLoader src={mapImages["normal"]} hidden={hidden.normal} alt="normal" onLoad={onComplete} />
-      <ImageLoader src={mapImages["achromatopsia"]} hidden={hidden.achromatopsia} alt="achromatopsia" onLoad={onComplete} />
-      <ImageLoader src={mapImages["deuteranopia"]} hidden={hidden.deuteranopia} alt="deuteranopia" onLoad={onComplete} />
-      <ImageLoader src={mapImages["protanopia"]} hidden={hidden.protanopia} alt="protanopia" onLoad={onComplete} />
-      <ImageLoader src={mapImages["tritanopia"]} hidden={hidden.tritanopia} alt="tritanopia" onLoad={onComplete} />
+      {mapImages && <>
+        <ImageLoader src={mapImages["normal"]} hidden={hidden.normal} alt="normal" onLoad={onComplete} />
+        <ImageLoader src={mapImages["achromatopsia"]} hidden={hidden.achromatopsia} alt="achromatopsia" onLoad={onComplete} />
+        <ImageLoader src={mapImages["deuteranopia"]} hidden={hidden.deuteranopia} alt="deuteranopia" onLoad={onComplete} />
+        <ImageLoader src={mapImages["protanopia"]} hidden={hidden.protanopia} alt="protanopia" onLoad={onComplete} />
+        <ImageLoader src={mapImages["tritanopia"]} hidden={hidden.tritanopia} alt="tritanopia" onLoad={onComplete} />
+      </>
+      }
       {isMobile && <MobileControl onDirectionChange={keyUpdate} />}
     </div>
   )
