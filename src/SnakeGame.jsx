@@ -265,7 +265,7 @@ const SnakeGame = ({ mapLocations }) => {
     const loadMapImages = async () => {
       console.log(mapLocations)
       try {
-        const module = await import(mapLocations);
+        const module = await import(`./${mapLocations}.js`);
         setMapImages(module.default);
       } catch (error) {
         console.error(`Failed to dynamically load component`);
