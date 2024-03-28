@@ -6,7 +6,7 @@ import ImageLoader from "./ImageLoader";
 import snakeImages from "./snakeImages";
 // import mapImages from "./mapImages";
 
-const SnakeGame = ({ mapLocations }) => {
+const SnakeGame = ({ mapImporterName }) => {
 
   const [mapImages, setMapImages] = useState("")
   const snakeRef = useRef();
@@ -263,9 +263,8 @@ const SnakeGame = ({ mapLocations }) => {
     console.log("setup")
 
     const loadMapImages = async () => {
-      console.log(mapLocations)
       try {
-        const module = await import(`./${mapLocations}.js`);
+        const module = await import(`./image_importers/${mapImporterName}.js`);
         setMapImages(module.default);
       } catch (error) {
         console.error(`Failed to dynamically load component`);

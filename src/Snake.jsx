@@ -7,7 +7,7 @@ import {
   FRAME
 } from "./constants";
 import snakeImages from "./snakeImages";
-import mapImages from "./mapImages";
+import mapImages from "./image_importers/mapImages";
 import ImageLoader from "./ImageLoader";
 import MobileControl from "./MobileControl";
 

@@ -3,7 +3,7 @@ import SnakeGame from './SnakeGame'
 const GameInterface = () => {
   return (
     <div>
-      <SnakeGame mapLocations={"desertImages"} />
+      <SnakeGame mapImporterName={"desertImages"} />
     </div>
   );
 }
