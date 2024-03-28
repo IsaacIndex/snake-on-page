@@ -6,7 +6,7 @@ import ImageLoader from "./ImageLoader";
 import snakeImages from "./snakeImages";
 // import mapImages from "./mapImages";
 
-const SnakeGame = ({ mapImporterName }) => {
+const SnakeGame = ({ mapImporterName, nextMap }) => {
 
   const [mapImages, setMapImages] = useState("")
   const snakeRef = useRef();
@@ -65,7 +65,10 @@ const SnakeGame = ({ mapImporterName }) => {
         directionRef.current = "up"
       } else if (keyboardMapping[e.key] == "down" && directionRef.current != "up") {
         directionRef.current = "down"
+      } else if (e.key == "m") {
+        nextMap()
       } else {
+        console.log(e.key)
         return
       }
 
@@ -335,7 +338,7 @@ const SnakeGame = ({ mapImporterName }) => {
       window.removeEventListener('resize', resizeCanvas);
       window.removeEventListener("keydown", keyUpdate)
     }
-  }, [loaded])
+  }, [loaded, mapImporterName])
 
   // change snakesprite use Effect
   useEffect(() => {
@@ -353,8 +356,8 @@ const SnakeGame = ({ mapImporterName }) => {
     <div ref={containerRef} className={styles.snakeGame}>
       {!loaded && <span>Loading...</span>}
       <img src="" hidden style={{ position: "fixed" }} ref={spriteRef} />
-      <canvas className={styles.snakeCanvas} ref={snakeCanvasRef} />
       <canvas className={styles.mapCanvas} ref={mapCanvasRef} />
+      <canvas className={styles.snakeCanvas} ref={snakeCanvasRef} />
       {mapImages && <>
         <ImageLoader src={mapImages["normal"]} hidden={hidden.normal} alt="normal" onLoad={onComplete} />
         <ImageLoader src={mapImages["achromatopsia"]} hidden={hidden.achromatopsia} alt="achromatopsia" onLoad={onComplete} />
