@@ -117,8 +117,8 @@ const SnakeGame = ({ mapImporterName, nextMap }) => {
     // Check collide with tunnel
     const tunnel = tunnelRef.current
     if (
-      Math.abs(snakeRef.current[0][0] - tunnel[0]) < (spriteSize / 2) &&
-      Math.abs((snakeRef.current[0][1] + scrollY) - tunnel[1]) < (spriteSize / 2)
+      Math.abs(snakeRef.current[0][0] - tunnel[0]) < (spriteSize) &&
+      Math.abs((snakeRef.current[0][1] + scrollY) - tunnel[1]) < (spriteSize)
     ) {
       console.log("==========================tunnel")
       nextMap()
