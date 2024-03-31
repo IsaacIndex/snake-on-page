@@ -11,6 +11,7 @@ const SnakeGame = ({ mapImporterName, nextMap }) => {
   const [mapImages, setMapImages] = useState("")
   const snakeRef = useRef();
   const appleRef = useRef();
+  const tunnelRef = useRef()
   const directionRef = useRef("right");
 
   const snakeCanvasRef = useRef();
@@ -125,7 +126,7 @@ const SnakeGame = ({ mapImporterName, nextMap }) => {
         console.log("==========================eaten")
         appleEaten = true
         appleRef.current.splice(index, 1)
-        drawApple()
+        drawMap()
         const SnakeSpriteImg = new Image()
         SnakeSpriteImg.src = snakeImages[deficiency]
         snakeSpriteImgRef.current = SnakeSpriteImg
@@ -237,16 +238,19 @@ const SnakeGame = ({ mapImporterName, nextMap }) => {
     }
   }
 
-  const drawApple = () => {
+  const drawMap = () => {
     const mapCanvas = mapCanvasRef.current
     const mapContext = mapCanvas.getContext('2d')
     mapContext.clearRect(0, 0, mapContext.canvas.width, mapContext.canvas.height)
+    mapContext.textAlign = "center"
+    mapContext.font = "20px Georgia";
+    mapContext.fillStyle = "white"
     appleRef.current.forEach(([deficiency, applePosition]) => {
       mapContext.drawImage(spriteRef.current, 0 * 64, 3 * 64, 64, 64, applePosition[0], applePosition[1], spriteSize, spriteSize)
-      mapContext.font = "20px Georgia";
-      mapContext.fillStyle = "white"
-      mapContext.fillText(deficiency, applePosition[0], applePosition[1] + spriteSize)
+      mapContext.fillText(deficiency, applePosition[0] + spriteSize / 2, applePosition[1] + spriteSize)
     })
+    mapContext.drawImage(spriteRef.current, 1 * 64, 3 * 64, 64, 64, tunnelRef.current[0], tunnelRef.current[1], spriteSize * 2, spriteSize * 2)
+    mapContext.fillText("Next Map", tunnelRef.current[0] + spriteSize, tunnelRef.current[1] + 64)
   }
 
   // Game Loop (triggered after directionRef updated)
@@ -306,6 +310,12 @@ const SnakeGame = ({ mapImporterName, nextMap }) => {
     SnakeSpriteImg.src = snakeImages.normal
     snakeSpriteImgRef.current = SnakeSpriteImg
 
+    // Tunnel
+    tunnelRef.current = [
+      Math.floor(Math.random() * ((containerRef.current.offsetWidth - 64 * 2) - 64 * 2 + 1)) + 64 * 2,
+      Math.ceil(containerRef.current.offsetHeight * 0.9)
+    ]
+
     // resize canvas
     const resizeCanvas = () => {
       const snakeCanvas = snakeCanvasRef.current
@@ -324,13 +334,13 @@ const SnakeGame = ({ mapImporterName, nextMap }) => {
       // TODO: Conversion from position a (screen size 1) to position b (screen size 2)
 
       drawSnake()
-      drawApple()
+      drawMap()
     };
     resizeCanvas();
 
     // Draw
     drawSnake()
-    drawApple()
+    drawMap()
 
     window.addEventListener('resize', resizeCanvas);
     window.addEventListener("keydown", keyUpdate);
@@ -346,7 +356,7 @@ const SnakeGame = ({ mapImporterName, nextMap }) => {
     const spriteImg = spriteRef.current
     spriteImg.src = snakeSpriteImgRef.current.src
     spriteImg.onload = () => {
-      drawApple()
+      drawMap()
       drawSnake()
     }
 
