@@ -23,9 +23,10 @@ const SnakeGame = ({ mapImporterName, nextMap }) => {
   const spriteRef = useRef()
 
   const [isMobile, setIsMobile] = useState(false);
-  const [spriteSize, setSpriteSize] = useState(window.innerWidth * 0.03)
+  const [spriteSize, setSpriteSize] = useState(30)
 
   const onComplete = after(5, () => {
+    console.log(loaded)
     setLoaded(true);
     console.log("loaded");
   })
@@ -113,6 +114,16 @@ const SnakeGame = ({ mapImporterName, nextMap }) => {
       snakeRef.current[0][0] = 0
     }
 
+    // Check collide with tunnel
+    const tunnel = tunnelRef.current
+    if (
+      Math.abs(snakeRef.current[0][0] - tunnel[0]) < (spriteSize / 2) &&
+      Math.abs((snakeRef.current[0][1] + scrollY) - tunnel[1]) < (spriteSize / 2)
+    ) {
+      console.log("==========================tunnel")
+      nextMap()
+    }
+
     // Check collide with apple
     const apples = appleRef.current;
     let appleEaten = false
@@ -140,7 +151,6 @@ const SnakeGame = ({ mapImporterName, nextMap }) => {
     }
 
     // offset to stay in the centre
-    console.log(window.innerHeight + window.scrollY, containerRef.current.offsetHeight)
     if (directionRef.current == "down") {
       if (window.innerHeight + window.scrollY < containerRef.current.offsetHeight) {
         snakeRef.current.forEach(s => s[1] -= spriteSize)
@@ -269,11 +279,20 @@ const SnakeGame = ({ mapImporterName, nextMap }) => {
     drawSnake()
   }
 
+  // Reset States when change map
+  useEffect(() => {
+    setLoaded(false)
+  }, [mapImporterName])
 
   // Setup useEffect
   useEffect(() => {
     console.log("setup")
 
+    // Resize after change map
+    // containerRef.current.style.height = '100%'
+    // mapCanvasRef.current.style.height = containerRef.current.style.height
+
+    // load map images
     const loadMapImages = async () => {
       try {
         const module = await import(`./image_importers/${mapImporterName}.js`);
@@ -317,8 +336,8 @@ const SnakeGame = ({ mapImporterName, nextMap }) => {
 
     // Tunnel
     tunnelRef.current = [
-      Math.floor(Math.random() * ((containerRef.current.offsetWidth - 64 * 2) - 64 * 2 + 1)) + 64 * 2,
-      Math.ceil(containerRef.current.offsetHeight * 0.9)
+      Math.floor(Math.random() * ((document.documentElement.offsetWidth - 64 * 2) - 64 * 2 + 1)) + 64 * 2,
+      Math.ceil(document.documentElement.offsetHeight * 0.9)
     ]
 
     // resize canvas
@@ -334,7 +353,7 @@ const SnakeGame = ({ mapImporterName, nextMap }) => {
       mapCanvas.height = container.offsetHeight
 
       setIsMobile(window.innerWidth <= 768)
-      setSpriteSize(Math.round(window.innerWidth * 0.03))
+      // setSpriteSize(Math.round(window.innerWidth * 0.03))
 
       // TODO: Conversion from position a (screen size 1) to position b (screen size 2)
 
@@ -369,6 +388,7 @@ const SnakeGame = ({ mapImporterName, nextMap }) => {
 
   return (
     <div ref={containerRef} className={styles.snakeGame}>
+      {/* TODO: Loading full screen + no key input */}
       {!loaded && <span>Loading...</span>}
       <img src="" hidden style={{ position: "fixed" }} ref={spriteRef} />
       <canvas className={styles.mapCanvas} ref={mapCanvasRef} />
