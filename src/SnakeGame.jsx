@@ -113,12 +113,12 @@ const SnakeGame = ({ mapImporterName, nextMap }) => {
       snakeRef.current[0][0] = 0
     }
 
+    // Check collide with apple
     const apples = appleRef.current;
     let appleEaten = false
     for (let index = 0; index < apples.length; index++) {
       const [deficiency, applePosition] = apples[index];
 
-      // Check width and height
       if (
         Math.abs(snakeRef.current[0][0] - applePosition[0]) < (spriteSize / 2) &&
         Math.abs((snakeRef.current[0][1] + scrollY) - applePosition[1]) < (spriteSize / 2)
@@ -140,11 +140,16 @@ const SnakeGame = ({ mapImporterName, nextMap }) => {
     }
 
     // offset to stay in the centre
+    console.log(window.innerHeight + window.scrollY, containerRef.current.offsetHeight)
     if (directionRef.current == "down") {
-      snakeRef.current.forEach(s => s[1] -= spriteSize)
+      if (window.innerHeight + window.scrollY < containerRef.current.offsetHeight) {
+        snakeRef.current.forEach(s => s[1] -= spriteSize)
+      }
       scrollBy(0, spriteSize + 1)
     } else if (directionRef.current == "up") {
-      snakeRef.current.forEach(s => s[1] += spriteSize)
+      if (window.scrollY > 0) {
+        snakeRef.current.forEach(s => s[1] += spriteSize)
+      }
       scrollBy(0, -spriteSize + 1)
     }
   }
