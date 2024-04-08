@@ -1,7 +1,7 @@
 import styles from './SnakeGame.module.css'
 import { useRef, useEffect, useState, useMemo } from "react";
 import MobileControl from "./MobileControl";
-
+import LoadingScreen from './LoadingScreen';
 import ImageLoader from "./ImageLoader";
 import snakeImages from "./snakeImages";
 // import mapImages from "./mapImages";
@@ -389,7 +389,7 @@ const SnakeGame = ({ mapImporterName, nextMap }) => {
   return (
     <div ref={containerRef} className={styles.snakeGame}>
       {/* TODO: Loading full screen + no key input */}
-      {!loaded && <span>Loading...</span>}
+      {!loaded && <LoadingScreen />}
       <img src="" hidden style={{ position: "fixed" }} ref={spriteRef} />
       <canvas className={styles.mapCanvas} ref={mapCanvasRef} />
       <canvas className={styles.snakeCanvas} ref={snakeCanvasRef} />
