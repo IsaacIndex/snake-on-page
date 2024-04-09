@@ -6,7 +6,7 @@ import ImageLoader from "./ImageLoader";
 import snakeImages from "./snakeImages";
 // import mapImages from "./mapImages";
 
-const SnakeGame = ({ mapImporterName, nextMap }) => {
+const SnakeGame = ({ mapImporterName, nextMap, addScore }) => {
 
   const [mapImages, setMapImages] = useState("")
   const snakeRef = useRef();
@@ -68,7 +68,8 @@ const SnakeGame = ({ mapImporterName, nextMap }) => {
       } else if (keyboardMapping[e.key] == "down" && directionRef.current != "up") {
         directionRef.current = "down"
       } else if (e.key == "m") {
-        nextMap()
+        addScore()
+        console.log(addScore)
       } else {
         console.log(e.key)
         return
@@ -131,10 +132,11 @@ const SnakeGame = ({ mapImporterName, nextMap }) => {
       const [deficiency, applePosition] = apples[index];
 
       if (
-        Math.abs(snakeRef.current[0][0] - applePosition[0]) < (spriteSize / 2) &&
-        Math.abs((snakeRef.current[0][1] + scrollY) - applePosition[1]) < (spriteSize / 2)
+        Math.abs(snakeRef.current[0][0] - applePosition[0]) < spriteSize * 0.75 &&
+        Math.abs((snakeRef.current[0][1] + scrollY) - applePosition[1]) < spriteSize * 0.75
       ) {
         console.log("==========================eaten")
+        addScore()
         appleEaten = true
         appleRef.current.splice(index, 1)
         drawMap()
@@ -151,8 +153,9 @@ const SnakeGame = ({ mapImporterName, nextMap }) => {
     }
 
     // offset to stay in the centre
+    console.log(window.innerHeight + window.scrollY, containerRef.current.offsetHeight)
     if (directionRef.current == "down") {
-      if (window.innerHeight + window.scrollY < containerRef.current.offsetHeight) {
+      if (window.innerHeight + window.scrollY < containerRef.current.offsetHeight - spriteSize) {
         snakeRef.current.forEach(s => s[1] -= spriteSize)
       }
       scrollBy(0, spriteSize + 1)
