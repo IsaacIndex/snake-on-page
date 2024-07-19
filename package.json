@@ -1,6 +1,7 @@
 {
-  "name": "snake-on-page",
-  "private": true,
+  "name": "@isaacindex/snake-on-page",
+  "description": "A snake game on a webpage",
+  "private": false,
   "version": "0.0.0",
   "homepage": "https://isaacindex.github.io/snake-on-page",
   "type": "module",
@@ -11,9 +12,15 @@
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "simulate": "node src/simulate.js"
+    "simulate": "node src/simulate.js",
+    "distribute": "rm -rf dist && mkdir dist && babel src/lib -d dist --copy-files"
   },
-  "dependencies": {
+  "babel": {
+    "presets": [
+      "@babel/preset-react"
+    ]
+  },
+  "peerDependencies": {
     "@bjornlu/colorblind": "^1.0.3",
     "canvas": "^2.11.2",
     "react": "^18.2.0",
@@ -21,6 +28,10 @@
     "react-joystick-component": "^6.2.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.24.8",
+    "@babel/core": "^7.24.9",
+    "@babel/preset-env": "^7.24.8",
+    "@babel/preset-react": "^7.24.7",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react-swc": "^3.5.0",

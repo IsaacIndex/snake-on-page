@@ -1,9 +1,9 @@
 import styles from './SnakeGame.module.css'
 import { useRef, useEffect, useState, useMemo } from "react";
-import MobileControl from "./MobileControl";
-import LoadingScreen from './LoadingScreen';
-import ImageLoader from "./ImageLoader";
-import snakeImages from "./snakeImages";
+import MobileControl from "../MobileControl";
+import LoadingScreen from '../LoadingScreen';
+import ImageLoader from "../ImageLoader";
+import snakeImages from "../snakeImages";
 // import mapImages from "./mapImages";
 
 const SnakeGame = ({ mapImporterName, nextMap, addScore }) => {
@@ -298,7 +298,7 @@ const SnakeGame = ({ mapImporterName, nextMap, addScore }) => {
     // load map images
     const loadMapImages = async () => {
       try {
-        const module = await import(`./image_importers/${mapImporterName}.js`);
+        const module = await import(`../image_importers/${mapImporterName}.js`);
         setMapImages(module.default);
       } catch (error) {
         console.error(`Failed to dynamically load component`);
