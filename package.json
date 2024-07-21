@@ -1,5 +1,6 @@
 {
   "name": "@isaacindex/snake-on-page",
+  "main": "dist/GameInterface.js",
   "description": "A snake game on a webpage",
   "private": false,
   "version": "0.0.0",
