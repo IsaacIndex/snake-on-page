@@ -1,5 +1,5 @@
 import SnakeGame from './SnakeGame'
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 
 const GameInterface = () => {
   const [mapIndex, setMapIndex] = useState(0)
