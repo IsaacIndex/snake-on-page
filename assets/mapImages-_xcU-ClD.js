@@ -1,1 +1,0 @@
-const a="/snake-on-page/assets/map-7XW-qL6J.png",s="/snake-on-page/assets/map_achromatopsia-HHn0Jcva.png",n="/snake-on-page/assets/map_deuteranopia-rfZX-XXD.png",p="/snake-on-page/assets/map_protanopia-oUuEzW80.png",o="/snake-on-page/assets/map_tritanopia-JtEBVrp7.png",t={normal:a,achromatopsia:s,deuteranopia:n,protanopia:p,tritanopia:o};export{t as default};
