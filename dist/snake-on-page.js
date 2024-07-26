@@ -1,140 +1,140 @@
-import { jsx as m, jsxs as zt, Fragment as Wt } from "react/jsx-runtime";
-import pt, { useEffect as N, useRef as k, useState as z, useMemo as Qt } from "react";
-const te = "/snake_sprite/snake-graphics.png", ee = "/snake_sprite/snake-graphics_achromatopsia.png", oe = "/snake_sprite/snake-graphics_deuteranopia.png", re = "/snake_sprite/snake-graphics_protanopia.png", ne = "/snake_sprite/snake-graphics_tritanopia.png", jt = {
-  normal: te,
-  achromatopsia: ee,
-  deuteranopia: oe,
-  protanopia: re,
-  tritanopia: ne
+import { jsx as m, jsxs as Vt, Fragment as me } from "react/jsx-runtime";
+import H, { useEffect as rt, useRef as w, useState as j, useMemo as Pe } from "react";
+const Ie = "/snake_sprite/snake-graphics.png", xe = "/snake_sprite/snake-graphics_achromatopsia.png", ze = "/snake_sprite/snake-graphics_deuteranopia.png", je = "/snake_sprite/snake-graphics_protanopia.png", Oe = "/snake_sprite/snake-graphics_tritanopia.png", te = {
+  normal: Ie,
+  achromatopsia: xe,
+  deuteranopia: ze,
+  protanopia: je,
+  tritanopia: Oe
 };
-function q({ src: o, alt: n, hidden: e, onLoad: t }) {
-  return N(() => {
-    const r = new Image();
-    return r.src = o, r.onload = () => {
+function $({ src: r, alt: i, hidden: e, onLoad: t }) {
+  return rt(() => {
+    const o = new Image();
+    return o.src = r, o.onload = () => {
       t();
     }, () => {
-      r.onload = null;
+      o.onload = null;
     };
-  }, [o]), /* @__PURE__ */ m("img", { src: o, alt: n, hidden: e });
+  }, [r]), /* @__PURE__ */ m("img", { src: r, alt: i, hidden: e });
 }
-var it = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, Ht = {}, ut = {}, K = {};
-(function(o) {
-  Object.defineProperty(o, "__esModule", { value: !0 }), o.JoystickShape = void 0, function(n) {
-    n.Circle = "circle", n.Square = "square", n.AxisY = "axisY", n.AxisX = "axisX";
-  }(o.JoystickShape || (o.JoystickShape = {}));
-})(K);
-var lt = {};
-Object.defineProperty(lt, "__esModule", { value: !0 });
-lt.shapeFactory = void 0;
-var Ot = K, ie = function(o, n) {
-  switch (o) {
-    case Ot.JoystickShape.Square:
+var gt = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, be = {}, Rt = {}, it = {};
+(function(r) {
+  Object.defineProperty(r, "__esModule", { value: !0 }), r.JoystickShape = void 0, function(i) {
+    i.Circle = "circle", i.Square = "square", i.AxisY = "axisY", i.AxisX = "axisX";
+  }(r.JoystickShape || (r.JoystickShape = {}));
+})(it);
+var Mt = {};
+Object.defineProperty(Mt, "__esModule", { value: !0 });
+Mt.shapeFactory = void 0;
+var ee = it, Je = function(r, i) {
+  switch (r) {
+    case ee.JoystickShape.Square:
       return {
-        borderRadius: Math.sqrt(n)
+        borderRadius: Math.sqrt(i)
       };
-    case Ot.JoystickShape.Circle:
+    case ee.JoystickShape.Circle:
     default:
       return {
-        borderRadius: n
+        borderRadius: i
       };
   }
 };
-lt.shapeFactory = ie;
-var dt = {};
-Object.defineProperty(dt, "__esModule", { value: !0 });
-dt.shapeBoundsFactory = void 0;
-var Rt = K, se = function(o, n, e, t, r, i, c, s, a) {
-  switch (o) {
-    case Rt.JoystickShape.Square:
-      return t = et(n - a.left - s / 2, s), r = et(e - a.top - s / 2, s), { relativeX: t, relativeY: r };
-    case Rt.JoystickShape.AxisX:
-      return t = et(n - a.left - s / 2, s), r = 0, { relativeX: t, relativeY: r };
-    case Rt.JoystickShape.AxisY:
-      return t = 0, r = et(e - a.top - s / 2, s), { relativeX: t, relativeY: r };
+Mt.shapeFactory = Je;
+var Ct = {};
+Object.defineProperty(Ct, "__esModule", { value: !0 });
+Ct.shapeBoundsFactory = void 0;
+var Ut = it, Be = function(r, i, e, t, o, n, p, s, a) {
+  switch (r) {
+    case Ut.JoystickShape.Square:
+      return t = dt(i - a.left - s / 2, s), o = dt(e - a.top - s / 2, s), { relativeX: t, relativeY: o };
+    case Ut.JoystickShape.AxisX:
+      return t = dt(i - a.left - s / 2, s), o = 0, { relativeX: t, relativeY: o };
+    case Ut.JoystickShape.AxisY:
+      return t = 0, o = dt(e - a.top - s / 2, s), { relativeX: t, relativeY: o };
     default:
-      return i > c && (t *= c / i, r *= c / i), { relativeX: t, relativeY: r };
+      return n > p && (t *= p / n, o *= p / n), { relativeX: t, relativeY: o };
   }
 };
-dt.shapeBoundsFactory = se;
-var et = function(o, n) {
-  var e = n / 2;
-  return o > e ? e : o < -e ? e * -1 : o;
-}, ae = it && it.__extends || /* @__PURE__ */ function() {
-  var o = function(n, e) {
-    return o = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t, r) {
-      t.__proto__ = r;
-    } || function(t, r) {
-      for (var i in r) Object.prototype.hasOwnProperty.call(r, i) && (t[i] = r[i]);
-    }, o(n, e);
+Ct.shapeBoundsFactory = Be;
+var dt = function(r, i) {
+  var e = i / 2;
+  return r > e ? e : r < -e ? e * -1 : r;
+}, De = gt && gt.__extends || /* @__PURE__ */ function() {
+  var r = function(i, e) {
+    return r = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t, o) {
+      t.__proto__ = o;
+    } || function(t, o) {
+      for (var n in o) Object.prototype.hasOwnProperty.call(o, n) && (t[n] = o[n]);
+    }, r(i, e);
   };
-  return function(n, e) {
+  return function(i, e) {
     if (typeof e != "function" && e !== null)
       throw new TypeError("Class extends value " + String(e) + " is not a constructor or null");
-    o(n, e);
+    r(i, e);
     function t() {
-      this.constructor = n;
+      this.constructor = i;
     }
-    n.prototype = e === null ? Object.create(e) : (t.prototype = e.prototype, new t());
+    i.prototype = e === null ? Object.create(e) : (t.prototype = e.prototype, new t());
   };
-}(), T = it && it.__assign || function() {
-  return T = Object.assign || function(o) {
-    for (var n, e = 1, t = arguments.length; e < t; e++) {
-      n = arguments[e];
-      for (var r in n) Object.prototype.hasOwnProperty.call(n, r) && (o[r] = n[r]);
+}(), Y = gt && gt.__assign || function() {
+  return Y = Object.assign || function(r) {
+    for (var i, e = 1, t = arguments.length; e < t; e++) {
+      i = arguments[e];
+      for (var o in i) Object.prototype.hasOwnProperty.call(i, o) && (r[o] = i[o]);
     }
-    return o;
-  }, T.apply(this, arguments);
+    return r;
+  }, Y.apply(this, arguments);
 };
-Object.defineProperty(ut, "__esModule", { value: !0 });
-ut.Joystick = void 0;
-var U = pt, Jt = K, Lt = lt, ce = dt, M;
-(function(o) {
-  o.PointerDown = "pointerdown", o.PointerMove = "pointermove", o.PointerUp = "pointerup";
+Object.defineProperty(Rt, "__esModule", { value: !0 });
+Rt.Joystick = void 0;
+var V = H, oe = it, re = Mt, Le = Ct, M;
+(function(r) {
+  r.PointerDown = "pointerdown", r.PointerMove = "pointermove", r.PointerUp = "pointerup";
 })(M || (M = {}));
-var C;
-(function(o) {
-  o[o.TopRight = 2.35619449] = "TopRight", o[o.TopLeft = -2.35619449] = "TopLeft", o[o.BottomRight = 0.785398163] = "BottomRight", o[o.BottomLeft = -0.785398163] = "BottomLeft";
-})(C || (C = {}));
-var pe = (
+var O;
+(function(r) {
+  r[r.TopRight = 2.35619449] = "TopRight", r[r.TopLeft = -2.35619449] = "TopLeft", r[r.BottomRight = 0.785398163] = "BottomRight", r[r.BottomLeft = -0.785398163] = "BottomLeft";
+})(O || (O = {}));
+var Te = (
   /** @class */
-  function(o) {
-    ae(n, o);
-    function n(e) {
-      var t = o.call(this, e) || this;
-      return t._stickRef = U.createRef(), t._baseRef = U.createRef(), t.frameId = null, t._pointerId = null, t._mounted = !1, t._pointerMove = function(r) {
-        if (r.preventDefault(), t.state.dragging) {
-          if (!t.props.followCursor && r.pointerId !== t._pointerId)
+  function(r) {
+    De(i, r);
+    function i(e) {
+      var t = r.call(this, e) || this;
+      return t._stickRef = V.createRef(), t._baseRef = V.createRef(), t.frameId = null, t._pointerId = null, t._mounted = !1, t._pointerMove = function(o) {
+        if (o.preventDefault(), t.state.dragging) {
+          if (!t.props.followCursor && o.pointerId !== t._pointerId)
             return;
-          var i = r.clientX, c = r.clientY, s = i - t._parentRect.left - t._radius, a = c - t._parentRect.top - t._radius, g = t._distance(s, a), v = (0, ce.shapeBoundsFactory)(
+          var n = o.clientX, p = o.clientY, s = n - t._parentRect.left - t._radius, a = p - t._parentRect.top - t._radius, f = t._distance(s, a), h = (0, Le.shapeBoundsFactory)(
             //@ts-ignore
             t.props.controlPlaneShape || t.props.baseShape,
-            i,
-            c,
+            n,
+            p,
             s,
             a,
-            g,
+            f,
             t._radius,
             t._baseSize,
             t._parentRect
           );
-          s = v.relativeX, a = v.relativeY;
-          var w = Math.atan2(s, a);
+          s = h.relativeX, a = h.relativeY;
+          var k = Math.atan2(s, a);
           t._updatePos({
             relativeX: s,
             relativeY: a,
-            distance: t._distanceToPercentile(g),
-            direction: t._getDirection(w),
-            axisX: i - t._parentRect.left,
-            axisY: c - t._parentRect.top
+            distance: t._distanceToPercentile(f),
+            direction: t._getDirection(k),
+            axisX: n - t._parentRect.left,
+            axisY: p - t._parentRect.top
           });
         }
-      }, t._pointerUp = function(r) {
-        if (r.pointerId === t._pointerId) {
-          var i = {
+      }, t._pointerUp = function(o) {
+        if (o.pointerId === t._pointerId) {
+          var n = {
             dragging: !1
           };
-          t.props.sticky || (i.coordinates = void 0), t.frameId = window.requestAnimationFrame(function() {
-            t._mounted && t.setState(i);
+          t.props.sticky || (n.coordinates = void 0), t.frameId = window.requestAnimationFrame(function() {
+            t._mounted && t.setState(n);
           }), window.removeEventListener(M.PointerUp, t._pointerUp), window.removeEventListener(M.PointerMove, t._pointerMove), t._pointerId = null, t.props.stop && t.props.stop({
             type: "stop",
             // @ts-ignore
@@ -150,20 +150,20 @@ var pe = (
       }, t.state = {
         dragging: !1
       }, t._throttleMoveCallback = /* @__PURE__ */ function() {
-        var r = 0;
-        return function(i) {
-          var c = (/* @__PURE__ */ new Date()).getTime(), s = t.props.throttle || 0;
-          if (!(c - r < s) && (r = c, t.props.move))
-            return t.props.move(i);
+        var o = 0;
+        return function(n) {
+          var p = (/* @__PURE__ */ new Date()).getTime(), s = t.props.throttle || 0;
+          if (!(p - o < s) && (o = p, t.props.move))
+            return t.props.move(n);
         };
       }(), t;
     }
-    return n.prototype.componentWillUnmount = function() {
+    return i.prototype.componentWillUnmount = function() {
       var e = this;
       this._mounted = !1, this.props.followCursor && window.removeEventListener(M.PointerMove, function(t) {
         return e._pointerMove(t);
       }), this.frameId !== null && window.cancelAnimationFrame(this.frameId);
-    }, n.prototype.componentDidMount = function() {
+    }, i.prototype.componentDidMount = function() {
       var e = this;
       this._mounted = !0, this.props.followCursor && (this._parentRect = this._baseRef.current.getBoundingClientRect(), this.setState({
         dragging: !0
@@ -176,7 +176,7 @@ var pe = (
         distance: null,
         direction: null
       }));
-    }, n.prototype._updatePos = function(e) {
+    }, i.prototype._updatePos = function(e) {
       var t = this;
       this.frameId = window.requestAnimationFrame(function() {
         t._mounted && t.setState({
@@ -189,7 +189,7 @@ var pe = (
         direction: e.direction,
         distance: e.distance
       });
-    }, n.prototype._pointerDown = function(e) {
+    }, i.prototype._pointerDown = function(e) {
       this.props.disabled || this.props.followCursor || (this._parentRect = this._baseRef.current.getBoundingClientRect(), this.setState({
         dragging: !0
       }), window.addEventListener(M.PointerUp, this._pointerUp), window.addEventListener(M.PointerMove, this._pointerMove), this._pointerId = e.pointerId, this._stickRef.current.setPointerCapture(e.pointerId), this.props.start && this.props.start({
@@ -199,59 +199,59 @@ var pe = (
         distance: null,
         direction: null
       }));
-    }, n.prototype._getDirection = function(e) {
-      return e > C.TopRight || e < C.TopLeft ? "FORWARD" : e < C.TopRight && e > C.BottomRight ? "RIGHT" : e < C.BottomLeft ? "LEFT" : "BACKWARD";
-    }, n.prototype._distance = function(e, t) {
+    }, i.prototype._getDirection = function(e) {
+      return e > O.TopRight || e < O.TopLeft ? "FORWARD" : e < O.TopRight && e > O.BottomRight ? "RIGHT" : e < O.BottomLeft ? "LEFT" : "BACKWARD";
+    }, i.prototype._distance = function(e, t) {
       return Math.hypot(e, t);
-    }, n.prototype._distanceToPercentile = function(e) {
+    }, i.prototype._distanceToPercentile = function(e) {
       var t = e / (this._baseSize / 2) * 100;
       return t > 100 ? 100 : t;
-    }, n.prototype.getBaseShapeStyle = function() {
-      var e = this.props.baseShape || Jt.JoystickShape.Circle;
-      return (0, Lt.shapeFactory)(e, this._baseSize);
-    }, n.prototype.getStickShapeStyle = function() {
-      var e = this.props.stickShape || Jt.JoystickShape.Circle;
-      return (0, Lt.shapeFactory)(e, this._baseSize);
-    }, n.prototype._getBaseStyle = function() {
-      var e = this.props.baseColor !== void 0 ? this.props.baseColor : "#000033", t = "".concat(this._baseSize, "px"), r = T(T({}, this.getBaseShapeStyle()), { height: t, width: t, background: e, display: "flex", justifyContent: "center", alignItems: "center" });
-      return this.props.baseImage && (r.background = "url(".concat(this.props.baseImage, ")"), r.backgroundSize = "100%"), r;
-    }, n.prototype._getStickStyle = function() {
-      var e = this.props.stickColor !== void 0 ? this.props.stickColor : "#3D59AB", t = this._stickSize ? "".concat(this._stickSize, "px") : "".concat(this._baseSize / 1.5, "px"), r = T(T({}, this.getStickShapeStyle()), { background: e, cursor: "move", height: t, width: t, border: "none", flexShrink: 0, touchAction: "none" });
-      return this.props.stickImage && (r.background = "url(".concat(this.props.stickImage, ")"), r.backgroundSize = "100%"), this.props.pos && (r = Object.assign({}, r, {
+    }, i.prototype.getBaseShapeStyle = function() {
+      var e = this.props.baseShape || oe.JoystickShape.Circle;
+      return (0, re.shapeFactory)(e, this._baseSize);
+    }, i.prototype.getStickShapeStyle = function() {
+      var e = this.props.stickShape || oe.JoystickShape.Circle;
+      return (0, re.shapeFactory)(e, this._baseSize);
+    }, i.prototype._getBaseStyle = function() {
+      var e = this.props.baseColor !== void 0 ? this.props.baseColor : "#000033", t = "".concat(this._baseSize, "px"), o = Y(Y({}, this.getBaseShapeStyle()), { height: t, width: t, background: e, display: "flex", justifyContent: "center", alignItems: "center" });
+      return this.props.baseImage && (o.background = "url(".concat(this.props.baseImage, ")"), o.backgroundSize = "100%"), o;
+    }, i.prototype._getStickStyle = function() {
+      var e = this.props.stickColor !== void 0 ? this.props.stickColor : "#3D59AB", t = this._stickSize ? "".concat(this._stickSize, "px") : "".concat(this._baseSize / 1.5, "px"), o = Y(Y({}, this.getStickShapeStyle()), { background: e, cursor: "move", height: t, width: t, border: "none", flexShrink: 0, touchAction: "none" });
+      return this.props.stickImage && (o.background = "url(".concat(this.props.stickImage, ")"), o.backgroundSize = "100%"), this.props.pos && (o = Object.assign({}, o, {
         position: "absolute",
         transform: "translate3d(".concat(this.props.pos.x * this._baseSize / 2, "px, ").concat(-(this.props.pos.y * this._baseSize) / 2, "px, 0)")
-      })), this.state.coordinates !== void 0 && (r = Object.assign({}, r, {
+      })), this.state.coordinates !== void 0 && (o = Object.assign({}, o, {
         position: "absolute",
         transform: "translate3d(".concat(this.state.coordinates.relativeX, "px, ").concat(this.state.coordinates.relativeY, "px, 0)")
-      })), r;
-    }, n.prototype.render = function() {
+      })), o;
+    }, i.prototype.render = function() {
       var e = this;
       this._baseSize = this.props.size || 100, this._stickSize = this.props.stickSize, this._radius = this._baseSize / 2;
-      var t = this._getBaseStyle(), r = this._getStickStyle();
-      return U.createElement(
+      var t = this._getBaseStyle(), o = this._getStickStyle();
+      return V.createElement(
         "div",
         { "data-testid": "joystick-base", className: this.props.disabled ? "joystick-base-disabled" : "", ref: this._baseRef, style: t },
-        U.createElement("button", { ref: this._stickRef, disabled: this.props.disabled, onPointerDown: function(i) {
-          return e._pointerDown(i);
-        }, className: this.props.disabled ? "joystick-disabled" : "", style: r })
+        V.createElement("button", { ref: this._stickRef, disabled: this.props.disabled, onPointerDown: function(n) {
+          return e._pointerDown(n);
+        }, className: this.props.disabled ? "joystick-disabled" : "", style: o })
       );
-    }, n;
-  }(U.Component)
+    }, i;
+  }(V.Component)
 );
-ut.Joystick = pe;
-(function(o) {
-  Object.defineProperty(o, "__esModule", { value: !0 }), o.JoystickShape = o.Joystick = void 0;
-  var n = ut;
-  Object.defineProperty(o, "Joystick", { enumerable: !0, get: function() {
-    return n.Joystick;
+Rt.Joystick = Te;
+(function(r) {
+  Object.defineProperty(r, "__esModule", { value: !0 }), r.JoystickShape = r.Joystick = void 0;
+  var i = Rt;
+  Object.defineProperty(r, "Joystick", { enumerable: !0, get: function() {
+    return i.Joystick;
   } });
-  var e = K;
-  Object.defineProperty(o, "JoystickShape", { enumerable: !0, get: function() {
+  var e = it;
+  Object.defineProperty(r, "JoystickShape", { enumerable: !0, get: function() {
     return e.JoystickShape;
   } });
-})(Ht);
-const ue = ({ onDirectionChange: o }) => {
-  const n = {
+})(be);
+const Ae = ({ onDirectionChange: r }) => {
+  const i = {
     position: "fixed",
     bottom: "5%",
     right: "5%",
@@ -263,158 +263,158 @@ const ue = ({ onDirectionChange: o }) => {
     fontSize: "16px",
     padding: "10px",
     borderRadius: "4px"
-  }, e = 60, t = k(null), r = k(), i = k(0), c = (a) => {
+  }, e = 60, t = w(null), o = w(), n = w(0), p = (a) => {
     t.current = a.direction;
   }, s = () => {
     t.current = null;
   };
-  return N(() => {
+  return rt(() => {
     let a;
-    const g = (v) => {
-      v - i.current >= e && (t.current != null && o(t.current), i.current = v), a = window.requestAnimationFrame(g);
+    const f = (h) => {
+      h - n.current >= e && (t.current != null && r(t.current), n.current = h), a = window.requestAnimationFrame(f);
     };
-    return g(), () => {
+    return f(), () => {
       window.cancelAnimationFrame(a);
     };
-  }, []), /* @__PURE__ */ m("div", { style: n, children: /* @__PURE__ */ m(Ht.Joystick, { ref: r, minDistance: 50, move: c, stop: s }) });
-}, le = (o, n, e) => {
-  const t = o[n];
-  return t ? typeof t == "function" ? t() : Promise.resolve(t) : new Promise((r, i) => {
+  }, []), /* @__PURE__ */ m("div", { style: i, children: /* @__PURE__ */ m(be.Joystick, { ref: o, minDistance: 50, move: p, stop: s }) });
+}, Fe = (r, i, e) => {
+  const t = r[i];
+  return t ? typeof t == "function" ? t() : Promise.resolve(t) : new Promise((o, n) => {
     (typeof queueMicrotask == "function" ? queueMicrotask : setTimeout)(
-      i.bind(
+      n.bind(
         null,
         new Error(
-          "Unknown variable dynamic import: " + n + (n.split("/").length !== e ? ". Note that variables only represent file names one level deep." : "")
+          "Unknown variable dynamic import: " + i + (i.split("/").length !== e ? ". Note that variables only represent file names one level deep." : "")
         )
       )
     );
   });
-}, de = "_snakeGame_2cqgw_5", he = "_snakeCanvas_2cqgw_15", fe = "_mapCanvas_2cqgw_23", Mt = {
-  snakeGame: de,
-  snakeCanvas: he,
-  mapCanvas: fe
-}, ve = "_loadingDiv_dcsfs_1", _e = {
-  loadingDiv: ve
-}, ye = () => /* @__PURE__ */ m("div", { className: _e.loadingDiv, children: /* @__PURE__ */ m("h1", { children: "Loading..." }) }), me = ({ mapImporterName: o, nextMap: n, addScore: e }) => {
-  const [t, r] = z(""), i = k(), c = k(), s = k(), a = k("right"), g = k(), v = k(), w = k(), [J, Gt] = z("normal"), [kt, Ct] = z(!1), L = k(), Y = k(), [Nt, Kt] = z(!1), [d, Ee] = z(30), B = $t(5, () => {
-    console.log(kt), Ct(!0), console.log("loaded");
+}, Ye = "_snakeGame_2cqgw_5", Ee = "_snakeCanvas_2cqgw_15", Xe = "_mapCanvas_2cqgw_23", Wt = {
+  snakeGame: Ye,
+  snakeCanvas: Ee,
+  mapCanvas: Xe
+}, qe = "_loadingDiv_dcsfs_1", Ue = {
+  loadingDiv: qe
+}, We = () => /* @__PURE__ */ m("div", { className: Ue.loadingDiv, children: /* @__PURE__ */ m("h1", { children: "Loading..." }) }), He = ({ mapImporterName: r, nextMap: i, addScore: e }) => {
+  const [t, o] = j(""), n = w(), p = w(), s = w(), a = w("right"), f = w(), h = w(), k = w(), [A, Se] = j("normal"), [Xt, Zt] = j(!1), F = w(), N = w(), [ke, we] = j(!1), [d, Mo] = j(30), G = Re(5, () => {
+    console.log(Xt), Zt(!0), console.log("loaded");
   });
-  function $t(f, l) {
-    let h = 0;
-    return function(...p) {
-      h = h + 1, f === h && l(...p);
+  function Re(v, l) {
+    let _ = 0;
+    return function(...c) {
+      _ = _ + 1, v === _ && l(...c);
     };
   }
-  const X = Qt(() => ({
-    normal: J !== "normal",
-    achromatopsia: J !== "achromatopsia",
-    deuteranopia: J !== "deuteranopia",
-    protanopia: J !== "protanopia",
-    tritanopia: J !== "tritanopia"
-  }), [J]), wt = (f) => {
-    if (typeof f == "object") {
+  const K = Pe(() => ({
+    normal: A !== "normal",
+    achromatopsia: A !== "achromatopsia",
+    deuteranopia: A !== "deuteranopia",
+    protanopia: A !== "protanopia",
+    tritanopia: A !== "tritanopia"
+  }), [A]), qt = (v) => {
+    if (typeof v == "object") {
       const l = {
         ArrowLeft: "left",
         ArrowRight: "right",
         ArrowUp: "up",
         ArrowDown: "down"
       };
-      if (l[f.key] == "right" && a.current != "left")
+      if (l[v.key] == "right" && a.current != "left")
         a.current = "right";
-      else if (l[f.key] == "left" && a.current != "right")
+      else if (l[v.key] == "left" && a.current != "right")
         a.current = "left";
-      else if (l[f.key] == "up" && a.current != "down")
+      else if (l[v.key] == "up" && a.current != "down")
         a.current = "up";
-      else if (l[f.key] == "down" && a.current != "up")
+      else if (l[v.key] == "down" && a.current != "up")
         a.current = "down";
-      else if (f.key == "m")
+      else if (v.key == "m")
         e(), console.log(e);
       else {
-        console.log(f.key);
+        console.log(v.key);
         return;
       }
-    } else if (f == "RIGHT" && a.current != "left")
+    } else if (v == "RIGHT" && a.current != "left")
       a.current = "right";
-    else if (f == "LEFT" && a.current != "right")
+    else if (v == "LEFT" && a.current != "right")
       a.current = "left";
-    else if (f == "FORWARD" && a.current != "down")
+    else if (v == "FORWARD" && a.current != "down")
       a.current = "up";
-    else if (f == "BACKWARD" && a.current != "up")
+    else if (v == "BACKWARD" && a.current != "up")
       a.current = "down";
     else
       return;
-    Zt();
-  }, Vt = () => {
-    const f = {
+    Ce();
+  }, Me = () => {
+    const v = {
       right: [1, 0],
       left: [-1, 0],
       up: [0, -1],
       down: [0, 1]
     };
-    i.current.unshift(
+    n.current.unshift(
       [
-        i.current[0][0] + f[a.current][0] * d,
-        i.current[0][1] + f[a.current][1] * d
+        n.current[0][0] + v[a.current][0] * d,
+        n.current[0][1] + v[a.current][1] * d
       ]
-    ), i.current[0][0] < 0 ? i.current[0][0] = window.innerWidth : i.current[0][0] > window.innerWidth && (i.current[0][0] = 0);
+    ), n.current[0][0] < 0 ? n.current[0][0] = window.innerWidth : n.current[0][0] > window.innerWidth && (n.current[0][0] = 0);
     const l = s.current;
-    Math.abs(i.current[0][0] - l[0]) < d && Math.abs(i.current[0][1] + scrollY - l[1]) < d && (console.log("==========================tunnel"), n());
-    const h = c.current;
-    let p = !1;
-    for (let u = 0; u < h.length; u++) {
-      const [R, _] = h[u];
-      if (Math.abs(i.current[0][0] - _[0]) < d * 0.75 && Math.abs(i.current[0][1] + scrollY - _[1]) < d * 0.75) {
-        console.log("==========================eaten"), e(), p = !0, c.current.splice(u, 1), tt();
-        const y = new Image();
-        y.src = jt[R], v.current = y, Gt(R), u--;
+    Math.abs(n.current[0][0] - l[0]) < d && Math.abs(n.current[0][1] + scrollY - l[1]) < d && (console.log("==========================tunnel"), i());
+    const _ = p.current;
+    let c = !1;
+    for (let u = 0; u < _.length; u++) {
+      const [R, y] = _[u];
+      if (Math.abs(n.current[0][0] - y[0]) < d * 0.75 && Math.abs(n.current[0][1] + scrollY - y[1]) < d * 0.75) {
+        console.log("==========================eaten"), e(), c = !0, p.current.splice(u, 1), lt();
+        const g = new Image();
+        g.src = te[R], h.current = g, Se(R), u--;
       }
     }
-    p || i.current.pop(), console.log(window.innerHeight + window.scrollY, L.current.offsetHeight), a.current == "down" ? (window.innerHeight + window.scrollY < L.current.offsetHeight - d && i.current.forEach((u) => u[1] -= d), scrollBy(0, d + 1)) : a.current == "up" && (window.scrollY > 0 && i.current.forEach((u) => u[1] += d), scrollBy(0, -d + 1));
-  }, Q = () => {
-    const l = g.current.getContext("2d");
+    c || n.current.pop(), console.log(window.innerHeight + window.scrollY, F.current.offsetHeight), a.current == "down" ? (window.innerHeight + window.scrollY < F.current.offsetHeight - d && n.current.forEach((u) => u[1] -= d), scrollBy(0, d + 1)) : a.current == "up" && (window.scrollY > 0 && n.current.forEach((u) => u[1] += d), scrollBy(0, -d + 1));
+  }, ut = () => {
+    const l = f.current.getContext("2d");
     l.clearRect(0, 0, l.canvas.width, l.canvas.height);
-    for (var h = 0; h < i.current.length; h++) {
-      var p = 0, u = 0, R = i.current[h], _ = R[0], y = R[1];
-      if (h == 0) {
-        var b = i.current[h + 1];
-        y < b[1] ? (p = 3, u = 0) : _ > b[0] ? (p = 4, u = 0) : y > b[1] ? (p = 4, u = 1) : _ < b[0] && (p = 3, u = 1);
-      } else if (h == i.current.length - 1) {
-        var S = i.current[h - 1];
-        S[1] < y ? (p = 3, u = 2) : S[0] > _ ? (p = 4, u = 2) : S[1] > y ? (p = 4, u = 3) : S[0] < _ && (p = 3, u = 3);
+    for (var _ = 0; _ < n.current.length; _++) {
+      var c = 0, u = 0, R = n.current[_], y = R[0], g = R[1];
+      if (_ == 0) {
+        var b = n.current[_ + 1];
+        g < b[1] ? (c = 3, u = 0) : y > b[0] ? (c = 4, u = 0) : g > b[1] ? (c = 4, u = 1) : y < b[0] && (c = 3, u = 1);
+      } else if (_ == n.current.length - 1) {
+        var S = n.current[_ - 1];
+        S[1] < g ? (c = 3, u = 2) : S[0] > y ? (c = 4, u = 2) : S[1] > g ? (c = 4, u = 3) : S[0] < y && (c = 3, u = 3);
       } else {
-        var S = i.current[h - 1], b = i.current[h + 1];
-        S[0] < _ && b[0] > _ || b[0] < _ && S[0] > _ ? (p = 1, u = 0) : S[0] < _ && b[1] > y || b[0] < _ && S[1] > y ? (p = 2, u = 0) : S[1] < y && b[1] > y || b[1] < y && S[1] > y ? (p = 2, u = 1) : S[1] < y && b[0] < _ || b[1] < y && S[0] < _ ? (p = 2, u = 2) : S[0] > _ && b[1] < y || b[0] > _ && S[1] < y ? (p = 0, u = 1) : S[1] > y && b[0] > _ || b[1] > y && S[0] > _ ? (p = 0, u = 0) : (p = 1, u = 0);
+        var S = n.current[_ - 1], b = n.current[_ + 1];
+        S[0] < y && b[0] > y || b[0] < y && S[0] > y ? (c = 1, u = 0) : S[0] < y && b[1] > g || b[0] < y && S[1] > g ? (c = 2, u = 0) : S[1] < g && b[1] > g || b[1] < g && S[1] > g ? (c = 2, u = 1) : S[1] < g && b[0] < y || b[1] < g && S[0] < y ? (c = 2, u = 2) : S[0] > y && b[1] < g || b[0] > y && S[1] < g ? (c = 0, u = 1) : S[1] > g && b[0] > y || b[1] > g && S[0] > y ? (c = 0, u = 0) : (c = 1, u = 0);
       }
-      var xt = [0, 0];
-      l.drawImage(Y.current, p * 64, u * 64, 64, 64, i.current[h][0] + xt[0], i.current[h][1] + xt[1], d, d);
+      var Qt = [0, 0];
+      l.drawImage(N.current, c * 64, u * 64, 64, 64, n.current[_][0] + Qt[0], n.current[_][1] + Qt[1], d, d);
     }
-  }, tt = () => {
-    const l = w.current.getContext("2d");
-    l.clearRect(0, 0, l.canvas.width, l.canvas.height), l.textAlign = "center", l.font = "20px Georgia", l.fillStyle = "white", c.current.forEach(([h, p]) => {
-      l.drawImage(Y.current, 0 * 64, 3 * 64, 64, 64, p[0], p[1], d, d), l.fillText(h, p[0] + d / 2, p[1] + d);
-    }), l.drawImage(Y.current, 1 * 64, 3 * 64, 64, 64, s.current[0], s.current[1], d * 2, d * 2), l.fillText("Next Map", s.current[0] + d, s.current[1] + 64);
-  }, Zt = () => {
-    console.log("gameLoop"), Vt(), Q();
+  }, lt = () => {
+    const l = k.current.getContext("2d");
+    l.clearRect(0, 0, l.canvas.width, l.canvas.height), l.textAlign = "center", l.font = "20px Georgia", l.fillStyle = "white", p.current.forEach(([_, c]) => {
+      l.drawImage(N.current, 0 * 64, 3 * 64, 64, 64, c[0], c[1], d, d), l.fillText(_, c[0] + d / 2, c[1] + d);
+    }), l.drawImage(N.current, 1 * 64, 3 * 64, 64, 64, s.current[0], s.current[1], d * 2, d * 2), l.fillText("Next Map", s.current[0] + d, s.current[1] + 64);
+  }, Ce = () => {
+    console.log("gameLoop"), Me(), ut();
   };
-  return N(() => {
-    Ct(!1);
-  }, [o]), N(() => {
+  return rt(() => {
+    Zt(!1);
+  }, [r]), rt(() => {
     console.log("setup"), (async () => {
       try {
-        const p = await le(/* @__PURE__ */ Object.assign({ "../image_importers/desertImages.js": () => import("./desertImages-CIneN81N.js"), "../image_importers/forestImages.js": () => import("./forestImages-My2q2rGl.js"), "../image_importers/mapImages.js": () => import("./mapImages-BClUnFAK.js") }), `../image_importers/${o}.js`, 3);
-        r(p.default);
+        const c = await Fe(/* @__PURE__ */ Object.assign({ "../image_importers/desertImages.js": () => import("./desertImages-CIneN81N.js"), "../image_importers/forestImages.js": () => import("./forestImages-My2q2rGl.js"), "../image_importers/mapImages.js": () => import("./mapImages-BClUnFAK.js") }), `../image_importers/${r}.js`, 3);
+        o(c.default);
       } catch {
         console.error("Failed to dynamically load component");
       }
-    })(), c.current = [
+    })(), p.current = [
       ["protanopia", [0.3, 0.3]],
       ["achromatopsia", [0.4, 0.35]],
       ["deuteranopia", [0.4, 0.45]],
       ["tritanopia", [0.4, 0.55]],
       ["normal", [0.4, 0.65]]
-    ], c.current.forEach((p) => {
-      p[1][0] *= L.current.offsetWidth, p[1][1] *= L.current.offsetHeight;
-    }), i.current = [
+    ], p.current.forEach((c) => {
+      c[1][0] *= F.current.offsetWidth, c[1][1] *= F.current.offsetHeight;
+    }), n.current = [
       [Math.round(window.innerWidth / 2), Math.round(window.innerHeight / 2)],
       [Math.round(window.innerWidth / 2) - d, Math.round(window.innerHeight / 2)],
       [Math.round(window.innerWidth / 2) - d * 2, Math.round(window.innerHeight / 2)],
@@ -424,166 +424,166 @@ const ue = ({ onDirectionChange: o }) => {
       [Math.round(window.innerWidth / 2) - d * 6, Math.round(window.innerHeight / 2)]
     ];
     const l = new Image();
-    l.src = jt.normal, v.current = l, s.current = [
+    l.src = te.normal, h.current = l, s.current = [
       Math.floor(Math.random() * (document.documentElement.offsetWidth - 64 * 2 - 64 * 2 + 1)) + 64 * 2,
       Math.ceil(document.documentElement.offsetHeight * 0.9)
     ];
-    const h = () => {
-      const p = g.current, u = w.current, R = L.current;
-      p.width = Math.min(window.innerWidth, 1920), p.height = window.innerHeight, u.width = R.offsetWidth, u.height = R.offsetHeight, Kt(window.innerWidth <= 768), Q(), tt();
+    const _ = () => {
+      const c = f.current, u = k.current, R = F.current;
+      c.width = Math.min(window.innerWidth, 1920), c.height = window.innerHeight, u.width = R.offsetWidth, u.height = R.offsetHeight, we(window.innerWidth <= 768), ut(), lt();
     };
-    return h(), Q(), tt(), window.addEventListener("resize", h), window.addEventListener("keydown", wt), () => {
-      window.removeEventListener("resize", h), window.removeEventListener("keydown", wt);
+    return _(), ut(), lt(), window.addEventListener("resize", _), window.addEventListener("keydown", qt), () => {
+      window.removeEventListener("resize", _), window.removeEventListener("keydown", qt);
     };
-  }, [kt, o]), N(() => {
+  }, [Xt, r]), rt(() => {
     console.log("snakesprite");
-    const f = Y.current;
-    f.src = v.current.src, f.onload = () => {
-      tt(), Q();
+    const v = N.current;
+    v.src = h.current.src, v.onload = () => {
+      lt(), ut();
     };
-  }, [v.current]), /* @__PURE__ */ zt("div", { ref: L, className: Mt.snakeGame, children: [
-    !kt && /* @__PURE__ */ m(ye, {}),
-    /* @__PURE__ */ m("img", { src: "", hidden: !0, style: { position: "fixed" }, ref: Y }),
-    /* @__PURE__ */ m("canvas", { className: Mt.mapCanvas, ref: w }),
-    /* @__PURE__ */ m("canvas", { className: Mt.snakeCanvas, ref: g }),
-    t && /* @__PURE__ */ zt(Wt, { children: [
-      /* @__PURE__ */ m(q, { src: t.normal, hidden: X.normal, alt: "normal", onLoad: B }),
-      /* @__PURE__ */ m(q, { src: t.achromatopsia, hidden: X.achromatopsia, alt: "achromatopsia", onLoad: B }),
-      /* @__PURE__ */ m(q, { src: t.deuteranopia, hidden: X.deuteranopia, alt: "deuteranopia", onLoad: B }),
-      /* @__PURE__ */ m(q, { src: t.protanopia, hidden: X.protanopia, alt: "protanopia", onLoad: B }),
-      /* @__PURE__ */ m(q, { src: t.tritanopia, hidden: X.tritanopia, alt: "tritanopia", onLoad: B })
+  }, [h.current]), /* @__PURE__ */ Vt("div", { ref: F, className: Wt.snakeGame, children: [
+    !Xt && /* @__PURE__ */ m(We, {}),
+    /* @__PURE__ */ m("img", { src: "", hidden: !0, style: { position: "fixed" }, ref: N }),
+    /* @__PURE__ */ m("canvas", { className: Wt.mapCanvas, ref: k }),
+    /* @__PURE__ */ m("canvas", { className: Wt.snakeCanvas, ref: f }),
+    t && /* @__PURE__ */ Vt(me, { children: [
+      /* @__PURE__ */ m($, { src: t.normal, hidden: K.normal, alt: "normal", onLoad: G }),
+      /* @__PURE__ */ m($, { src: t.achromatopsia, hidden: K.achromatopsia, alt: "achromatopsia", onLoad: G }),
+      /* @__PURE__ */ m($, { src: t.deuteranopia, hidden: K.deuteranopia, alt: "deuteranopia", onLoad: G }),
+      /* @__PURE__ */ m($, { src: t.protanopia, hidden: K.protanopia, alt: "protanopia", onLoad: G }),
+      /* @__PURE__ */ m($, { src: t.tritanopia, hidden: K.tritanopia, alt: "tritanopia", onLoad: G })
     ] }),
-    Nt && /* @__PURE__ */ m(ue, { onDirectionChange: wt })
+    ke && /* @__PURE__ */ m(Ae, { onDirectionChange: qt })
   ] });
-}, ge = () => {
-  const [o, n] = z(0), [e, t] = z(0);
-  return console.log(e), /* @__PURE__ */ zt("div", { children: [
+}, Ne = () => {
+  const [r, i] = j(0), [e, t] = j(0);
+  return console.log(e), /* @__PURE__ */ Vt("div", { children: [
     /* @__PURE__ */ m("span", { style: { position: "fixed", zIndex: 999, top: 0, backgroundColor: "white" }, children: e }),
-    /* @__PURE__ */ m(me, { mapImporterName: {
+    /* @__PURE__ */ m(He, { mapImporterName: {
       0: "forestImages",
       1: "desertImages"
-    }[o], nextMap: () => n(o + 1), addScore: () => t((i) => i + 1) })
+    }[r], nextMap: () => i(r + 1), addScore: () => t((n) => n + 1) })
   ] });
 };
-var st = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, be = {}, ht = {}, $ = {};
-(function(o) {
-  Object.defineProperty(o, "__esModule", { value: !0 }), o.JoystickShape = void 0, function(n) {
-    n.Circle = "circle", n.Square = "square", n.AxisY = "axisY", n.AxisX = "axisX";
-  }(o.JoystickShape || (o.JoystickShape = {}));
-})($);
-var ft = {};
-Object.defineProperty(ft, "__esModule", { value: !0 });
-ft.shapeFactory = void 0;
-var Tt = $, Se = function(o, n) {
-  switch (o) {
-    case Tt.JoystickShape.Square:
+var mt = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, Ge = {}, Pt = {}, nt = {};
+(function(r) {
+  Object.defineProperty(r, "__esModule", { value: !0 }), r.JoystickShape = void 0, function(i) {
+    i.Circle = "circle", i.Square = "square", i.AxisY = "axisY", i.AxisX = "axisX";
+  }(r.JoystickShape || (r.JoystickShape = {}));
+})(nt);
+var It = {};
+Object.defineProperty(It, "__esModule", { value: !0 });
+It.shapeFactory = void 0;
+var ie = nt, Ke = function(r, i) {
+  switch (r) {
+    case ie.JoystickShape.Square:
       return {
-        borderRadius: Math.sqrt(n)
+        borderRadius: Math.sqrt(i)
       };
-    case Tt.JoystickShape.Circle:
+    case ie.JoystickShape.Circle:
     default:
       return {
-        borderRadius: n
+        borderRadius: i
       };
   }
 };
-ft.shapeFactory = Se;
-var vt = {};
-Object.defineProperty(vt, "__esModule", { value: !0 });
-vt.shapeBoundsFactory = void 0;
-var It = $, ke = function(o, n, e, t, r, i, c, s, a) {
-  switch (o) {
-    case It.JoystickShape.Square:
-      return t = ot(n - a.left - s / 2, s), r = ot(e - a.top - s / 2, s), { relativeX: t, relativeY: r };
-    case It.JoystickShape.AxisX:
-      return t = ot(n - a.left - s / 2, s), r = 0, { relativeX: t, relativeY: r };
-    case It.JoystickShape.AxisY:
-      return t = 0, r = ot(e - a.top - s / 2, s), { relativeX: t, relativeY: r };
+It.shapeFactory = Ke;
+var xt = {};
+Object.defineProperty(xt, "__esModule", { value: !0 });
+xt.shapeBoundsFactory = void 0;
+var Ht = nt, $e = function(r, i, e, t, o, n, p, s, a) {
+  switch (r) {
+    case Ht.JoystickShape.Square:
+      return t = ht(i - a.left - s / 2, s), o = ht(e - a.top - s / 2, s), { relativeX: t, relativeY: o };
+    case Ht.JoystickShape.AxisX:
+      return t = ht(i - a.left - s / 2, s), o = 0, { relativeX: t, relativeY: o };
+    case Ht.JoystickShape.AxisY:
+      return t = 0, o = ht(e - a.top - s / 2, s), { relativeX: t, relativeY: o };
     default:
-      return i > c && (t *= c / i, r *= c / i), { relativeX: t, relativeY: r };
+      return n > p && (t *= p / n, o *= p / n), { relativeX: t, relativeY: o };
   }
 };
-vt.shapeBoundsFactory = ke;
-var ot = function(o, n) {
-  var e = n / 2;
-  return o > e ? e : o < -e ? e * -1 : o;
-}, we = st && st.__extends || /* @__PURE__ */ function() {
-  var o = function(n, e) {
-    return o = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t, r) {
-      t.__proto__ = r;
-    } || function(t, r) {
-      for (var i in r) Object.prototype.hasOwnProperty.call(r, i) && (t[i] = r[i]);
-    }, o(n, e);
+xt.shapeBoundsFactory = $e;
+var ht = function(r, i) {
+  var e = i / 2;
+  return r > e ? e : r < -e ? e * -1 : r;
+}, Ve = mt && mt.__extends || /* @__PURE__ */ function() {
+  var r = function(i, e) {
+    return r = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t, o) {
+      t.__proto__ = o;
+    } || function(t, o) {
+      for (var n in o) Object.prototype.hasOwnProperty.call(o, n) && (t[n] = o[n]);
+    }, r(i, e);
   };
-  return function(n, e) {
+  return function(i, e) {
     if (typeof e != "function" && e !== null)
       throw new TypeError("Class extends value " + String(e) + " is not a constructor or null");
-    o(n, e);
+    r(i, e);
     function t() {
-      this.constructor = n;
+      this.constructor = i;
     }
-    n.prototype = e === null ? Object.create(e) : (t.prototype = e.prototype, new t());
+    i.prototype = e === null ? Object.create(e) : (t.prototype = e.prototype, new t());
   };
-}(), F = st && st.__assign || function() {
-  return F = Object.assign || function(o) {
-    for (var n, e = 1, t = arguments.length; e < t; e++) {
-      n = arguments[e];
-      for (var r in n) Object.prototype.hasOwnProperty.call(n, r) && (o[r] = n[r]);
+}(), E = mt && mt.__assign || function() {
+  return E = Object.assign || function(r) {
+    for (var i, e = 1, t = arguments.length; e < t; e++) {
+      i = arguments[e];
+      for (var o in i) Object.prototype.hasOwnProperty.call(i, o) && (r[o] = i[o]);
     }
-    return o;
-  }, F.apply(this, arguments);
+    return r;
+  }, E.apply(this, arguments);
 };
-Object.defineProperty(ht, "__esModule", { value: !0 });
-ht.Joystick = void 0;
-var W = pt, Ft = $, Et = ft, Re = vt, I;
-(function(o) {
-  o.PointerDown = "pointerdown", o.PointerMove = "pointermove", o.PointerUp = "pointerup";
-})(I || (I = {}));
-var x;
-(function(o) {
-  o[o.TopRight = 2.35619449] = "TopRight", o[o.TopLeft = -2.35619449] = "TopLeft", o[o.BottomRight = 0.785398163] = "BottomRight", o[o.BottomLeft = -0.785398163] = "BottomLeft";
-})(x || (x = {}));
-var Me = (
+Object.defineProperty(Pt, "__esModule", { value: !0 });
+Pt.Joystick = void 0;
+var Z = H, ne = nt, se = It, Ze = xt, C;
+(function(r) {
+  r.PointerDown = "pointerdown", r.PointerMove = "pointermove", r.PointerUp = "pointerup";
+})(C || (C = {}));
+var J;
+(function(r) {
+  r[r.TopRight = 2.35619449] = "TopRight", r[r.TopLeft = -2.35619449] = "TopLeft", r[r.BottomRight = 0.785398163] = "BottomRight", r[r.BottomLeft = -0.785398163] = "BottomLeft";
+})(J || (J = {}));
+var Qe = (
   /** @class */
-  function(o) {
-    we(n, o);
-    function n(e) {
-      var t = o.call(this, e) || this;
-      return t._stickRef = W.createRef(), t._baseRef = W.createRef(), t.frameId = null, t._pointerId = null, t._mounted = !1, t._pointerMove = function(r) {
-        if (r.preventDefault(), t.state.dragging) {
-          if (!t.props.followCursor && r.pointerId !== t._pointerId)
+  function(r) {
+    Ve(i, r);
+    function i(e) {
+      var t = r.call(this, e) || this;
+      return t._stickRef = Z.createRef(), t._baseRef = Z.createRef(), t.frameId = null, t._pointerId = null, t._mounted = !1, t._pointerMove = function(o) {
+        if (o.preventDefault(), t.state.dragging) {
+          if (!t.props.followCursor && o.pointerId !== t._pointerId)
             return;
-          var i = r.clientX, c = r.clientY, s = i - t._parentRect.left - t._radius, a = c - t._parentRect.top - t._radius, g = t._distance(s, a), v = (0, Re.shapeBoundsFactory)(
+          var n = o.clientX, p = o.clientY, s = n - t._parentRect.left - t._radius, a = p - t._parentRect.top - t._radius, f = t._distance(s, a), h = (0, Ze.shapeBoundsFactory)(
             //@ts-ignore
             t.props.controlPlaneShape || t.props.baseShape,
-            i,
-            c,
+            n,
+            p,
             s,
             a,
-            g,
+            f,
             t._radius,
             t._baseSize,
             t._parentRect
           );
-          s = v.relativeX, a = v.relativeY;
-          var w = Math.atan2(s, a);
+          s = h.relativeX, a = h.relativeY;
+          var k = Math.atan2(s, a);
           t._updatePos({
             relativeX: s,
             relativeY: a,
-            distance: t._distanceToPercentile(g),
-            direction: t._getDirection(w),
-            axisX: i - t._parentRect.left,
-            axisY: c - t._parentRect.top
+            distance: t._distanceToPercentile(f),
+            direction: t._getDirection(k),
+            axisX: n - t._parentRect.left,
+            axisY: p - t._parentRect.top
           });
         }
-      }, t._pointerUp = function(r) {
-        if (r.pointerId === t._pointerId) {
-          var i = {
+      }, t._pointerUp = function(o) {
+        if (o.pointerId === t._pointerId) {
+          var n = {
             dragging: !1
           };
-          t.props.sticky || (i.coordinates = void 0), t.frameId = window.requestAnimationFrame(function() {
-            t._mounted && t.setState(i);
-          }), window.removeEventListener(I.PointerUp, t._pointerUp), window.removeEventListener(I.PointerMove, t._pointerMove), t._pointerId = null, t.props.stop && t.props.stop({
+          t.props.sticky || (n.coordinates = void 0), t.frameId = window.requestAnimationFrame(function() {
+            t._mounted && t.setState(n);
+          }), window.removeEventListener(C.PointerUp, t._pointerUp), window.removeEventListener(C.PointerMove, t._pointerMove), t._pointerId = null, t.props.stop && t.props.stop({
             type: "stop",
             // @ts-ignore
             x: t.props.sticky ? t.state.coordinates.relativeX * 2 / t._baseSize : null,
@@ -598,24 +598,24 @@ var Me = (
       }, t.state = {
         dragging: !1
       }, t._throttleMoveCallback = /* @__PURE__ */ function() {
-        var r = 0;
-        return function(i) {
-          var c = (/* @__PURE__ */ new Date()).getTime(), s = t.props.throttle || 0;
-          if (!(c - r < s) && (r = c, t.props.move))
-            return t.props.move(i);
+        var o = 0;
+        return function(n) {
+          var p = (/* @__PURE__ */ new Date()).getTime(), s = t.props.throttle || 0;
+          if (!(p - o < s) && (o = p, t.props.move))
+            return t.props.move(n);
         };
       }(), t;
     }
-    return n.prototype.componentWillUnmount = function() {
+    return i.prototype.componentWillUnmount = function() {
       var e = this;
-      this._mounted = !1, this.props.followCursor && window.removeEventListener(I.PointerMove, function(t) {
+      this._mounted = !1, this.props.followCursor && window.removeEventListener(C.PointerMove, function(t) {
         return e._pointerMove(t);
       }), this.frameId !== null && window.cancelAnimationFrame(this.frameId);
-    }, n.prototype.componentDidMount = function() {
+    }, i.prototype.componentDidMount = function() {
       var e = this;
       this._mounted = !0, this.props.followCursor && (this._parentRect = this._baseRef.current.getBoundingClientRect(), this.setState({
         dragging: !0
-      }), window.addEventListener(I.PointerMove, function(t) {
+      }), window.addEventListener(C.PointerMove, function(t) {
         return e._pointerMove(t);
       }), this.props.start && this.props.start({
         type: "start",
@@ -624,7 +624,7 @@ var Me = (
         distance: null,
         direction: null
       }));
-    }, n.prototype._updatePos = function(e) {
+    }, i.prototype._updatePos = function(e) {
       var t = this;
       this.frameId = window.requestAnimationFrame(function() {
         t._mounted && t.setState({
@@ -637,185 +637,185 @@ var Me = (
         direction: e.direction,
         distance: e.distance
       });
-    }, n.prototype._pointerDown = function(e) {
+    }, i.prototype._pointerDown = function(e) {
       this.props.disabled || this.props.followCursor || (this._parentRect = this._baseRef.current.getBoundingClientRect(), this.setState({
         dragging: !0
-      }), window.addEventListener(I.PointerUp, this._pointerUp), window.addEventListener(I.PointerMove, this._pointerMove), this._pointerId = e.pointerId, this._stickRef.current.setPointerCapture(e.pointerId), this.props.start && this.props.start({
+      }), window.addEventListener(C.PointerUp, this._pointerUp), window.addEventListener(C.PointerMove, this._pointerMove), this._pointerId = e.pointerId, this._stickRef.current.setPointerCapture(e.pointerId), this.props.start && this.props.start({
         type: "start",
         x: null,
         y: null,
         distance: null,
         direction: null
       }));
-    }, n.prototype._getDirection = function(e) {
-      return e > x.TopRight || e < x.TopLeft ? "FORWARD" : e < x.TopRight && e > x.BottomRight ? "RIGHT" : e < x.BottomLeft ? "LEFT" : "BACKWARD";
-    }, n.prototype._distance = function(e, t) {
+    }, i.prototype._getDirection = function(e) {
+      return e > J.TopRight || e < J.TopLeft ? "FORWARD" : e < J.TopRight && e > J.BottomRight ? "RIGHT" : e < J.BottomLeft ? "LEFT" : "BACKWARD";
+    }, i.prototype._distance = function(e, t) {
       return Math.hypot(e, t);
-    }, n.prototype._distanceToPercentile = function(e) {
+    }, i.prototype._distanceToPercentile = function(e) {
       var t = e / (this._baseSize / 2) * 100;
       return t > 100 ? 100 : t;
-    }, n.prototype.getBaseShapeStyle = function() {
-      var e = this.props.baseShape || Ft.JoystickShape.Circle;
-      return (0, Et.shapeFactory)(e, this._baseSize);
-    }, n.prototype.getStickShapeStyle = function() {
-      var e = this.props.stickShape || Ft.JoystickShape.Circle;
-      return (0, Et.shapeFactory)(e, this._baseSize);
-    }, n.prototype._getBaseStyle = function() {
-      var e = this.props.baseColor !== void 0 ? this.props.baseColor : "#000033", t = "".concat(this._baseSize, "px"), r = F(F({}, this.getBaseShapeStyle()), { height: t, width: t, background: e, display: "flex", justifyContent: "center", alignItems: "center" });
-      return this.props.baseImage && (r.background = "url(".concat(this.props.baseImage, ")"), r.backgroundSize = "100%"), r;
-    }, n.prototype._getStickStyle = function() {
-      var e = this.props.stickColor !== void 0 ? this.props.stickColor : "#3D59AB", t = this._stickSize ? "".concat(this._stickSize, "px") : "".concat(this._baseSize / 1.5, "px"), r = F(F({}, this.getStickShapeStyle()), { background: e, cursor: "move", height: t, width: t, border: "none", flexShrink: 0, touchAction: "none" });
-      return this.props.stickImage && (r.background = "url(".concat(this.props.stickImage, ")"), r.backgroundSize = "100%"), this.props.pos && (r = Object.assign({}, r, {
+    }, i.prototype.getBaseShapeStyle = function() {
+      var e = this.props.baseShape || ne.JoystickShape.Circle;
+      return (0, se.shapeFactory)(e, this._baseSize);
+    }, i.prototype.getStickShapeStyle = function() {
+      var e = this.props.stickShape || ne.JoystickShape.Circle;
+      return (0, se.shapeFactory)(e, this._baseSize);
+    }, i.prototype._getBaseStyle = function() {
+      var e = this.props.baseColor !== void 0 ? this.props.baseColor : "#000033", t = "".concat(this._baseSize, "px"), o = E(E({}, this.getBaseShapeStyle()), { height: t, width: t, background: e, display: "flex", justifyContent: "center", alignItems: "center" });
+      return this.props.baseImage && (o.background = "url(".concat(this.props.baseImage, ")"), o.backgroundSize = "100%"), o;
+    }, i.prototype._getStickStyle = function() {
+      var e = this.props.stickColor !== void 0 ? this.props.stickColor : "#3D59AB", t = this._stickSize ? "".concat(this._stickSize, "px") : "".concat(this._baseSize / 1.5, "px"), o = E(E({}, this.getStickShapeStyle()), { background: e, cursor: "move", height: t, width: t, border: "none", flexShrink: 0, touchAction: "none" });
+      return this.props.stickImage && (o.background = "url(".concat(this.props.stickImage, ")"), o.backgroundSize = "100%"), this.props.pos && (o = Object.assign({}, o, {
         position: "absolute",
         transform: "translate3d(".concat(this.props.pos.x * this._baseSize / 2, "px, ").concat(-(this.props.pos.y * this._baseSize) / 2, "px, 0)")
-      })), this.state.coordinates !== void 0 && (r = Object.assign({}, r, {
+      })), this.state.coordinates !== void 0 && (o = Object.assign({}, o, {
         position: "absolute",
         transform: "translate3d(".concat(this.state.coordinates.relativeX, "px, ").concat(this.state.coordinates.relativeY, "px, 0)")
-      })), r;
-    }, n.prototype.render = function() {
+      })), o;
+    }, i.prototype.render = function() {
       var e = this;
       this._baseSize = this.props.size || 100, this._stickSize = this.props.stickSize, this._radius = this._baseSize / 2;
-      var t = this._getBaseStyle(), r = this._getStickStyle();
-      return W.createElement(
+      var t = this._getBaseStyle(), o = this._getStickStyle();
+      return Z.createElement(
         "div",
         { "data-testid": "joystick-base", className: this.props.disabled ? "joystick-base-disabled" : "", ref: this._baseRef, style: t },
-        W.createElement("button", { ref: this._stickRef, disabled: this.props.disabled, onPointerDown: function(i) {
-          return e._pointerDown(i);
-        }, className: this.props.disabled ? "joystick-disabled" : "", style: r })
+        Z.createElement("button", { ref: this._stickRef, disabled: this.props.disabled, onPointerDown: function(n) {
+          return e._pointerDown(n);
+        }, className: this.props.disabled ? "joystick-disabled" : "", style: o })
       );
-    }, n;
-  }(W.Component)
+    }, i;
+  }(Z.Component)
 );
-ht.Joystick = Me;
-(function(o) {
-  Object.defineProperty(o, "__esModule", { value: !0 }), o.JoystickShape = o.Joystick = void 0;
-  var n = ht;
-  Object.defineProperty(o, "Joystick", { enumerable: !0, get: function() {
-    return n.Joystick;
+Pt.Joystick = Qe;
+(function(r) {
+  Object.defineProperty(r, "__esModule", { value: !0 }), r.JoystickShape = r.Joystick = void 0;
+  var i = Pt;
+  Object.defineProperty(r, "Joystick", { enumerable: !0, get: function() {
+    return i.Joystick;
   } });
-  var e = $;
-  Object.defineProperty(o, "JoystickShape", { enumerable: !0, get: function() {
+  var e = nt;
+  Object.defineProperty(r, "JoystickShape", { enumerable: !0, get: function() {
     return e.JoystickShape;
   } });
-})(be);
-var at = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, Ie = {}, _t = {}, V = {};
-(function(o) {
-  Object.defineProperty(o, "__esModule", { value: !0 }), o.JoystickShape = void 0, function(n) {
-    n.Circle = "circle", n.Square = "square", n.AxisY = "axisY", n.AxisX = "axisX";
-  }(o.JoystickShape || (o.JoystickShape = {}));
-})(V);
-var yt = {};
-Object.defineProperty(yt, "__esModule", { value: !0 });
-yt.shapeFactory = void 0;
-var Dt = V, Pe = function(o, n) {
-  switch (o) {
-    case Dt.JoystickShape.Square:
+})(Ge);
+var bt = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, to = {}, zt = {}, st = {};
+(function(r) {
+  Object.defineProperty(r, "__esModule", { value: !0 }), r.JoystickShape = void 0, function(i) {
+    i.Circle = "circle", i.Square = "square", i.AxisY = "axisY", i.AxisX = "axisX";
+  }(r.JoystickShape || (r.JoystickShape = {}));
+})(st);
+var jt = {};
+Object.defineProperty(jt, "__esModule", { value: !0 });
+jt.shapeFactory = void 0;
+var ae = st, eo = function(r, i) {
+  switch (r) {
+    case ae.JoystickShape.Square:
       return {
-        borderRadius: Math.sqrt(n)
+        borderRadius: Math.sqrt(i)
       };
-    case Dt.JoystickShape.Circle:
+    case ae.JoystickShape.Circle:
     default:
       return {
-        borderRadius: n
+        borderRadius: i
       };
   }
 };
-yt.shapeFactory = Pe;
-var mt = {};
-Object.defineProperty(mt, "__esModule", { value: !0 });
-mt.shapeBoundsFactory = void 0;
-var Pt = V, Ae = function(o, n, e, t, r, i, c, s, a) {
-  switch (o) {
-    case Pt.JoystickShape.Square:
-      return t = rt(n - a.left - s / 2, s), r = rt(e - a.top - s / 2, s), { relativeX: t, relativeY: r };
-    case Pt.JoystickShape.AxisX:
-      return t = rt(n - a.left - s / 2, s), r = 0, { relativeX: t, relativeY: r };
-    case Pt.JoystickShape.AxisY:
-      return t = 0, r = rt(e - a.top - s / 2, s), { relativeX: t, relativeY: r };
+jt.shapeFactory = eo;
+var Ot = {};
+Object.defineProperty(Ot, "__esModule", { value: !0 });
+Ot.shapeBoundsFactory = void 0;
+var Nt = st, oo = function(r, i, e, t, o, n, p, s, a) {
+  switch (r) {
+    case Nt.JoystickShape.Square:
+      return t = ft(i - a.left - s / 2, s), o = ft(e - a.top - s / 2, s), { relativeX: t, relativeY: o };
+    case Nt.JoystickShape.AxisX:
+      return t = ft(i - a.left - s / 2, s), o = 0, { relativeX: t, relativeY: o };
+    case Nt.JoystickShape.AxisY:
+      return t = 0, o = ft(e - a.top - s / 2, s), { relativeX: t, relativeY: o };
     default:
-      return i > c && (t *= c / i, r *= c / i), { relativeX: t, relativeY: r };
+      return n > p && (t *= p / n, o *= p / n), { relativeX: t, relativeY: o };
   }
 };
-mt.shapeBoundsFactory = Ae;
-var rt = function(o, n) {
-  var e = n / 2;
-  return o > e ? e : o < -e ? e * -1 : o;
-}, ze = at && at.__extends || /* @__PURE__ */ function() {
-  var o = function(n, e) {
-    return o = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t, r) {
-      t.__proto__ = r;
-    } || function(t, r) {
-      for (var i in r) Object.prototype.hasOwnProperty.call(r, i) && (t[i] = r[i]);
-    }, o(n, e);
+Ot.shapeBoundsFactory = oo;
+var ft = function(r, i) {
+  var e = i / 2;
+  return r > e ? e : r < -e ? e * -1 : r;
+}, ro = bt && bt.__extends || /* @__PURE__ */ function() {
+  var r = function(i, e) {
+    return r = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t, o) {
+      t.__proto__ = o;
+    } || function(t, o) {
+      for (var n in o) Object.prototype.hasOwnProperty.call(o, n) && (t[n] = o[n]);
+    }, r(i, e);
   };
-  return function(n, e) {
+  return function(i, e) {
     if (typeof e != "function" && e !== null)
       throw new TypeError("Class extends value " + String(e) + " is not a constructor or null");
-    o(n, e);
+    r(i, e);
     function t() {
-      this.constructor = n;
+      this.constructor = i;
     }
-    n.prototype = e === null ? Object.create(e) : (t.prototype = e.prototype, new t());
+    i.prototype = e === null ? Object.create(e) : (t.prototype = e.prototype, new t());
   };
-}(), E = at && at.__assign || function() {
-  return E = Object.assign || function(o) {
-    for (var n, e = 1, t = arguments.length; e < t; e++) {
-      n = arguments[e];
-      for (var r in n) Object.prototype.hasOwnProperty.call(n, r) && (o[r] = n[r]);
+}(), X = bt && bt.__assign || function() {
+  return X = Object.assign || function(r) {
+    for (var i, e = 1, t = arguments.length; e < t; e++) {
+      i = arguments[e];
+      for (var o in i) Object.prototype.hasOwnProperty.call(i, o) && (r[o] = i[o]);
     }
-    return o;
-  }, E.apply(this, arguments);
+    return r;
+  }, X.apply(this, arguments);
 };
-Object.defineProperty(_t, "__esModule", { value: !0 });
-_t.Joystick = void 0;
-var H = pt, Yt = V, Bt = yt, Ce = mt, P;
-(function(o) {
-  o.PointerDown = "pointerdown", o.PointerMove = "pointermove", o.PointerUp = "pointerup";
+Object.defineProperty(zt, "__esModule", { value: !0 });
+zt.Joystick = void 0;
+var Q = H, pe = st, ce = jt, io = Ot, P;
+(function(r) {
+  r.PointerDown = "pointerdown", r.PointerMove = "pointermove", r.PointerUp = "pointerup";
 })(P || (P = {}));
-var j;
-(function(o) {
-  o[o.TopRight = 2.35619449] = "TopRight", o[o.TopLeft = -2.35619449] = "TopLeft", o[o.BottomRight = 0.785398163] = "BottomRight", o[o.BottomLeft = -0.785398163] = "BottomLeft";
-})(j || (j = {}));
-var xe = (
+var B;
+(function(r) {
+  r[r.TopRight = 2.35619449] = "TopRight", r[r.TopLeft = -2.35619449] = "TopLeft", r[r.BottomRight = 0.785398163] = "BottomRight", r[r.BottomLeft = -0.785398163] = "BottomLeft";
+})(B || (B = {}));
+var no = (
   /** @class */
-  function(o) {
-    ze(n, o);
-    function n(e) {
-      var t = o.call(this, e) || this;
-      return t._stickRef = H.createRef(), t._baseRef = H.createRef(), t.frameId = null, t._pointerId = null, t._mounted = !1, t._pointerMove = function(r) {
-        if (r.preventDefault(), t.state.dragging) {
-          if (!t.props.followCursor && r.pointerId !== t._pointerId)
+  function(r) {
+    ro(i, r);
+    function i(e) {
+      var t = r.call(this, e) || this;
+      return t._stickRef = Q.createRef(), t._baseRef = Q.createRef(), t.frameId = null, t._pointerId = null, t._mounted = !1, t._pointerMove = function(o) {
+        if (o.preventDefault(), t.state.dragging) {
+          if (!t.props.followCursor && o.pointerId !== t._pointerId)
             return;
-          var i = r.clientX, c = r.clientY, s = i - t._parentRect.left - t._radius, a = c - t._parentRect.top - t._radius, g = t._distance(s, a), v = (0, Ce.shapeBoundsFactory)(
+          var n = o.clientX, p = o.clientY, s = n - t._parentRect.left - t._radius, a = p - t._parentRect.top - t._radius, f = t._distance(s, a), h = (0, io.shapeBoundsFactory)(
             //@ts-ignore
             t.props.controlPlaneShape || t.props.baseShape,
-            i,
-            c,
+            n,
+            p,
             s,
             a,
-            g,
+            f,
             t._radius,
             t._baseSize,
             t._parentRect
           );
-          s = v.relativeX, a = v.relativeY;
-          var w = Math.atan2(s, a);
+          s = h.relativeX, a = h.relativeY;
+          var k = Math.atan2(s, a);
           t._updatePos({
             relativeX: s,
             relativeY: a,
-            distance: t._distanceToPercentile(g),
-            direction: t._getDirection(w),
-            axisX: i - t._parentRect.left,
-            axisY: c - t._parentRect.top
+            distance: t._distanceToPercentile(f),
+            direction: t._getDirection(k),
+            axisX: n - t._parentRect.left,
+            axisY: p - t._parentRect.top
           });
         }
-      }, t._pointerUp = function(r) {
-        if (r.pointerId === t._pointerId) {
-          var i = {
+      }, t._pointerUp = function(o) {
+        if (o.pointerId === t._pointerId) {
+          var n = {
             dragging: !1
           };
-          t.props.sticky || (i.coordinates = void 0), t.frameId = window.requestAnimationFrame(function() {
-            t._mounted && t.setState(i);
+          t.props.sticky || (n.coordinates = void 0), t.frameId = window.requestAnimationFrame(function() {
+            t._mounted && t.setState(n);
           }), window.removeEventListener(P.PointerUp, t._pointerUp), window.removeEventListener(P.PointerMove, t._pointerMove), t._pointerId = null, t.props.stop && t.props.stop({
             type: "stop",
             // @ts-ignore
@@ -831,20 +831,20 @@ var xe = (
       }, t.state = {
         dragging: !1
       }, t._throttleMoveCallback = /* @__PURE__ */ function() {
-        var r = 0;
-        return function(i) {
-          var c = (/* @__PURE__ */ new Date()).getTime(), s = t.props.throttle || 0;
-          if (!(c - r < s) && (r = c, t.props.move))
-            return t.props.move(i);
+        var o = 0;
+        return function(n) {
+          var p = (/* @__PURE__ */ new Date()).getTime(), s = t.props.throttle || 0;
+          if (!(p - o < s) && (o = p, t.props.move))
+            return t.props.move(n);
         };
       }(), t;
     }
-    return n.prototype.componentWillUnmount = function() {
+    return i.prototype.componentWillUnmount = function() {
       var e = this;
       this._mounted = !1, this.props.followCursor && window.removeEventListener(P.PointerMove, function(t) {
         return e._pointerMove(t);
       }), this.frameId !== null && window.cancelAnimationFrame(this.frameId);
-    }, n.prototype.componentDidMount = function() {
+    }, i.prototype.componentDidMount = function() {
       var e = this;
       this._mounted = !0, this.props.followCursor && (this._parentRect = this._baseRef.current.getBoundingClientRect(), this.setState({
         dragging: !0
@@ -857,7 +857,7 @@ var xe = (
         distance: null,
         direction: null
       }));
-    }, n.prototype._updatePos = function(e) {
+    }, i.prototype._updatePos = function(e) {
       var t = this;
       this.frameId = window.requestAnimationFrame(function() {
         t._mounted && t.setState({
@@ -870,7 +870,7 @@ var xe = (
         direction: e.direction,
         distance: e.distance
       });
-    }, n.prototype._pointerDown = function(e) {
+    }, i.prototype._pointerDown = function(e) {
       this.props.disabled || this.props.followCursor || (this._parentRect = this._baseRef.current.getBoundingClientRect(), this.setState({
         dragging: !0
       }), window.addEventListener(P.PointerUp, this._pointerUp), window.addEventListener(P.PointerMove, this._pointerMove), this._pointerId = e.pointerId, this._stickRef.current.setPointerCapture(e.pointerId), this.props.start && this.props.start({
@@ -880,176 +880,176 @@ var xe = (
         distance: null,
         direction: null
       }));
-    }, n.prototype._getDirection = function(e) {
-      return e > j.TopRight || e < j.TopLeft ? "FORWARD" : e < j.TopRight && e > j.BottomRight ? "RIGHT" : e < j.BottomLeft ? "LEFT" : "BACKWARD";
-    }, n.prototype._distance = function(e, t) {
+    }, i.prototype._getDirection = function(e) {
+      return e > B.TopRight || e < B.TopLeft ? "FORWARD" : e < B.TopRight && e > B.BottomRight ? "RIGHT" : e < B.BottomLeft ? "LEFT" : "BACKWARD";
+    }, i.prototype._distance = function(e, t) {
       return Math.hypot(e, t);
-    }, n.prototype._distanceToPercentile = function(e) {
+    }, i.prototype._distanceToPercentile = function(e) {
       var t = e / (this._baseSize / 2) * 100;
       return t > 100 ? 100 : t;
-    }, n.prototype.getBaseShapeStyle = function() {
-      var e = this.props.baseShape || Yt.JoystickShape.Circle;
-      return (0, Bt.shapeFactory)(e, this._baseSize);
-    }, n.prototype.getStickShapeStyle = function() {
-      var e = this.props.stickShape || Yt.JoystickShape.Circle;
-      return (0, Bt.shapeFactory)(e, this._baseSize);
-    }, n.prototype._getBaseStyle = function() {
-      var e = this.props.baseColor !== void 0 ? this.props.baseColor : "#000033", t = "".concat(this._baseSize, "px"), r = E(E({}, this.getBaseShapeStyle()), { height: t, width: t, background: e, display: "flex", justifyContent: "center", alignItems: "center" });
-      return this.props.baseImage && (r.background = "url(".concat(this.props.baseImage, ")"), r.backgroundSize = "100%"), r;
-    }, n.prototype._getStickStyle = function() {
-      var e = this.props.stickColor !== void 0 ? this.props.stickColor : "#3D59AB", t = this._stickSize ? "".concat(this._stickSize, "px") : "".concat(this._baseSize / 1.5, "px"), r = E(E({}, this.getStickShapeStyle()), { background: e, cursor: "move", height: t, width: t, border: "none", flexShrink: 0, touchAction: "none" });
-      return this.props.stickImage && (r.background = "url(".concat(this.props.stickImage, ")"), r.backgroundSize = "100%"), this.props.pos && (r = Object.assign({}, r, {
+    }, i.prototype.getBaseShapeStyle = function() {
+      var e = this.props.baseShape || pe.JoystickShape.Circle;
+      return (0, ce.shapeFactory)(e, this._baseSize);
+    }, i.prototype.getStickShapeStyle = function() {
+      var e = this.props.stickShape || pe.JoystickShape.Circle;
+      return (0, ce.shapeFactory)(e, this._baseSize);
+    }, i.prototype._getBaseStyle = function() {
+      var e = this.props.baseColor !== void 0 ? this.props.baseColor : "#000033", t = "".concat(this._baseSize, "px"), o = X(X({}, this.getBaseShapeStyle()), { height: t, width: t, background: e, display: "flex", justifyContent: "center", alignItems: "center" });
+      return this.props.baseImage && (o.background = "url(".concat(this.props.baseImage, ")"), o.backgroundSize = "100%"), o;
+    }, i.prototype._getStickStyle = function() {
+      var e = this.props.stickColor !== void 0 ? this.props.stickColor : "#3D59AB", t = this._stickSize ? "".concat(this._stickSize, "px") : "".concat(this._baseSize / 1.5, "px"), o = X(X({}, this.getStickShapeStyle()), { background: e, cursor: "move", height: t, width: t, border: "none", flexShrink: 0, touchAction: "none" });
+      return this.props.stickImage && (o.background = "url(".concat(this.props.stickImage, ")"), o.backgroundSize = "100%"), this.props.pos && (o = Object.assign({}, o, {
         position: "absolute",
         transform: "translate3d(".concat(this.props.pos.x * this._baseSize / 2, "px, ").concat(-(this.props.pos.y * this._baseSize) / 2, "px, 0)")
-      })), this.state.coordinates !== void 0 && (r = Object.assign({}, r, {
+      })), this.state.coordinates !== void 0 && (o = Object.assign({}, o, {
         position: "absolute",
         transform: "translate3d(".concat(this.state.coordinates.relativeX, "px, ").concat(this.state.coordinates.relativeY, "px, 0)")
-      })), r;
-    }, n.prototype.render = function() {
+      })), o;
+    }, i.prototype.render = function() {
       var e = this;
       this._baseSize = this.props.size || 100, this._stickSize = this.props.stickSize, this._radius = this._baseSize / 2;
-      var t = this._getBaseStyle(), r = this._getStickStyle();
-      return H.createElement(
+      var t = this._getBaseStyle(), o = this._getStickStyle();
+      return Q.createElement(
         "div",
         { "data-testid": "joystick-base", className: this.props.disabled ? "joystick-base-disabled" : "", ref: this._baseRef, style: t },
-        H.createElement("button", { ref: this._stickRef, disabled: this.props.disabled, onPointerDown: function(i) {
-          return e._pointerDown(i);
-        }, className: this.props.disabled ? "joystick-disabled" : "", style: r })
+        Q.createElement("button", { ref: this._stickRef, disabled: this.props.disabled, onPointerDown: function(n) {
+          return e._pointerDown(n);
+        }, className: this.props.disabled ? "joystick-disabled" : "", style: o })
       );
-    }, n;
-  }(H.Component)
+    }, i;
+  }(Q.Component)
 );
-_t.Joystick = xe;
-(function(o) {
-  Object.defineProperty(o, "__esModule", { value: !0 }), o.JoystickShape = o.Joystick = void 0;
-  var n = _t;
-  Object.defineProperty(o, "Joystick", { enumerable: !0, get: function() {
-    return n.Joystick;
+zt.Joystick = no;
+(function(r) {
+  Object.defineProperty(r, "__esModule", { value: !0 }), r.JoystickShape = r.Joystick = void 0;
+  var i = zt;
+  Object.defineProperty(r, "Joystick", { enumerable: !0, get: function() {
+    return i.Joystick;
   } });
-  var e = V;
-  Object.defineProperty(o, "JoystickShape", { enumerable: !0, get: function() {
+  var e = st;
+  Object.defineProperty(r, "JoystickShape", { enumerable: !0, get: function() {
     return e.JoystickShape;
   } });
-})(Ie);
-var ct = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, je = {}, gt = {}, Z = {};
-(function(o) {
-  Object.defineProperty(o, "__esModule", { value: !0 }), o.JoystickShape = void 0, function(n) {
-    n.Circle = "circle", n.Square = "square", n.AxisY = "axisY", n.AxisX = "axisX";
-  }(o.JoystickShape || (o.JoystickShape = {}));
-})(Z);
-var bt = {};
-Object.defineProperty(bt, "__esModule", { value: !0 });
-bt.shapeFactory = void 0;
-var Xt = Z, Oe = function(o, n) {
-  switch (o) {
-    case Xt.JoystickShape.Square:
+})(to);
+var St = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, so = {}, Jt = {}, at = {};
+(function(r) {
+  Object.defineProperty(r, "__esModule", { value: !0 }), r.JoystickShape = void 0, function(i) {
+    i.Circle = "circle", i.Square = "square", i.AxisY = "axisY", i.AxisX = "axisX";
+  }(r.JoystickShape || (r.JoystickShape = {}));
+})(at);
+var Bt = {};
+Object.defineProperty(Bt, "__esModule", { value: !0 });
+Bt.shapeFactory = void 0;
+var ue = at, ao = function(r, i) {
+  switch (r) {
+    case ue.JoystickShape.Square:
       return {
-        borderRadius: Math.sqrt(n)
+        borderRadius: Math.sqrt(i)
       };
-    case Xt.JoystickShape.Circle:
+    case ue.JoystickShape.Circle:
     default:
       return {
-        borderRadius: n
+        borderRadius: i
       };
   }
 };
-bt.shapeFactory = Oe;
-var St = {};
-Object.defineProperty(St, "__esModule", { value: !0 });
-St.shapeBoundsFactory = void 0;
-var At = Z, Je = function(o, n, e, t, r, i, c, s, a) {
-  switch (o) {
-    case At.JoystickShape.Square:
-      return t = nt(n - a.left - s / 2, s), r = nt(e - a.top - s / 2, s), { relativeX: t, relativeY: r };
-    case At.JoystickShape.AxisX:
-      return t = nt(n - a.left - s / 2, s), r = 0, { relativeX: t, relativeY: r };
-    case At.JoystickShape.AxisY:
-      return t = 0, r = nt(e - a.top - s / 2, s), { relativeX: t, relativeY: r };
+Bt.shapeFactory = ao;
+var Dt = {};
+Object.defineProperty(Dt, "__esModule", { value: !0 });
+Dt.shapeBoundsFactory = void 0;
+var Gt = at, po = function(r, i, e, t, o, n, p, s, a) {
+  switch (r) {
+    case Gt.JoystickShape.Square:
+      return t = _t(i - a.left - s / 2, s), o = _t(e - a.top - s / 2, s), { relativeX: t, relativeY: o };
+    case Gt.JoystickShape.AxisX:
+      return t = _t(i - a.left - s / 2, s), o = 0, { relativeX: t, relativeY: o };
+    case Gt.JoystickShape.AxisY:
+      return t = 0, o = _t(e - a.top - s / 2, s), { relativeX: t, relativeY: o };
     default:
-      return i > c && (t *= c / i, r *= c / i), { relativeX: t, relativeY: r };
+      return n > p && (t *= p / n, o *= p / n), { relativeX: t, relativeY: o };
   }
 };
-St.shapeBoundsFactory = Je;
-var nt = function(o, n) {
-  var e = n / 2;
-  return o > e ? e : o < -e ? e * -1 : o;
-}, Le = ct && ct.__extends || /* @__PURE__ */ function() {
-  var o = function(n, e) {
-    return o = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t, r) {
-      t.__proto__ = r;
-    } || function(t, r) {
-      for (var i in r) Object.prototype.hasOwnProperty.call(r, i) && (t[i] = r[i]);
-    }, o(n, e);
+Dt.shapeBoundsFactory = po;
+var _t = function(r, i) {
+  var e = i / 2;
+  return r > e ? e : r < -e ? e * -1 : r;
+}, co = St && St.__extends || /* @__PURE__ */ function() {
+  var r = function(i, e) {
+    return r = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t, o) {
+      t.__proto__ = o;
+    } || function(t, o) {
+      for (var n in o) Object.prototype.hasOwnProperty.call(o, n) && (t[n] = o[n]);
+    }, r(i, e);
   };
-  return function(n, e) {
+  return function(i, e) {
     if (typeof e != "function" && e !== null)
       throw new TypeError("Class extends value " + String(e) + " is not a constructor or null");
-    o(n, e);
+    r(i, e);
     function t() {
-      this.constructor = n;
+      this.constructor = i;
     }
-    n.prototype = e === null ? Object.create(e) : (t.prototype = e.prototype, new t());
+    i.prototype = e === null ? Object.create(e) : (t.prototype = e.prototype, new t());
   };
-}(), D = ct && ct.__assign || function() {
-  return D = Object.assign || function(o) {
-    for (var n, e = 1, t = arguments.length; e < t; e++) {
-      n = arguments[e];
-      for (var r in n) Object.prototype.hasOwnProperty.call(n, r) && (o[r] = n[r]);
+}(), q = St && St.__assign || function() {
+  return q = Object.assign || function(r) {
+    for (var i, e = 1, t = arguments.length; e < t; e++) {
+      i = arguments[e];
+      for (var o in i) Object.prototype.hasOwnProperty.call(i, o) && (r[o] = i[o]);
     }
-    return o;
-  }, D.apply(this, arguments);
+    return r;
+  }, q.apply(this, arguments);
 };
-Object.defineProperty(gt, "__esModule", { value: !0 });
-gt.Joystick = void 0;
-var G = pt, qt = Z, Ut = bt, Te = St, A;
-(function(o) {
-  o.PointerDown = "pointerdown", o.PointerMove = "pointermove", o.PointerUp = "pointerup";
-})(A || (A = {}));
-var O;
-(function(o) {
-  o[o.TopRight = 2.35619449] = "TopRight", o[o.TopLeft = -2.35619449] = "TopLeft", o[o.BottomRight = 0.785398163] = "BottomRight", o[o.BottomLeft = -0.785398163] = "BottomLeft";
-})(O || (O = {}));
-var Fe = (
+Object.defineProperty(Jt, "__esModule", { value: !0 });
+Jt.Joystick = void 0;
+var tt = H, le = at, de = Bt, uo = Dt, I;
+(function(r) {
+  r.PointerDown = "pointerdown", r.PointerMove = "pointermove", r.PointerUp = "pointerup";
+})(I || (I = {}));
+var D;
+(function(r) {
+  r[r.TopRight = 2.35619449] = "TopRight", r[r.TopLeft = -2.35619449] = "TopLeft", r[r.BottomRight = 0.785398163] = "BottomRight", r[r.BottomLeft = -0.785398163] = "BottomLeft";
+})(D || (D = {}));
+var lo = (
   /** @class */
-  function(o) {
-    Le(n, o);
-    function n(e) {
-      var t = o.call(this, e) || this;
-      return t._stickRef = G.createRef(), t._baseRef = G.createRef(), t.frameId = null, t._pointerId = null, t._mounted = !1, t._pointerMove = function(r) {
-        if (r.preventDefault(), t.state.dragging) {
-          if (!t.props.followCursor && r.pointerId !== t._pointerId)
+  function(r) {
+    co(i, r);
+    function i(e) {
+      var t = r.call(this, e) || this;
+      return t._stickRef = tt.createRef(), t._baseRef = tt.createRef(), t.frameId = null, t._pointerId = null, t._mounted = !1, t._pointerMove = function(o) {
+        if (o.preventDefault(), t.state.dragging) {
+          if (!t.props.followCursor && o.pointerId !== t._pointerId)
             return;
-          var i = r.clientX, c = r.clientY, s = i - t._parentRect.left - t._radius, a = c - t._parentRect.top - t._radius, g = t._distance(s, a), v = (0, Te.shapeBoundsFactory)(
+          var n = o.clientX, p = o.clientY, s = n - t._parentRect.left - t._radius, a = p - t._parentRect.top - t._radius, f = t._distance(s, a), h = (0, uo.shapeBoundsFactory)(
             //@ts-ignore
             t.props.controlPlaneShape || t.props.baseShape,
-            i,
-            c,
+            n,
+            p,
             s,
             a,
-            g,
+            f,
             t._radius,
             t._baseSize,
             t._parentRect
           );
-          s = v.relativeX, a = v.relativeY;
-          var w = Math.atan2(s, a);
+          s = h.relativeX, a = h.relativeY;
+          var k = Math.atan2(s, a);
           t._updatePos({
             relativeX: s,
             relativeY: a,
-            distance: t._distanceToPercentile(g),
-            direction: t._getDirection(w),
-            axisX: i - t._parentRect.left,
-            axisY: c - t._parentRect.top
+            distance: t._distanceToPercentile(f),
+            direction: t._getDirection(k),
+            axisX: n - t._parentRect.left,
+            axisY: p - t._parentRect.top
           });
         }
-      }, t._pointerUp = function(r) {
-        if (r.pointerId === t._pointerId) {
-          var i = {
+      }, t._pointerUp = function(o) {
+        if (o.pointerId === t._pointerId) {
+          var n = {
             dragging: !1
           };
-          t.props.sticky || (i.coordinates = void 0), t.frameId = window.requestAnimationFrame(function() {
-            t._mounted && t.setState(i);
-          }), window.removeEventListener(A.PointerUp, t._pointerUp), window.removeEventListener(A.PointerMove, t._pointerMove), t._pointerId = null, t.props.stop && t.props.stop({
+          t.props.sticky || (n.coordinates = void 0), t.frameId = window.requestAnimationFrame(function() {
+            t._mounted && t.setState(n);
+          }), window.removeEventListener(I.PointerUp, t._pointerUp), window.removeEventListener(I.PointerMove, t._pointerMove), t._pointerId = null, t.props.stop && t.props.stop({
             type: "stop",
             // @ts-ignore
             x: t.props.sticky ? t.state.coordinates.relativeX * 2 / t._baseSize : null,
@@ -1064,24 +1064,24 @@ var Fe = (
       }, t.state = {
         dragging: !1
       }, t._throttleMoveCallback = /* @__PURE__ */ function() {
-        var r = 0;
-        return function(i) {
-          var c = (/* @__PURE__ */ new Date()).getTime(), s = t.props.throttle || 0;
-          if (!(c - r < s) && (r = c, t.props.move))
-            return t.props.move(i);
+        var o = 0;
+        return function(n) {
+          var p = (/* @__PURE__ */ new Date()).getTime(), s = t.props.throttle || 0;
+          if (!(p - o < s) && (o = p, t.props.move))
+            return t.props.move(n);
         };
       }(), t;
     }
-    return n.prototype.componentWillUnmount = function() {
+    return i.prototype.componentWillUnmount = function() {
       var e = this;
-      this._mounted = !1, this.props.followCursor && window.removeEventListener(A.PointerMove, function(t) {
+      this._mounted = !1, this.props.followCursor && window.removeEventListener(I.PointerMove, function(t) {
         return e._pointerMove(t);
       }), this.frameId !== null && window.cancelAnimationFrame(this.frameId);
-    }, n.prototype.componentDidMount = function() {
+    }, i.prototype.componentDidMount = function() {
       var e = this;
       this._mounted = !0, this.props.followCursor && (this._parentRect = this._baseRef.current.getBoundingClientRect(), this.setState({
         dragging: !0
-      }), window.addEventListener(A.PointerMove, function(t) {
+      }), window.addEventListener(I.PointerMove, function(t) {
         return e._pointerMove(t);
       }), this.props.start && this.props.start({
         type: "start",
@@ -1090,7 +1090,7 @@ var Fe = (
         distance: null,
         direction: null
       }));
-    }, n.prototype._updatePos = function(e) {
+    }, i.prototype._updatePos = function(e) {
       var t = this;
       this.frameId = window.requestAnimationFrame(function() {
         t._mounted && t.setState({
@@ -1103,70 +1103,536 @@ var Fe = (
         direction: e.direction,
         distance: e.distance
       });
-    }, n.prototype._pointerDown = function(e) {
+    }, i.prototype._pointerDown = function(e) {
       this.props.disabled || this.props.followCursor || (this._parentRect = this._baseRef.current.getBoundingClientRect(), this.setState({
         dragging: !0
-      }), window.addEventListener(A.PointerUp, this._pointerUp), window.addEventListener(A.PointerMove, this._pointerMove), this._pointerId = e.pointerId, this._stickRef.current.setPointerCapture(e.pointerId), this.props.start && this.props.start({
+      }), window.addEventListener(I.PointerUp, this._pointerUp), window.addEventListener(I.PointerMove, this._pointerMove), this._pointerId = e.pointerId, this._stickRef.current.setPointerCapture(e.pointerId), this.props.start && this.props.start({
         type: "start",
         x: null,
         y: null,
         distance: null,
         direction: null
       }));
-    }, n.prototype._getDirection = function(e) {
-      return e > O.TopRight || e < O.TopLeft ? "FORWARD" : e < O.TopRight && e > O.BottomRight ? "RIGHT" : e < O.BottomLeft ? "LEFT" : "BACKWARD";
-    }, n.prototype._distance = function(e, t) {
+    }, i.prototype._getDirection = function(e) {
+      return e > D.TopRight || e < D.TopLeft ? "FORWARD" : e < D.TopRight && e > D.BottomRight ? "RIGHT" : e < D.BottomLeft ? "LEFT" : "BACKWARD";
+    }, i.prototype._distance = function(e, t) {
       return Math.hypot(e, t);
-    }, n.prototype._distanceToPercentile = function(e) {
+    }, i.prototype._distanceToPercentile = function(e) {
       var t = e / (this._baseSize / 2) * 100;
       return t > 100 ? 100 : t;
-    }, n.prototype.getBaseShapeStyle = function() {
-      var e = this.props.baseShape || qt.JoystickShape.Circle;
-      return (0, Ut.shapeFactory)(e, this._baseSize);
-    }, n.prototype.getStickShapeStyle = function() {
-      var e = this.props.stickShape || qt.JoystickShape.Circle;
-      return (0, Ut.shapeFactory)(e, this._baseSize);
-    }, n.prototype._getBaseStyle = function() {
-      var e = this.props.baseColor !== void 0 ? this.props.baseColor : "#000033", t = "".concat(this._baseSize, "px"), r = D(D({}, this.getBaseShapeStyle()), { height: t, width: t, background: e, display: "flex", justifyContent: "center", alignItems: "center" });
-      return this.props.baseImage && (r.background = "url(".concat(this.props.baseImage, ")"), r.backgroundSize = "100%"), r;
-    }, n.prototype._getStickStyle = function() {
-      var e = this.props.stickColor !== void 0 ? this.props.stickColor : "#3D59AB", t = this._stickSize ? "".concat(this._stickSize, "px") : "".concat(this._baseSize / 1.5, "px"), r = D(D({}, this.getStickShapeStyle()), { background: e, cursor: "move", height: t, width: t, border: "none", flexShrink: 0, touchAction: "none" });
-      return this.props.stickImage && (r.background = "url(".concat(this.props.stickImage, ")"), r.backgroundSize = "100%"), this.props.pos && (r = Object.assign({}, r, {
+    }, i.prototype.getBaseShapeStyle = function() {
+      var e = this.props.baseShape || le.JoystickShape.Circle;
+      return (0, de.shapeFactory)(e, this._baseSize);
+    }, i.prototype.getStickShapeStyle = function() {
+      var e = this.props.stickShape || le.JoystickShape.Circle;
+      return (0, de.shapeFactory)(e, this._baseSize);
+    }, i.prototype._getBaseStyle = function() {
+      var e = this.props.baseColor !== void 0 ? this.props.baseColor : "#000033", t = "".concat(this._baseSize, "px"), o = q(q({}, this.getBaseShapeStyle()), { height: t, width: t, background: e, display: "flex", justifyContent: "center", alignItems: "center" });
+      return this.props.baseImage && (o.background = "url(".concat(this.props.baseImage, ")"), o.backgroundSize = "100%"), o;
+    }, i.prototype._getStickStyle = function() {
+      var e = this.props.stickColor !== void 0 ? this.props.stickColor : "#3D59AB", t = this._stickSize ? "".concat(this._stickSize, "px") : "".concat(this._baseSize / 1.5, "px"), o = q(q({}, this.getStickShapeStyle()), { background: e, cursor: "move", height: t, width: t, border: "none", flexShrink: 0, touchAction: "none" });
+      return this.props.stickImage && (o.background = "url(".concat(this.props.stickImage, ")"), o.backgroundSize = "100%"), this.props.pos && (o = Object.assign({}, o, {
         position: "absolute",
         transform: "translate3d(".concat(this.props.pos.x * this._baseSize / 2, "px, ").concat(-(this.props.pos.y * this._baseSize) / 2, "px, 0)")
-      })), this.state.coordinates !== void 0 && (r = Object.assign({}, r, {
+      })), this.state.coordinates !== void 0 && (o = Object.assign({}, o, {
         position: "absolute",
         transform: "translate3d(".concat(this.state.coordinates.relativeX, "px, ").concat(this.state.coordinates.relativeY, "px, 0)")
-      })), r;
-    }, n.prototype.render = function() {
+      })), o;
+    }, i.prototype.render = function() {
       var e = this;
       this._baseSize = this.props.size || 100, this._stickSize = this.props.stickSize, this._radius = this._baseSize / 2;
-      var t = this._getBaseStyle(), r = this._getStickStyle();
-      return G.createElement(
+      var t = this._getBaseStyle(), o = this._getStickStyle();
+      return tt.createElement(
         "div",
         { "data-testid": "joystick-base", className: this.props.disabled ? "joystick-base-disabled" : "", ref: this._baseRef, style: t },
-        G.createElement("button", { ref: this._stickRef, disabled: this.props.disabled, onPointerDown: function(i) {
-          return e._pointerDown(i);
-        }, className: this.props.disabled ? "joystick-disabled" : "", style: r })
+        tt.createElement("button", { ref: this._stickRef, disabled: this.props.disabled, onPointerDown: function(n) {
+          return e._pointerDown(n);
+        }, className: this.props.disabled ? "joystick-disabled" : "", style: o })
       );
-    }, n;
-  }(G.Component)
+    }, i;
+  }(tt.Component)
 );
-gt.Joystick = Fe;
-(function(o) {
-  Object.defineProperty(o, "__esModule", { value: !0 }), o.JoystickShape = o.Joystick = void 0;
-  var n = gt;
-  Object.defineProperty(o, "Joystick", { enumerable: !0, get: function() {
-    return n.Joystick;
+Jt.Joystick = lo;
+(function(r) {
+  Object.defineProperty(r, "__esModule", { value: !0 }), r.JoystickShape = r.Joystick = void 0;
+  var i = Jt;
+  Object.defineProperty(r, "Joystick", { enumerable: !0, get: function() {
+    return i.Joystick;
   } });
-  var e = Z;
-  Object.defineProperty(o, "JoystickShape", { enumerable: !0, get: function() {
+  var e = at;
+  Object.defineProperty(r, "JoystickShape", { enumerable: !0, get: function() {
     return e.JoystickShape;
   } });
-})(je);
-function Be() {
-  return /* @__PURE__ */ m(Wt, { children: /* @__PURE__ */ m(ge, {}) });
+})(so);
+var kt = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, ho = {}, Lt = {}, pt = {};
+(function(r) {
+  Object.defineProperty(r, "__esModule", { value: !0 }), r.JoystickShape = void 0, function(i) {
+    i.Circle = "circle", i.Square = "square", i.AxisY = "axisY", i.AxisX = "axisX";
+  }(r.JoystickShape || (r.JoystickShape = {}));
+})(pt);
+var Tt = {};
+Object.defineProperty(Tt, "__esModule", { value: !0 });
+Tt.shapeFactory = void 0;
+var he = pt, fo = function(r, i) {
+  switch (r) {
+    case he.JoystickShape.Square:
+      return {
+        borderRadius: Math.sqrt(i)
+      };
+    case he.JoystickShape.Circle:
+    default:
+      return {
+        borderRadius: i
+      };
+  }
+};
+Tt.shapeFactory = fo;
+var At = {};
+Object.defineProperty(At, "__esModule", { value: !0 });
+At.shapeBoundsFactory = void 0;
+var Kt = pt, _o = function(r, i, e, t, o, n, p, s, a) {
+  switch (r) {
+    case Kt.JoystickShape.Square:
+      return t = vt(i - a.left - s / 2, s), o = vt(e - a.top - s / 2, s), { relativeX: t, relativeY: o };
+    case Kt.JoystickShape.AxisX:
+      return t = vt(i - a.left - s / 2, s), o = 0, { relativeX: t, relativeY: o };
+    case Kt.JoystickShape.AxisY:
+      return t = 0, o = vt(e - a.top - s / 2, s), { relativeX: t, relativeY: o };
+    default:
+      return n > p && (t *= p / n, o *= p / n), { relativeX: t, relativeY: o };
+  }
+};
+At.shapeBoundsFactory = _o;
+var vt = function(r, i) {
+  var e = i / 2;
+  return r > e ? e : r < -e ? e * -1 : r;
+}, vo = kt && kt.__extends || /* @__PURE__ */ function() {
+  var r = function(i, e) {
+    return r = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t, o) {
+      t.__proto__ = o;
+    } || function(t, o) {
+      for (var n in o) Object.prototype.hasOwnProperty.call(o, n) && (t[n] = o[n]);
+    }, r(i, e);
+  };
+  return function(i, e) {
+    if (typeof e != "function" && e !== null)
+      throw new TypeError("Class extends value " + String(e) + " is not a constructor or null");
+    r(i, e);
+    function t() {
+      this.constructor = i;
+    }
+    i.prototype = e === null ? Object.create(e) : (t.prototype = e.prototype, new t());
+  };
+}(), U = kt && kt.__assign || function() {
+  return U = Object.assign || function(r) {
+    for (var i, e = 1, t = arguments.length; e < t; e++) {
+      i = arguments[e];
+      for (var o in i) Object.prototype.hasOwnProperty.call(i, o) && (r[o] = i[o]);
+    }
+    return r;
+  }, U.apply(this, arguments);
+};
+Object.defineProperty(Lt, "__esModule", { value: !0 });
+Lt.Joystick = void 0;
+var et = H, fe = pt, _e = Tt, yo = At, x;
+(function(r) {
+  r.PointerDown = "pointerdown", r.PointerMove = "pointermove", r.PointerUp = "pointerup";
+})(x || (x = {}));
+var L;
+(function(r) {
+  r[r.TopRight = 2.35619449] = "TopRight", r[r.TopLeft = -2.35619449] = "TopLeft", r[r.BottomRight = 0.785398163] = "BottomRight", r[r.BottomLeft = -0.785398163] = "BottomLeft";
+})(L || (L = {}));
+var go = (
+  /** @class */
+  function(r) {
+    vo(i, r);
+    function i(e) {
+      var t = r.call(this, e) || this;
+      return t._stickRef = et.createRef(), t._baseRef = et.createRef(), t.frameId = null, t._pointerId = null, t._mounted = !1, t._pointerMove = function(o) {
+        if (o.preventDefault(), t.state.dragging) {
+          if (!t.props.followCursor && o.pointerId !== t._pointerId)
+            return;
+          var n = o.clientX, p = o.clientY, s = n - t._parentRect.left - t._radius, a = p - t._parentRect.top - t._radius, f = t._distance(s, a), h = (0, yo.shapeBoundsFactory)(
+            //@ts-ignore
+            t.props.controlPlaneShape || t.props.baseShape,
+            n,
+            p,
+            s,
+            a,
+            f,
+            t._radius,
+            t._baseSize,
+            t._parentRect
+          );
+          s = h.relativeX, a = h.relativeY;
+          var k = Math.atan2(s, a);
+          t._updatePos({
+            relativeX: s,
+            relativeY: a,
+            distance: t._distanceToPercentile(f),
+            direction: t._getDirection(k),
+            axisX: n - t._parentRect.left,
+            axisY: p - t._parentRect.top
+          });
+        }
+      }, t._pointerUp = function(o) {
+        if (o.pointerId === t._pointerId) {
+          var n = {
+            dragging: !1
+          };
+          t.props.sticky || (n.coordinates = void 0), t.frameId = window.requestAnimationFrame(function() {
+            t._mounted && t.setState(n);
+          }), window.removeEventListener(x.PointerUp, t._pointerUp), window.removeEventListener(x.PointerMove, t._pointerMove), t._pointerId = null, t.props.stop && t.props.stop({
+            type: "stop",
+            // @ts-ignore
+            x: t.props.sticky ? t.state.coordinates.relativeX * 2 / t._baseSize : null,
+            // @ts-ignore
+            y: t.props.sticky ? t.state.coordinates.relativeY * 2 / t._baseSize : null,
+            // @ts-ignore
+            direction: t.props.sticky ? t.state.coordinates.direction : null,
+            // @ts-ignore
+            distance: t.props.sticky ? t.state.coordinates.distance : null
+          });
+        }
+      }, t.state = {
+        dragging: !1
+      }, t._throttleMoveCallback = /* @__PURE__ */ function() {
+        var o = 0;
+        return function(n) {
+          var p = (/* @__PURE__ */ new Date()).getTime(), s = t.props.throttle || 0;
+          if (!(p - o < s) && (o = p, t.props.move))
+            return t.props.move(n);
+        };
+      }(), t;
+    }
+    return i.prototype.componentWillUnmount = function() {
+      var e = this;
+      this._mounted = !1, this.props.followCursor && window.removeEventListener(x.PointerMove, function(t) {
+        return e._pointerMove(t);
+      }), this.frameId !== null && window.cancelAnimationFrame(this.frameId);
+    }, i.prototype.componentDidMount = function() {
+      var e = this;
+      this._mounted = !0, this.props.followCursor && (this._parentRect = this._baseRef.current.getBoundingClientRect(), this.setState({
+        dragging: !0
+      }), window.addEventListener(x.PointerMove, function(t) {
+        return e._pointerMove(t);
+      }), this.props.start && this.props.start({
+        type: "start",
+        x: null,
+        y: null,
+        distance: null,
+        direction: null
+      }));
+    }, i.prototype._updatePos = function(e) {
+      var t = this;
+      this.frameId = window.requestAnimationFrame(function() {
+        t._mounted && t.setState({
+          coordinates: e
+        });
+      }), !(typeof this.props.minDistance == "number" && e.distance < this.props.minDistance) && this._throttleMoveCallback({
+        type: "move",
+        x: e.relativeX * 2 / this._baseSize,
+        y: -(e.relativeY * 2 / this._baseSize),
+        direction: e.direction,
+        distance: e.distance
+      });
+    }, i.prototype._pointerDown = function(e) {
+      this.props.disabled || this.props.followCursor || (this._parentRect = this._baseRef.current.getBoundingClientRect(), this.setState({
+        dragging: !0
+      }), window.addEventListener(x.PointerUp, this._pointerUp), window.addEventListener(x.PointerMove, this._pointerMove), this._pointerId = e.pointerId, this._stickRef.current.setPointerCapture(e.pointerId), this.props.start && this.props.start({
+        type: "start",
+        x: null,
+        y: null,
+        distance: null,
+        direction: null
+      }));
+    }, i.prototype._getDirection = function(e) {
+      return e > L.TopRight || e < L.TopLeft ? "FORWARD" : e < L.TopRight && e > L.BottomRight ? "RIGHT" : e < L.BottomLeft ? "LEFT" : "BACKWARD";
+    }, i.prototype._distance = function(e, t) {
+      return Math.hypot(e, t);
+    }, i.prototype._distanceToPercentile = function(e) {
+      var t = e / (this._baseSize / 2) * 100;
+      return t > 100 ? 100 : t;
+    }, i.prototype.getBaseShapeStyle = function() {
+      var e = this.props.baseShape || fe.JoystickShape.Circle;
+      return (0, _e.shapeFactory)(e, this._baseSize);
+    }, i.prototype.getStickShapeStyle = function() {
+      var e = this.props.stickShape || fe.JoystickShape.Circle;
+      return (0, _e.shapeFactory)(e, this._baseSize);
+    }, i.prototype._getBaseStyle = function() {
+      var e = this.props.baseColor !== void 0 ? this.props.baseColor : "#000033", t = "".concat(this._baseSize, "px"), o = U(U({}, this.getBaseShapeStyle()), { height: t, width: t, background: e, display: "flex", justifyContent: "center", alignItems: "center" });
+      return this.props.baseImage && (o.background = "url(".concat(this.props.baseImage, ")"), o.backgroundSize = "100%"), o;
+    }, i.prototype._getStickStyle = function() {
+      var e = this.props.stickColor !== void 0 ? this.props.stickColor : "#3D59AB", t = this._stickSize ? "".concat(this._stickSize, "px") : "".concat(this._baseSize / 1.5, "px"), o = U(U({}, this.getStickShapeStyle()), { background: e, cursor: "move", height: t, width: t, border: "none", flexShrink: 0, touchAction: "none" });
+      return this.props.stickImage && (o.background = "url(".concat(this.props.stickImage, ")"), o.backgroundSize = "100%"), this.props.pos && (o = Object.assign({}, o, {
+        position: "absolute",
+        transform: "translate3d(".concat(this.props.pos.x * this._baseSize / 2, "px, ").concat(-(this.props.pos.y * this._baseSize) / 2, "px, 0)")
+      })), this.state.coordinates !== void 0 && (o = Object.assign({}, o, {
+        position: "absolute",
+        transform: "translate3d(".concat(this.state.coordinates.relativeX, "px, ").concat(this.state.coordinates.relativeY, "px, 0)")
+      })), o;
+    }, i.prototype.render = function() {
+      var e = this;
+      this._baseSize = this.props.size || 100, this._stickSize = this.props.stickSize, this._radius = this._baseSize / 2;
+      var t = this._getBaseStyle(), o = this._getStickStyle();
+      return et.createElement(
+        "div",
+        { "data-testid": "joystick-base", className: this.props.disabled ? "joystick-base-disabled" : "", ref: this._baseRef, style: t },
+        et.createElement("button", { ref: this._stickRef, disabled: this.props.disabled, onPointerDown: function(n) {
+          return e._pointerDown(n);
+        }, className: this.props.disabled ? "joystick-disabled" : "", style: o })
+      );
+    }, i;
+  }(et.Component)
+);
+Lt.Joystick = go;
+(function(r) {
+  Object.defineProperty(r, "__esModule", { value: !0 }), r.JoystickShape = r.Joystick = void 0;
+  var i = Lt;
+  Object.defineProperty(r, "Joystick", { enumerable: !0, get: function() {
+    return i.Joystick;
+  } });
+  var e = pt;
+  Object.defineProperty(r, "JoystickShape", { enumerable: !0, get: function() {
+    return e.JoystickShape;
+  } });
+})(ho);
+var wt = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, mo = {}, Ft = {}, ct = {};
+(function(r) {
+  Object.defineProperty(r, "__esModule", { value: !0 }), r.JoystickShape = void 0, function(i) {
+    i.Circle = "circle", i.Square = "square", i.AxisY = "axisY", i.AxisX = "axisX";
+  }(r.JoystickShape || (r.JoystickShape = {}));
+})(ct);
+var Yt = {};
+Object.defineProperty(Yt, "__esModule", { value: !0 });
+Yt.shapeFactory = void 0;
+var ve = ct, bo = function(r, i) {
+  switch (r) {
+    case ve.JoystickShape.Square:
+      return {
+        borderRadius: Math.sqrt(i)
+      };
+    case ve.JoystickShape.Circle:
+    default:
+      return {
+        borderRadius: i
+      };
+  }
+};
+Yt.shapeFactory = bo;
+var Et = {};
+Object.defineProperty(Et, "__esModule", { value: !0 });
+Et.shapeBoundsFactory = void 0;
+var $t = ct, So = function(r, i, e, t, o, n, p, s, a) {
+  switch (r) {
+    case $t.JoystickShape.Square:
+      return t = yt(i - a.left - s / 2, s), o = yt(e - a.top - s / 2, s), { relativeX: t, relativeY: o };
+    case $t.JoystickShape.AxisX:
+      return t = yt(i - a.left - s / 2, s), o = 0, { relativeX: t, relativeY: o };
+    case $t.JoystickShape.AxisY:
+      return t = 0, o = yt(e - a.top - s / 2, s), { relativeX: t, relativeY: o };
+    default:
+      return n > p && (t *= p / n, o *= p / n), { relativeX: t, relativeY: o };
+  }
+};
+Et.shapeBoundsFactory = So;
+var yt = function(r, i) {
+  var e = i / 2;
+  return r > e ? e : r < -e ? e * -1 : r;
+}, ko = wt && wt.__extends || /* @__PURE__ */ function() {
+  var r = function(i, e) {
+    return r = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t, o) {
+      t.__proto__ = o;
+    } || function(t, o) {
+      for (var n in o) Object.prototype.hasOwnProperty.call(o, n) && (t[n] = o[n]);
+    }, r(i, e);
+  };
+  return function(i, e) {
+    if (typeof e != "function" && e !== null)
+      throw new TypeError("Class extends value " + String(e) + " is not a constructor or null");
+    r(i, e);
+    function t() {
+      this.constructor = i;
+    }
+    i.prototype = e === null ? Object.create(e) : (t.prototype = e.prototype, new t());
+  };
+}(), W = wt && wt.__assign || function() {
+  return W = Object.assign || function(r) {
+    for (var i, e = 1, t = arguments.length; e < t; e++) {
+      i = arguments[e];
+      for (var o in i) Object.prototype.hasOwnProperty.call(i, o) && (r[o] = i[o]);
+    }
+    return r;
+  }, W.apply(this, arguments);
+};
+Object.defineProperty(Ft, "__esModule", { value: !0 });
+Ft.Joystick = void 0;
+var ot = H, ye = ct, ge = Yt, wo = Et, z;
+(function(r) {
+  r.PointerDown = "pointerdown", r.PointerMove = "pointermove", r.PointerUp = "pointerup";
+})(z || (z = {}));
+var T;
+(function(r) {
+  r[r.TopRight = 2.35619449] = "TopRight", r[r.TopLeft = -2.35619449] = "TopLeft", r[r.BottomRight = 0.785398163] = "BottomRight", r[r.BottomLeft = -0.785398163] = "BottomLeft";
+})(T || (T = {}));
+var Ro = (
+  /** @class */
+  function(r) {
+    ko(i, r);
+    function i(e) {
+      var t = r.call(this, e) || this;
+      return t._stickRef = ot.createRef(), t._baseRef = ot.createRef(), t.frameId = null, t._pointerId = null, t._mounted = !1, t._pointerMove = function(o) {
+        if (o.preventDefault(), t.state.dragging) {
+          if (!t.props.followCursor && o.pointerId !== t._pointerId)
+            return;
+          var n = o.clientX, p = o.clientY, s = n - t._parentRect.left - t._radius, a = p - t._parentRect.top - t._radius, f = t._distance(s, a), h = (0, wo.shapeBoundsFactory)(
+            //@ts-ignore
+            t.props.controlPlaneShape || t.props.baseShape,
+            n,
+            p,
+            s,
+            a,
+            f,
+            t._radius,
+            t._baseSize,
+            t._parentRect
+          );
+          s = h.relativeX, a = h.relativeY;
+          var k = Math.atan2(s, a);
+          t._updatePos({
+            relativeX: s,
+            relativeY: a,
+            distance: t._distanceToPercentile(f),
+            direction: t._getDirection(k),
+            axisX: n - t._parentRect.left,
+            axisY: p - t._parentRect.top
+          });
+        }
+      }, t._pointerUp = function(o) {
+        if (o.pointerId === t._pointerId) {
+          var n = {
+            dragging: !1
+          };
+          t.props.sticky || (n.coordinates = void 0), t.frameId = window.requestAnimationFrame(function() {
+            t._mounted && t.setState(n);
+          }), window.removeEventListener(z.PointerUp, t._pointerUp), window.removeEventListener(z.PointerMove, t._pointerMove), t._pointerId = null, t.props.stop && t.props.stop({
+            type: "stop",
+            // @ts-ignore
+            x: t.props.sticky ? t.state.coordinates.relativeX * 2 / t._baseSize : null,
+            // @ts-ignore
+            y: t.props.sticky ? t.state.coordinates.relativeY * 2 / t._baseSize : null,
+            // @ts-ignore
+            direction: t.props.sticky ? t.state.coordinates.direction : null,
+            // @ts-ignore
+            distance: t.props.sticky ? t.state.coordinates.distance : null
+          });
+        }
+      }, t.state = {
+        dragging: !1
+      }, t._throttleMoveCallback = /* @__PURE__ */ function() {
+        var o = 0;
+        return function(n) {
+          var p = (/* @__PURE__ */ new Date()).getTime(), s = t.props.throttle || 0;
+          if (!(p - o < s) && (o = p, t.props.move))
+            return t.props.move(n);
+        };
+      }(), t;
+    }
+    return i.prototype.componentWillUnmount = function() {
+      var e = this;
+      this._mounted = !1, this.props.followCursor && window.removeEventListener(z.PointerMove, function(t) {
+        return e._pointerMove(t);
+      }), this.frameId !== null && window.cancelAnimationFrame(this.frameId);
+    }, i.prototype.componentDidMount = function() {
+      var e = this;
+      this._mounted = !0, this.props.followCursor && (this._parentRect = this._baseRef.current.getBoundingClientRect(), this.setState({
+        dragging: !0
+      }), window.addEventListener(z.PointerMove, function(t) {
+        return e._pointerMove(t);
+      }), this.props.start && this.props.start({
+        type: "start",
+        x: null,
+        y: null,
+        distance: null,
+        direction: null
+      }));
+    }, i.prototype._updatePos = function(e) {
+      var t = this;
+      this.frameId = window.requestAnimationFrame(function() {
+        t._mounted && t.setState({
+          coordinates: e
+        });
+      }), !(typeof this.props.minDistance == "number" && e.distance < this.props.minDistance) && this._throttleMoveCallback({
+        type: "move",
+        x: e.relativeX * 2 / this._baseSize,
+        y: -(e.relativeY * 2 / this._baseSize),
+        direction: e.direction,
+        distance: e.distance
+      });
+    }, i.prototype._pointerDown = function(e) {
+      this.props.disabled || this.props.followCursor || (this._parentRect = this._baseRef.current.getBoundingClientRect(), this.setState({
+        dragging: !0
+      }), window.addEventListener(z.PointerUp, this._pointerUp), window.addEventListener(z.PointerMove, this._pointerMove), this._pointerId = e.pointerId, this._stickRef.current.setPointerCapture(e.pointerId), this.props.start && this.props.start({
+        type: "start",
+        x: null,
+        y: null,
+        distance: null,
+        direction: null
+      }));
+    }, i.prototype._getDirection = function(e) {
+      return e > T.TopRight || e < T.TopLeft ? "FORWARD" : e < T.TopRight && e > T.BottomRight ? "RIGHT" : e < T.BottomLeft ? "LEFT" : "BACKWARD";
+    }, i.prototype._distance = function(e, t) {
+      return Math.hypot(e, t);
+    }, i.prototype._distanceToPercentile = function(e) {
+      var t = e / (this._baseSize / 2) * 100;
+      return t > 100 ? 100 : t;
+    }, i.prototype.getBaseShapeStyle = function() {
+      var e = this.props.baseShape || ye.JoystickShape.Circle;
+      return (0, ge.shapeFactory)(e, this._baseSize);
+    }, i.prototype.getStickShapeStyle = function() {
+      var e = this.props.stickShape || ye.JoystickShape.Circle;
+      return (0, ge.shapeFactory)(e, this._baseSize);
+    }, i.prototype._getBaseStyle = function() {
+      var e = this.props.baseColor !== void 0 ? this.props.baseColor : "#000033", t = "".concat(this._baseSize, "px"), o = W(W({}, this.getBaseShapeStyle()), { height: t, width: t, background: e, display: "flex", justifyContent: "center", alignItems: "center" });
+      return this.props.baseImage && (o.background = "url(".concat(this.props.baseImage, ")"), o.backgroundSize = "100%"), o;
+    }, i.prototype._getStickStyle = function() {
+      var e = this.props.stickColor !== void 0 ? this.props.stickColor : "#3D59AB", t = this._stickSize ? "".concat(this._stickSize, "px") : "".concat(this._baseSize / 1.5, "px"), o = W(W({}, this.getStickShapeStyle()), { background: e, cursor: "move", height: t, width: t, border: "none", flexShrink: 0, touchAction: "none" });
+      return this.props.stickImage && (o.background = "url(".concat(this.props.stickImage, ")"), o.backgroundSize = "100%"), this.props.pos && (o = Object.assign({}, o, {
+        position: "absolute",
+        transform: "translate3d(".concat(this.props.pos.x * this._baseSize / 2, "px, ").concat(-(this.props.pos.y * this._baseSize) / 2, "px, 0)")
+      })), this.state.coordinates !== void 0 && (o = Object.assign({}, o, {
+        position: "absolute",
+        transform: "translate3d(".concat(this.state.coordinates.relativeX, "px, ").concat(this.state.coordinates.relativeY, "px, 0)")
+      })), o;
+    }, i.prototype.render = function() {
+      var e = this;
+      this._baseSize = this.props.size || 100, this._stickSize = this.props.stickSize, this._radius = this._baseSize / 2;
+      var t = this._getBaseStyle(), o = this._getStickStyle();
+      return ot.createElement(
+        "div",
+        { "data-testid": "joystick-base", className: this.props.disabled ? "joystick-base-disabled" : "", ref: this._baseRef, style: t },
+        ot.createElement("button", { ref: this._stickRef, disabled: this.props.disabled, onPointerDown: function(n) {
+          return e._pointerDown(n);
+        }, className: this.props.disabled ? "joystick-disabled" : "", style: o })
+      );
+    }, i;
+  }(ot.Component)
+);
+Ft.Joystick = Ro;
+(function(r) {
+  Object.defineProperty(r, "__esModule", { value: !0 }), r.JoystickShape = r.Joystick = void 0;
+  var i = Ft;
+  Object.defineProperty(r, "Joystick", { enumerable: !0, get: function() {
+    return i.Joystick;
+  } });
+  var e = ct;
+  Object.defineProperty(r, "JoystickShape", { enumerable: !0, get: function() {
+    return e.JoystickShape;
+  } });
+})(mo);
+function Io() {
+  return /* @__PURE__ */ m(me, { children: /* @__PURE__ */ m(Ne, {}) });
 }
 export {
-  Be as default
+  Io as default
 };

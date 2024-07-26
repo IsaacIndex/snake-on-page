@@ -6,7 +6,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "public"
   ],
   "description": "A snake game on a webpage",
   "private": false,
