@@ -2,7 +2,7 @@
   "name": "@isaacindex/snake-on-page",
   "exports": {
     ".": {
-      "default": "./dist/npm-test.js"
+      "default": "./dist/snake-on-page.js"
     }
   },
   "files": [
