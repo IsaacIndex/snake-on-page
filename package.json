@@ -1,6 +1,13 @@
 {
   "name": "@isaacindex/snake-on-page",
-  "main": "dist/GameInterface.js",
+  "exports": {
+    ".": {
+      "default": "./dist/npm-test.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "description": "A snake game on a webpage",
   "private": false,
   "version": "0.0.0",
