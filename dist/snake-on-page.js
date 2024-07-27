@@ -18,15 +18,15 @@ const le = (n, r, t) => {
   mapCanvas: me
 };
 var H = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, ne = {}, q = {}, J = {};
-(function(n) {
-  Object.defineProperty(n, "__esModule", { value: !0 }), n.JoystickShape = void 0, function(r) {
+(function (n) {
+  Object.defineProperty(n, "__esModule", { value: !0 }), n.JoystickShape = void 0, function (r) {
     r.Circle = "circle", r.Square = "square", r.AxisY = "axisY", r.AxisX = "axisX";
   }(n.JoystickShape || (n.JoystickShape = {}));
 })(J);
 var x = {};
 Object.defineProperty(x, "__esModule", { value: !0 });
 x.shapeFactory = void 0;
-var Z = J, _e = function(n, r) {
+var Z = J, _e = function (n, r) {
   switch (n) {
     case Z.JoystickShape.Square:
       return {
@@ -43,7 +43,7 @@ x.shapeFactory = _e;
 var U = {};
 Object.defineProperty(U, "__esModule", { value: !0 });
 U.shapeBoundsFactory = void 0;
-var Y = J, ve = function(n, r, t, e, o, i, _, d, a) {
+var Y = J, ve = function (n, r, t, e, o, i, _, d, a) {
   switch (n) {
     case Y.JoystickShape.Square:
       return e = B(r - a.left - d / 2, d), o = B(t - a.top - d / 2, d), { relativeX: e, relativeY: o };
@@ -56,18 +56,18 @@ var Y = J, ve = function(n, r, t, e, o, i, _, d, a) {
   }
 };
 U.shapeBoundsFactory = ve;
-var B = function(n, r) {
+var B = function (n, r) {
   var t = r / 2;
   return n > t ? t : n < -t ? t * -1 : n;
-}, we = H && H.__extends || /* @__PURE__ */ function() {
-  var n = function(r, t) {
-    return n = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(e, o) {
+}, we = H && H.__extends || /* @__PURE__ */ function () {
+  var n = function (r, t) {
+    return n = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function (e, o) {
       e.__proto__ = o;
-    } || function(e, o) {
+    } || function (e, o) {
       for (var i in o) Object.prototype.hasOwnProperty.call(o, i) && (e[i] = o[i]);
     }, n(r, t);
   };
-  return function(r, t) {
+  return function (r, t) {
     if (typeof t != "function" && t !== null)
       throw new TypeError("Class extends value " + String(t) + " is not a constructor or null");
     n(r, t);
@@ -76,8 +76,8 @@ var B = function(n, r) {
     }
     r.prototype = t === null ? Object.create(t) : (e.prototype = t.prototype, new e());
   };
-}(), j = H && H.__assign || function() {
-  return j = Object.assign || function(n) {
+}(), j = H && H.__assign || function () {
+  return j = Object.assign || function (n) {
     for (var r, t = 1, e = arguments.length; t < e; t++) {
       r = arguments[t];
       for (var o in r) Object.prototype.hasOwnProperty.call(r, o) && (n[o] = r[o]);
@@ -88,20 +88,20 @@ var B = function(n, r) {
 Object.defineProperty(q, "__esModule", { value: !0 });
 q.Joystick = void 0;
 var E = ue, Q = J, ee = x, ge = U, M;
-(function(n) {
+(function (n) {
   n.PointerDown = "pointerdown", n.PointerMove = "pointermove", n.PointerUp = "pointerup";
 })(M || (M = {}));
 var I;
-(function(n) {
+(function (n) {
   n[n.TopRight = 2.35619449] = "TopRight", n[n.TopLeft = -2.35619449] = "TopLeft", n[n.BottomRight = 0.785398163] = "BottomRight", n[n.BottomLeft = -0.785398163] = "BottomLeft";
 })(I || (I = {}));
 var ye = (
   /** @class */
-  function(n) {
+  function (n) {
     we(r, n);
     function r(t) {
       var e = n.call(this, t) || this;
-      return e._stickRef = E.createRef(), e._baseRef = E.createRef(), e.frameId = null, e._pointerId = null, e._mounted = !1, e._pointerMove = function(o) {
+      return e._stickRef = E.createRef(), e._baseRef = E.createRef(), e.frameId = null, e._pointerId = null, e._mounted = !1, e._pointerMove = function (o) {
         if (o.preventDefault(), e.state.dragging) {
           if (!e.props.followCursor && o.pointerId !== e._pointerId)
             return;
@@ -128,12 +128,12 @@ var ye = (
             axisY: _ - e._parentRect.top
           });
         }
-      }, e._pointerUp = function(o) {
+      }, e._pointerUp = function (o) {
         if (o.pointerId === e._pointerId) {
           var i = {
             dragging: !1
           };
-          e.props.sticky || (i.coordinates = void 0), e.frameId = window.requestAnimationFrame(function() {
+          e.props.sticky || (i.coordinates = void 0), e.frameId = window.requestAnimationFrame(function () {
             e._mounted && e.setState(i);
           }), window.removeEventListener(M.PointerUp, e._pointerUp), window.removeEventListener(M.PointerMove, e._pointerMove), e._pointerId = null, e.props.stop && e.props.stop({
             type: "stop",
@@ -149,25 +149,25 @@ var ye = (
         }
       }, e.state = {
         dragging: !1
-      }, e._throttleMoveCallback = /* @__PURE__ */ function() {
+      }, e._throttleMoveCallback = /* @__PURE__ */ function () {
         var o = 0;
-        return function(i) {
+        return function (i) {
           var _ = (/* @__PURE__ */ new Date()).getTime(), d = e.props.throttle || 0;
           if (!(_ - o < d) && (o = _, e.props.move))
             return e.props.move(i);
         };
       }(), e;
     }
-    return r.prototype.componentWillUnmount = function() {
+    return r.prototype.componentWillUnmount = function () {
       var t = this;
-      this._mounted = !1, this.props.followCursor && window.removeEventListener(M.PointerMove, function(e) {
+      this._mounted = !1, this.props.followCursor && window.removeEventListener(M.PointerMove, function (e) {
         return t._pointerMove(e);
       }), this.frameId !== null && window.cancelAnimationFrame(this.frameId);
-    }, r.prototype.componentDidMount = function() {
+    }, r.prototype.componentDidMount = function () {
       var t = this;
       this._mounted = !0, this.props.followCursor && (this._parentRect = this._baseRef.current.getBoundingClientRect(), this.setState({
         dragging: !0
-      }), window.addEventListener(M.PointerMove, function(e) {
+      }), window.addEventListener(M.PointerMove, function (e) {
         return t._pointerMove(e);
       }), this.props.start && this.props.start({
         type: "start",
@@ -176,9 +176,9 @@ var ye = (
         distance: null,
         direction: null
       }));
-    }, r.prototype._updatePos = function(t) {
+    }, r.prototype._updatePos = function (t) {
       var e = this;
-      this.frameId = window.requestAnimationFrame(function() {
+      this.frameId = window.requestAnimationFrame(function () {
         e._mounted && e.setState({
           coordinates: t
         });
@@ -189,7 +189,7 @@ var ye = (
         direction: t.direction,
         distance: t.distance
       });
-    }, r.prototype._pointerDown = function(t) {
+    }, r.prototype._pointerDown = function (t) {
       this.props.disabled || this.props.followCursor || (this._parentRect = this._baseRef.current.getBoundingClientRect(), this.setState({
         dragging: !0
       }), window.addEventListener(M.PointerUp, this._pointerUp), window.addEventListener(M.PointerMove, this._pointerMove), this._pointerId = t.pointerId, this._stickRef.current.setPointerCapture(t.pointerId), this.props.start && this.props.start({
@@ -199,23 +199,23 @@ var ye = (
         distance: null,
         direction: null
       }));
-    }, r.prototype._getDirection = function(t) {
+    }, r.prototype._getDirection = function (t) {
       return t > I.TopRight || t < I.TopLeft ? "FORWARD" : t < I.TopRight && t > I.BottomRight ? "RIGHT" : t < I.BottomLeft ? "LEFT" : "BACKWARD";
-    }, r.prototype._distance = function(t, e) {
+    }, r.prototype._distance = function (t, e) {
       return Math.hypot(t, e);
-    }, r.prototype._distanceToPercentile = function(t) {
+    }, r.prototype._distanceToPercentile = function (t) {
       var e = t / (this._baseSize / 2) * 100;
       return e > 100 ? 100 : e;
-    }, r.prototype.getBaseShapeStyle = function() {
+    }, r.prototype.getBaseShapeStyle = function () {
       var t = this.props.baseShape || Q.JoystickShape.Circle;
       return (0, ee.shapeFactory)(t, this._baseSize);
-    }, r.prototype.getStickShapeStyle = function() {
+    }, r.prototype.getStickShapeStyle = function () {
       var t = this.props.stickShape || Q.JoystickShape.Circle;
       return (0, ee.shapeFactory)(t, this._baseSize);
-    }, r.prototype._getBaseStyle = function() {
+    }, r.prototype._getBaseStyle = function () {
       var t = this.props.baseColor !== void 0 ? this.props.baseColor : "#000033", e = "".concat(this._baseSize, "px"), o = j(j({}, this.getBaseShapeStyle()), { height: e, width: e, background: t, display: "flex", justifyContent: "center", alignItems: "center" });
       return this.props.baseImage && (o.background = "url(".concat(this.props.baseImage, ")"), o.backgroundSize = "100%"), o;
-    }, r.prototype._getStickStyle = function() {
+    }, r.prototype._getStickStyle = function () {
       var t = this.props.stickColor !== void 0 ? this.props.stickColor : "#3D59AB", e = this._stickSize ? "".concat(this._stickSize, "px") : "".concat(this._baseSize / 1.5, "px"), o = j(j({}, this.getStickShapeStyle()), { background: t, cursor: "move", height: e, width: e, border: "none", flexShrink: 0, touchAction: "none" });
       return this.props.stickImage && (o.background = "url(".concat(this.props.stickImage, ")"), o.backgroundSize = "100%"), this.props.pos && (o = Object.assign({}, o, {
         position: "absolute",
@@ -224,31 +224,37 @@ var ye = (
         position: "absolute",
         transform: "translate3d(".concat(this.state.coordinates.relativeX, "px, ").concat(this.state.coordinates.relativeY, "px, 0)")
       })), o;
-    }, r.prototype.render = function() {
+    }, r.prototype.render = function () {
       var t = this;
       this._baseSize = this.props.size || 100, this._stickSize = this.props.stickSize, this._radius = this._baseSize / 2;
       var e = this._getBaseStyle(), o = this._getStickStyle();
       return E.createElement(
         "div",
         { "data-testid": "joystick-base", className: this.props.disabled ? "joystick-base-disabled" : "", ref: this._baseRef, style: e },
-        E.createElement("button", { ref: this._stickRef, disabled: this.props.disabled, onPointerDown: function(i) {
-          return t._pointerDown(i);
-        }, className: this.props.disabled ? "joystick-disabled" : "", style: o })
+        E.createElement("button", {
+          ref: this._stickRef, disabled: this.props.disabled, onPointerDown: function (i) {
+            return t._pointerDown(i);
+          }, className: this.props.disabled ? "joystick-disabled" : "", style: o
+        })
       );
     }, r;
   }(E.Component)
 );
 q.Joystick = ye;
-(function(n) {
+(function (n) {
   Object.defineProperty(n, "__esModule", { value: !0 }), n.JoystickShape = n.Joystick = void 0;
   var r = q;
-  Object.defineProperty(n, "Joystick", { enumerable: !0, get: function() {
-    return r.Joystick;
-  } });
+  Object.defineProperty(n, "Joystick", {
+    enumerable: !0, get: function () {
+      return r.Joystick;
+    }
+  });
   var t = J;
-  Object.defineProperty(n, "JoystickShape", { enumerable: !0, get: function() {
-    return t.JoystickShape;
-  } });
+  Object.defineProperty(n, "JoystickShape", {
+    enumerable: !0, get: function () {
+      return t.JoystickShape;
+    }
+  });
 })(ne);
 const ke = ({ onDirectionChange: n }) => {
   const r = {
@@ -302,7 +308,7 @@ const Ce = "/snake_sprite/snake-graphics.png", Ie = "/snake_sprite/snake-graphic
   });
   function ae(f, p) {
     let l = 0;
-    return function(...s) {
+    return function (...s) {
       l = l + 1, f === l && p(...s);
     };
   }
@@ -331,17 +337,17 @@ const Ce = "/snake_sprite/snake-graphics.png", Ie = "/snake_sprite/snake-graphic
       else if (f.key == "m")
         t(), console.log(t);
       else {
-        console.log(f.key);
+        console.log(o.key);
         return;
       }
-    } else if (f == "RIGHT" && a.current != "left")
-      a.current = "right";
-    else if (f == "LEFT" && a.current != "right")
-      a.current = "left";
-    else if (f == "FORWARD" && a.current != "down")
-      a.current = "up";
-    else if (f == "BACKWARD" && a.current != "up")
-      a.current = "down";
+    } else if (o == "RIGHT" && w.current != "left")
+      w.current = "right";
+    else if (o == "LEFT" && w.current != "right")
+      w.current = "left";
+    else if (o == "FORWARD" && w.current != "down")
+      w.current = "up";
+    else if (o == "BACKWARD" && w.current != "up")
+      w.current = "down";
     else
       return;
     ce();
@@ -352,7 +358,7 @@ const Ce = "/snake_sprite/snake-graphics.png", Ie = "/snake_sprite/snake-graphic
       up: [0, -1],
       down: [0, 1]
     };
-    i.current.unshift(
+    Q.current.unshift(
       [
         i.current[0][0] + f[a.current][0] * u,
         i.current[0][1] + f[a.current][1] * u
@@ -442,29 +448,37 @@ const Ce = "/snake_sprite/snake-graphics.png", Ie = "/snake_sprite/snake-graphic
     f.src = k.current.src, f.onload = () => {
       W(), T();
     };
-  }, [k.current]), /* @__PURE__ */ K("div", { ref: L, className: N.snakeGame, children: [
-    !G && /* @__PURE__ */ g(Me, {}),
+  }, [k.current]), /* @__PURE__ */ K("div", {
+    ref: L, className: N.snakeGame, children: [
+      !G && /* @__PURE__ */ g(Me, {}),
     /* @__PURE__ */ g("img", { src: "", hidden: !0, style: { position: "fixed" }, ref: P }),
     /* @__PURE__ */ g("canvas", { className: N.mapCanvas, ref: D }),
     /* @__PURE__ */ g("canvas", { className: N.snakeCanvas, ref: S }),
-    e && /* @__PURE__ */ K(pe, { children: [
+      e && /* @__PURE__ */ K(pe, {
+        children: [
       /* @__PURE__ */ g(F, { src: e.normal, hidden: z.normal, alt: "normal", onLoad: A }),
       /* @__PURE__ */ g(F, { src: e.achromatopsia, hidden: z.achromatopsia, alt: "achromatopsia", onLoad: A }),
       /* @__PURE__ */ g(F, { src: e.deuteranopia, hidden: z.deuteranopia, alt: "deuteranopia", onLoad: A }),
       /* @__PURE__ */ g(F, { src: e.protanopia, hidden: z.protanopia, alt: "protanopia", onLoad: A }),
       /* @__PURE__ */ g(F, { src: e.tritanopia, hidden: z.tritanopia, alt: "tritanopia", onLoad: A })
-    ] }),
-    oe && /* @__PURE__ */ g(ke, { onDirectionChange: $ })
-  ] });
+        ]
+      }),
+      oe && /* @__PURE__ */ g(ke, { onDirectionChange: $ })
+    ]
+  });
 }, Ee = () => {
   const [n, r] = C(0), [t, e] = C(0);
-  return console.log(t), /* @__PURE__ */ K("div", { children: [
+  return console.log(t), /* @__PURE__ */ K("div", {
+    children: [
     /* @__PURE__ */ g("span", { style: { position: "fixed", zIndex: 999, top: 0, backgroundColor: "white" }, children: t }),
-    /* @__PURE__ */ g(De, { mapImporterName: {
-      0: "forestImages",
-      1: "desertImages"
-    }[n], nextMap: () => r(n + 1), addScore: () => e((i) => i + 1) })
-  ] });
+    /* @__PURE__ */ g(De, {
+      mapImporterName: {
+        0: "forestImages",
+        1: "desertImages"
+      }[n], nextMap: () => r(n + 1), addScore: () => e((i) => i + 1)
+    })
+    ]
+  });
 };
 export {
   Ee as default
