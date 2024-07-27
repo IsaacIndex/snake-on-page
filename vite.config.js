@@ -9,7 +9,7 @@ export default defineConfig({
     sourcemap: process.env.NODE_ENV !== 'production',
     copyPublicDir: false,
     lib: {
-      entry: resolve(__dirname, 'src/App.jsx'),
+      entry: resolve(__dirname, 'src/lib/GameInterface.jsx'),
       formats: ['es']
     },
     rollupOptions: {
