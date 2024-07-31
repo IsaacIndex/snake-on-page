@@ -1,7 +1,7 @@
 import SnakeGame from './SnakeGame'
 import { useState } from 'react'
 
-import Image from "../assets/map/map.png"
+// import Image from "../assets/map/map.png"
 
 const GameInterface = () => {
   const [mapIndex, setMapIndex] = useState(0)
