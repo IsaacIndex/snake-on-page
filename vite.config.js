@@ -15,7 +15,7 @@ export default defineConfig({
   ],
   build: {
     sourcemap: process.env.NODE_ENV !== 'production',
-    copyPublicDir: true,
+    copyPublicDir: false,
     lib: {
       entry: resolve(__dirname, 'src/lib/GameInterface.jsx'),
       formats: ['es']
