@@ -1,7 +1,7 @@
 import SnakeGame from './SnakeGame'
 import { useState } from 'react'
 
-// import Image from "../assets/map/map.png"
+import Image from "/map.png"
 
 const GameInterface = () => {
   const [mapIndex, setMapIndex] = useState(0)
@@ -21,7 +21,7 @@ const GameInterface = () => {
   return (
     <div>
       <span style={{ position: 'fixed', zIndex: 999, top: 0, backgroundColor: "white" }}>{score}</span>
-      {/* <Image /> */}
+      <Image />
       <SnakeGame mapImporterName={maps[mapIndex]} nextMap={() => setMapIndex(mapIndex + 1)} addScore={() => setScore(prev => prev + 1)} />
     </div>
   );
