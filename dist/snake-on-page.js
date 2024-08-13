@@ -1,6 +1,6 @@
-import { jsxs as I, jsx as b } from "react/jsx-runtime";
-import j, { useState as w } from "react";
-var _ = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, M = {}, y = {}, f = {};
+import { jsxs as M, jsx as b } from "react/jsx-runtime";
+import R, { useState as w } from "react";
+var _ = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, j = {}, y = {}, f = {};
 (function(o) {
   Object.defineProperty(o, "__esModule", { value: !0 }), o.JoystickShape = void 0, function(i) {
     i.Circle = "circle", i.Square = "square", i.AxisY = "axisY", i.AxisX = "axisX";
@@ -70,7 +70,7 @@ var d = function(o, i) {
 };
 Object.defineProperty(y, "__esModule", { value: !0 });
 y.Joystick = void 0;
-var h = j, C = f, x = v, B = m, c;
+var h = R, C = f, x = v, B = m, c;
 (function(o) {
   o.PointerDown = "pointerdown", o.PointerMove = "pointermove", o.PointerUp = "pointerup";
 })(c || (c = {}));
@@ -101,12 +101,12 @@ var T = (
             t._parentRect
           );
           s = k.relativeX, p = k.relativeY;
-          var R = Math.atan2(s, p);
+          var I = Math.atan2(s, p);
           t._updatePos({
             relativeX: s,
             relativeY: p,
             distance: t._distanceToPercentile(S),
-            direction: t._getDirection(R),
+            direction: t._getDirection(I),
             axisX: n - t._parentRect.left,
             axisY: a - t._parentRect.top
           });
@@ -232,13 +232,13 @@ y.Joystick = T;
   Object.defineProperty(o, "JoystickShape", { enumerable: !0, get: function() {
     return e.JoystickShape;
   } });
-})(M);
+})(j);
 const A = "/map.png", L = () => {
   w(0);
   const [o, i] = w(0);
-  return console.log(o), /* @__PURE__ */ I("div", { children: [
+  return console.log(o), /* @__PURE__ */ M("div", { children: [
     /* @__PURE__ */ b("span", { style: { position: "fixed", zIndex: 999, top: 0, backgroundColor: "white" }, children: o }),
-    /* @__PURE__ */ b(A, {})
+    /* @__PURE__ */ b("img", { src: A, alt: "My Image" })
   ] });
 };
 export {
