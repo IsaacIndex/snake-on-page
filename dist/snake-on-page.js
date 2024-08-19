@@ -2339,7 +2339,18 @@ kr.Joystick = fn;
 const ln = () => {
   tr.useState(0);
   const [v, f] = tr.useState(0);
-  return console.log(v), console.log("public:", process.env.PUBLIC_URL), console.log("origin:", window.location.origin), /* @__PURE__ */ Zr.jsxs("div", { children: [
+  console.log(v);
+  try {
+    console.log("public:" + process.env.PUBLIC_URL);
+  } catch {
+    console.log("public failed");
+  }
+  try {
+    console.log("origin:" + window.location.origin);
+  } catch {
+    console.log("origin failed");
+  }
+  return /* @__PURE__ */ Zr.jsxs("div", { children: [
     /* @__PURE__ */ Zr.jsx("span", { style: { position: "fixed", zIndex: 999, top: 0, backgroundColor: "white" }, children: v }),
     /* @__PURE__ */ Zr.jsx("img", { src: "/foresee-revamp2/mountain.jpg", alt: "My Image" })
   ] });
