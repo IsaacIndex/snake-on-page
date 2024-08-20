@@ -4,7 +4,7 @@ import { useState } from 'react'
 // import MyImage from "/mountain.png"
 
 const GameInterface = () => {
-  // const [mapIndex, setMapIndex] = useState(0)
+  const [mapIndex, setMapIndex] = useState(0)
   const [score, setScore] = useState(0)
   console.log(score)
   const maps = {
