@@ -7,8 +7,6 @@ const GameInterface = () => {
   const [mapIndex, setMapIndex] = useState(0)
   const [score, setScore] = useState(0)
   console.log(score)
-  console.log("public:", process.env.PUBLIC_URL)
-  console.log("origin:", window.location.origin)
   const maps = {
     0: "forestImages",
     1: "desertImages",
@@ -19,6 +17,8 @@ const GameInterface = () => {
     setScore(prevScore => prevScore + 1)
     console.log(score)
 
+    console.log("public:", process.env.PUBLIC_URL)
+    console.log("origin:", window.location.origin)
   }
 
   return (
