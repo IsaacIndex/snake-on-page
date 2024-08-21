@@ -24,7 +24,7 @@ const GameInterface = () => {
   return (
     <div>
       <span style={{ position: 'fixed', zIndex: 999, top: 0, backgroundColor: "white" }}>{score}</span>
-      <img src="/mountain.jpg" alt="My Image" />
+      <img src={`${import.meta.env.BASE_URL}mountain.jpg`} alt="My Image" />
       {/* <SnakeGame mapImporterName={maps[mapIndex]} nextMap={() => setMapIndex(mapIndex + 1)} addScore={() => setScore(prev => prev + 1)} /> */}
     </div>
   );
