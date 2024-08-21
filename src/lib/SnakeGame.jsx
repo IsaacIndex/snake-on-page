@@ -8,6 +8,9 @@ import snakeImages from "../snakeImages";
 
 const SnakeGame = ({ mapImporterName, nextMap, addScore }) => {
 
+  const basePath = window.location.pathname.split("/")[1]
+  const baseURL = (basePath) ? ("/" + basePath + "/") : ("")
+
   const [mapImages, setMapImages] = useState("")
   const snakeRef = useRef();
   const appleRef = useRef();
@@ -398,11 +401,11 @@ const SnakeGame = ({ mapImporterName, nextMap, addScore }) => {
       <canvas className={styles.mapCanvas} ref={mapCanvasRef} />
       <canvas className={styles.snakeCanvas} ref={snakeCanvasRef} />
 
-      <img src={`/maps/${mapImporterName}/map.png`} hidden={hidden.normal} alt="normal" onLoad={onComplete} />
-      <img src={`/maps/${mapImporterName}/map_achromatopsia.png`} hidden={hidden.achromatopsia} alt="normal" onLoad={onComplete} />
-      <img src={`/maps/${mapImporterName}/map_deuteranopia.png`} hidden={hidden.deuteranopia} alt="normal" onLoad={onComplete} />
-      <img src={`/maps/${mapImporterName}/map_protanopia.png`} hidden={hidden.protanopia} alt="normal" onLoad={onComplete} />
-      <img src={`/maps/${mapImporterName}/map_tritanopia.png`} hidden={hidden.tritanopia} alt="normal" onLoad={onComplete} />
+      <img src={`${baseURL}maps/${mapImporterName}/map.png`} hidden={hidden.normal} alt="normal" onLoad={onComplete} />
+      <img src={`${baseURL}maps/${mapImporterName}/map_achromatopsia.png`} hidden={hidden.achromatopsia} alt="normal" onLoad={onComplete} />
+      <img src={`${baseURL}maps/${mapImporterName}/map_deuteranopia.png`} hidden={hidden.deuteranopia} alt="normal" onLoad={onComplete} />
+      <img src={`${baseURL}maps/${mapImporterName}/map_protanopia.png`} hidden={hidden.protanopia} alt="normal" onLoad={onComplete} />
+      <img src={`${baseURL}maps/${mapImporterName}/map_tritanopia.png`} hidden={hidden.tritanopia} alt="normal" onLoad={onComplete} />
 
       {isMobile && <MobileControl onDirectionChange={keyUpdate} />}
     </div>

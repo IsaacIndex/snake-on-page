@@ -12,7 +12,7 @@ const GameInterface = () => {
     1: "desert_map",
   }
 
-  let basePath = window.location.pathname.split("/")[1]
+  const basePath = window.location.pathname.split("/")[1]
   const baseURL = (basePath) ? ("/" + basePath + "/") : ("")
 
   const addScore = () => {
