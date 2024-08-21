@@ -5,7 +5,6 @@ import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: process.env.BASE_PATH || '/',
   plugins: [
     react(),
     // viteStaticCopy({
@@ -24,12 +23,12 @@ export default defineConfig({
     rollupOptions: {
       external: ['react', 'react/jsx-runtime'],
       output: {
-        assetFileNames: ({ name }) => {
-          if (name.startsWith('src/assets/')) {
-            return 'assets/[name][extname]';
-          }
-          return 'assets/[name]-[hash][extname]';
-        },
+        // assetFileNames: ({ name }) => {
+        //   if (name.startsWith('src/assets/')) {
+        //     return 'assets/[name][extname]';
+        //   }
+        //   return 'assets/[name]-[hash][extname]';
+        // },
         globals: {
           react: 'React',
         },
