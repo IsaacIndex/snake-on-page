@@ -42,7 +42,7 @@ m.shapeBoundsFactory = z;
 var d = function(o, i) {
   var e = i / 2;
   return o > e ? e : o < -e ? e * -1 : o;
-}, A = _ && _.__extends || /* @__PURE__ */ function() {
+}, O = _ && _.__extends || /* @__PURE__ */ function() {
   var o = function(i, e) {
     return o = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t, r) {
       t.__proto__ = r;
@@ -70,7 +70,7 @@ var d = function(o, i) {
 };
 Object.defineProperty(y, "__esModule", { value: !0 });
 y.Joystick = void 0;
-var h = I, C = f, x = v, O = m, c;
+var h = I, C = f, x = v, B = m, c;
 (function(o) {
   o.PointerDown = "pointerdown", o.PointerMove = "pointermove", o.PointerUp = "pointerup";
 })(c || (c = {}));
@@ -81,14 +81,14 @@ var u;
 var T = (
   /** @class */
   function(o) {
-    A(i, o);
+    O(i, o);
     function i(e) {
       var t = o.call(this, e) || this;
       return t._stickRef = h.createRef(), t._baseRef = h.createRef(), t.frameId = null, t._pointerId = null, t._mounted = !1, t._pointerMove = function(r) {
         if (r.preventDefault(), t.state.dragging) {
           if (!t.props.followCursor && r.pointerId !== t._pointerId)
             return;
-          var n = r.clientX, a = r.clientY, s = n - t._parentRect.left - t._radius, p = a - t._parentRect.top - t._radius, S = t._distance(s, p), k = (0, O.shapeBoundsFactory)(
+          var n = r.clientX, a = r.clientY, s = n - t._parentRect.left - t._radius, p = a - t._parentRect.top - t._radius, S = t._distance(s, p), k = (0, B.shapeBoundsFactory)(
             //@ts-ignore
             t.props.controlPlaneShape || t.props.baseShape,
             n,
@@ -236,11 +236,12 @@ y.Joystick = T;
 const F = () => {
   w(0);
   const [o, i] = w(0);
-  console.log(o), window.location.pathname.split("/")[1];
-  const e = process.env.REACT_APP_BASE_PATH || "/";
+  console.log(o);
+  let e = window.location.pathname.split("/")[1];
+  const t = e ? "/" + e + "/" : "";
   return /* @__PURE__ */ j("div", { children: [
     /* @__PURE__ */ b("span", { style: { position: "fixed", zIndex: 999, top: 0, backgroundColor: "white" }, children: o }),
-    /* @__PURE__ */ b("img", { src: `${e}mountain.jpg`, alt: "My Image" })
+    /* @__PURE__ */ b("img", { src: `${t}mountain.jpg`, alt: "My Image" })
   ] });
 };
 export {
