@@ -5,6 +5,7 @@ import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: process.env.BASE_PATH || '/',
   plugins: [
     react(),
     // viteStaticCopy({
