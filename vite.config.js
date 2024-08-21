@@ -19,7 +19,21 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, 'src/lib/GameInterface.jsx'),
       formats: ['es']
-    }
+    },
+    rollupOptions: {
+      external: ['react', 'react/jsx-runtime'],
+      output: {
+        assetFileNames: ({ name }) => {
+          if (name.startsWith('src/assets/')) {
+            return 'assets/[name][extname]';
+          }
+          return 'assets/[name]-[hash][extname]';
+        },
+        globals: {
+          react: 'React',
+        },
+      },
+    },
   },
   publicDir: 'public'
 })
