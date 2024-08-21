@@ -12,13 +12,14 @@ const GameInterface = () => {
     1: "desertImages",
   }
 
+  console.log("public:", process.env.PUBLIC_URL)
+  console.log("origin:", window.location.origin)
+
   const addScore = () => {
     console.log(score)
     setScore(prevScore => prevScore + 1)
     console.log(score)
 
-    // console.log("public:", process.env.PUBLIC_URL)
-    // console.log("origin:", window.location.origin)
   }
 
   return (

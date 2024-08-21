@@ -1,5 +1,5 @@
-import { jsxs as j, jsx as b } from "react/jsx-runtime";
-import I, { useState as w } from "react";
+import { jsxs as I, jsx as b } from "react/jsx-runtime";
+import j, { useState as w } from "react";
 var _ = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, M = {}, y = {}, f = {};
 (function(o) {
   Object.defineProperty(o, "__esModule", { value: !0 }), o.JoystickShape = void 0, function(i) {
@@ -23,22 +23,22 @@ var P = f, J = function(o, i) {
   }
 };
 v.shapeFactory = J;
-var m = {};
-Object.defineProperty(m, "__esModule", { value: !0 });
-m.shapeBoundsFactory = void 0;
-var g = f, z = function(o, i, e, t, r, s, a, n, p) {
+var g = {};
+Object.defineProperty(g, "__esModule", { value: !0 });
+g.shapeBoundsFactory = void 0;
+var m = f, z = function(o, i, e, t, r, n, a, s, p) {
   switch (o) {
-    case g.JoystickShape.Square:
-      return t = d(i - p.left - n / 2, n), r = d(e - p.top - n / 2, n), { relativeX: t, relativeY: r };
-    case g.JoystickShape.AxisX:
-      return t = d(i - p.left - n / 2, n), r = 0, { relativeX: t, relativeY: r };
-    case g.JoystickShape.AxisY:
-      return t = 0, r = d(e - p.top - n / 2, n), { relativeX: t, relativeY: r };
+    case m.JoystickShape.Square:
+      return t = d(i - p.left - s / 2, s), r = d(e - p.top - s / 2, s), { relativeX: t, relativeY: r };
+    case m.JoystickShape.AxisX:
+      return t = d(i - p.left - s / 2, s), r = 0, { relativeX: t, relativeY: r };
+    case m.JoystickShape.AxisY:
+      return t = 0, r = d(e - p.top - s / 2, s), { relativeX: t, relativeY: r };
     default:
-      return s > a && (t *= a / s, r *= a / s), { relativeX: t, relativeY: r };
+      return n > a && (t *= a / n, r *= a / n), { relativeX: t, relativeY: r };
   }
 };
-m.shapeBoundsFactory = z;
+g.shapeBoundsFactory = z;
 var d = function(o, i) {
   var e = i / 2;
   return o > e ? e : o < -e ? e * -1 : o;
@@ -47,7 +47,7 @@ var d = function(o, i) {
     return o = Object.setPrototypeOf || { __proto__: [] } instanceof Array && function(t, r) {
       t.__proto__ = r;
     } || function(t, r) {
-      for (var s in r) Object.prototype.hasOwnProperty.call(r, s) && (t[s] = r[s]);
+      for (var n in r) Object.prototype.hasOwnProperty.call(r, n) && (t[n] = r[n]);
     }, o(i, e);
   };
   return function(i, e) {
@@ -70,7 +70,7 @@ var d = function(o, i) {
 };
 Object.defineProperty(y, "__esModule", { value: !0 });
 y.Joystick = void 0;
-var h = I, C = f, x = v, B = m, c;
+var h = j, C = f, x = v, B = g, c;
 (function(o) {
   o.PointerDown = "pointerdown", o.PointerMove = "pointermove", o.PointerUp = "pointerup";
 })(c || (c = {}));
@@ -78,7 +78,7 @@ var u;
 (function(o) {
   o[o.TopRight = 2.35619449] = "TopRight", o[o.TopLeft = -2.35619449] = "TopLeft", o[o.BottomRight = 0.785398163] = "BottomRight", o[o.BottomLeft = -0.785398163] = "BottomLeft";
 })(u || (u = {}));
-var T = (
+var L = (
   /** @class */
   function(o) {
     O(i, o);
@@ -88,36 +88,36 @@ var T = (
         if (r.preventDefault(), t.state.dragging) {
           if (!t.props.followCursor && r.pointerId !== t._pointerId)
             return;
-          var s = r.clientX, a = r.clientY, n = s - t._parentRect.left - t._radius, p = a - t._parentRect.top - t._radius, S = t._distance(n, p), k = (0, B.shapeBoundsFactory)(
+          var n = r.clientX, a = r.clientY, s = n - t._parentRect.left - t._radius, p = a - t._parentRect.top - t._radius, S = t._distance(s, p), k = (0, B.shapeBoundsFactory)(
             //@ts-ignore
             t.props.controlPlaneShape || t.props.baseShape,
-            s,
-            a,
             n,
+            a,
+            s,
             p,
             S,
             t._radius,
             t._baseSize,
             t._parentRect
           );
-          n = k.relativeX, p = k.relativeY;
-          var R = Math.atan2(n, p);
+          s = k.relativeX, p = k.relativeY;
+          var R = Math.atan2(s, p);
           t._updatePos({
-            relativeX: n,
+            relativeX: s,
             relativeY: p,
             distance: t._distanceToPercentile(S),
             direction: t._getDirection(R),
-            axisX: s - t._parentRect.left,
+            axisX: n - t._parentRect.left,
             axisY: a - t._parentRect.top
           });
         }
       }, t._pointerUp = function(r) {
         if (r.pointerId === t._pointerId) {
-          var s = {
+          var n = {
             dragging: !1
           };
-          t.props.sticky || (s.coordinates = void 0), t.frameId = window.requestAnimationFrame(function() {
-            t._mounted && t.setState(s);
+          t.props.sticky || (n.coordinates = void 0), t.frameId = window.requestAnimationFrame(function() {
+            t._mounted && t.setState(n);
           }), window.removeEventListener(c.PointerUp, t._pointerUp), window.removeEventListener(c.PointerMove, t._pointerMove), t._pointerId = null, t.props.stop && t.props.stop({
             type: "stop",
             // @ts-ignore
@@ -134,10 +134,10 @@ var T = (
         dragging: !1
       }, t._throttleMoveCallback = /* @__PURE__ */ function() {
         var r = 0;
-        return function(s) {
-          var a = (/* @__PURE__ */ new Date()).getTime(), n = t.props.throttle || 0;
-          if (!(a - r < n) && (r = a, t.props.move))
-            return t.props.move(s);
+        return function(n) {
+          var a = (/* @__PURE__ */ new Date()).getTime(), s = t.props.throttle || 0;
+          if (!(a - r < s) && (r = a, t.props.move))
+            return t.props.move(n);
         };
       }(), t;
     }
@@ -214,14 +214,14 @@ var T = (
       return h.createElement(
         "div",
         { "data-testid": "joystick-base", className: this.props.disabled ? "joystick-base-disabled" : "", ref: this._baseRef, style: t },
-        h.createElement("button", { ref: this._stickRef, disabled: this.props.disabled, onPointerDown: function(s) {
-          return e._pointerDown(s);
+        h.createElement("button", { ref: this._stickRef, disabled: this.props.disabled, onPointerDown: function(n) {
+          return e._pointerDown(n);
         }, className: this.props.disabled ? "joystick-disabled" : "", style: r })
       );
     }, i;
   }(h.Component)
 );
-y.Joystick = T;
+y.Joystick = L;
 (function(o) {
   Object.defineProperty(o, "__esModule", { value: !0 }), o.JoystickShape = o.Joystick = void 0;
   var i = y;
@@ -233,14 +233,14 @@ y.Joystick = T;
     return e.JoystickShape;
   } });
 })(M);
-const F = () => {
+const D = () => {
   w(0);
   const [o, i] = w(0);
-  return console.log(o), /* @__PURE__ */ j("div", { children: [
+  return console.log(o), console.log("public:", process.env.PUBLIC_URL), console.log("origin:", window.location.origin), /* @__PURE__ */ I("div", { children: [
     /* @__PURE__ */ b("span", { style: { position: "fixed", zIndex: 999, top: 0, backgroundColor: "white" }, children: o }),
     /* @__PURE__ */ b("img", { src: "/foresee-revamp2/assets/mountain.jpg", alt: "My Image" })
   ] });
 };
 export {
-  F as default
+  D as default
 };
