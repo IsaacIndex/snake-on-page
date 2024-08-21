@@ -2341,7 +2341,7 @@ const ln = () => {
   const [v, f] = tr.useState(0);
   return console.log(v), /* @__PURE__ */ Zr.jsxs("div", { children: [
     /* @__PURE__ */ Zr.jsx("span", { style: { position: "fixed", zIndex: 999, top: 0, backgroundColor: "white" }, children: v }),
-    /* @__PURE__ */ Zr.jsx("img", { src: "/foresee-revamp2/mountain.jpg", alt: "My Image" })
+    /* @__PURE__ */ Zr.jsx("img", { src: "/mountain.jpg", alt: "My Image" })
   ] });
 };
 export {
