@@ -8,8 +8,8 @@ const GameInterface = () => {
   const [score, setScore] = useState(0)
   console.log(score)
   const maps = {
-    0: "forestImages",
-    1: "desertImages",
+    0: "forest_map",
+    1: "desert_map",
   }
 
   let basePath = window.location.pathname.split("/")[1]
