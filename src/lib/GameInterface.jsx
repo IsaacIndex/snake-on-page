@@ -13,6 +13,7 @@ const GameInterface = () => {
   }
 
   const baseURL = window.location.pathname.split("/")[1]
+  const basePath = process.env.REACT_APP_BASE_PATH || '/';
 
   const addScore = () => {
     console.log(score)
@@ -24,7 +25,7 @@ const GameInterface = () => {
   return (
     <div>
       <span style={{ position: 'fixed', zIndex: 999, top: 0, backgroundColor: "white" }}>{score}</span>
-      <img src={`${import.meta.env.BASE_URL}mountain.jpg`} alt="My Image" />
+      <img src={`${basePath}mountain.jpg`} alt="My Image" />
       {/* <SnakeGame mapImporterName={maps[mapIndex]} nextMap={() => setMapIndex(mapIndex + 1)} addScore={() => setScore(prev => prev + 1)} /> */}
     </div>
   );
