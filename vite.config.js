@@ -5,6 +5,7 @@ import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "/foresee-revamp2/",
   plugins: [
     react(),
     // viteStaticCopy({
@@ -34,7 +35,6 @@ export default defineConfig({
         },
       },
     },
-    publicPath: '/foresee-revamp2/'
   },
   publicDir: 'public'
 })
