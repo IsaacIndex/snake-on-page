@@ -34,6 +34,7 @@ export default defineConfig({
         },
       },
     },
+    publicPath: '/foresee-revamp2/'
   },
   publicDir: 'public'
 })

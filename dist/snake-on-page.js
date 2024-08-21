@@ -1,5 +1,5 @@
-import { jsxs as I, jsx as b } from "react/jsx-runtime";
-import j, { useState as w } from "react";
+import { jsxs as j, jsx as b } from "react/jsx-runtime";
+import I, { useState as w } from "react";
 var _ = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, M = {}, y = {}, f = {};
 (function(o) {
   Object.defineProperty(o, "__esModule", { value: !0 }), o.JoystickShape = void 0, function(i) {
@@ -23,22 +23,22 @@ var P = f, J = function(o, i) {
   }
 };
 v.shapeFactory = J;
-var g = {};
-Object.defineProperty(g, "__esModule", { value: !0 });
-g.shapeBoundsFactory = void 0;
-var m = f, z = function(o, i, e, t, r, n, a, s, p) {
+var m = {};
+Object.defineProperty(m, "__esModule", { value: !0 });
+m.shapeBoundsFactory = void 0;
+var g = f, z = function(o, i, e, t, r, n, a, s, p) {
   switch (o) {
-    case m.JoystickShape.Square:
+    case g.JoystickShape.Square:
       return t = d(i - p.left - s / 2, s), r = d(e - p.top - s / 2, s), { relativeX: t, relativeY: r };
-    case m.JoystickShape.AxisX:
+    case g.JoystickShape.AxisX:
       return t = d(i - p.left - s / 2, s), r = 0, { relativeX: t, relativeY: r };
-    case m.JoystickShape.AxisY:
+    case g.JoystickShape.AxisY:
       return t = 0, r = d(e - p.top - s / 2, s), { relativeX: t, relativeY: r };
     default:
       return n > a && (t *= a / n, r *= a / n), { relativeX: t, relativeY: r };
   }
 };
-g.shapeBoundsFactory = z;
+m.shapeBoundsFactory = z;
 var d = function(o, i) {
   var e = i / 2;
   return o > e ? e : o < -e ? e * -1 : o;
@@ -70,7 +70,7 @@ var d = function(o, i) {
 };
 Object.defineProperty(y, "__esModule", { value: !0 });
 y.Joystick = void 0;
-var h = j, C = f, x = v, B = g, c;
+var h = I, C = f, x = v, B = m, c;
 (function(o) {
   o.PointerDown = "pointerdown", o.PointerMove = "pointermove", o.PointerUp = "pointerup";
 })(c || (c = {}));
@@ -78,7 +78,7 @@ var u;
 (function(o) {
   o[o.TopRight = 2.35619449] = "TopRight", o[o.TopLeft = -2.35619449] = "TopLeft", o[o.BottomRight = 0.785398163] = "BottomRight", o[o.BottomLeft = -0.785398163] = "BottomLeft";
 })(u || (u = {}));
-var L = (
+var T = (
   /** @class */
   function(o) {
     O(i, o);
@@ -221,7 +221,7 @@ var L = (
     }, i;
   }(h.Component)
 );
-y.Joystick = L;
+y.Joystick = T;
 (function(o) {
   Object.defineProperty(o, "__esModule", { value: !0 }), o.JoystickShape = o.Joystick = void 0;
   var i = y;
@@ -233,14 +233,14 @@ y.Joystick = L;
     return e.JoystickShape;
   } });
 })(M);
-const D = () => {
+const F = () => {
   w(0);
   const [o, i] = w(0);
-  return console.log(o), console.log("public:", process.env.PUBLIC_URL), console.log("origin:", window.location.origin), /* @__PURE__ */ I("div", { children: [
+  return console.log(o), window.location.pathname.split("/")[1], /* @__PURE__ */ j("div", { children: [
     /* @__PURE__ */ b("span", { style: { position: "fixed", zIndex: 999, top: 0, backgroundColor: "white" }, children: o }),
-    /* @__PURE__ */ b("img", { src: "/foresee-revamp2/assets/mountain.jpg", alt: "My Image" })
+    /* @__PURE__ */ b("img", { src: "/mountain.jpg", alt: "My Image" })
   ] });
 };
 export {
-  D as default
+  F as default
 };
