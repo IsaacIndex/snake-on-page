@@ -1,5 +1,6 @@
 import SnakeGame from './SnakeGame'
 import { useState } from 'react'
+import "./GameInterface.css"
 
 // import MyImage from "/mountain.png"
 

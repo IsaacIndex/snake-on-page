@@ -1,7 +1,7 @@
 // import Snake from './Snake'
 import SnakeGame from './lib/SnakeGame'
 import GameInterface from './lib/GameInterface'
-import './App.css'
+// import './App.css'
 import Test from '../'
 
 function App() {
