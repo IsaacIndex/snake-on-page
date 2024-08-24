@@ -9,7 +9,10 @@ body {
 }
 
 .snakeGame img {
-  width: min(1920px, 100%);
+  /* width: min(1920px, 100%); */
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
 }
 
 .snakeCanvas {
