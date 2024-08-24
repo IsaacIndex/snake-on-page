@@ -47,6 +47,7 @@
     "react-dom": "^18.2.0",
     "react-joystick-component": "^6.2.1",
     "vite": "^5.0.8",
+    "vite-plugin-lib-inject-css": "^2.1.1",
     "vite-plugin-static-copy": "^1.0.6"
   }
 }

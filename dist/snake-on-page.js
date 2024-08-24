@@ -1,6 +1,6 @@
 import { jsx as i, jsxs as $ } from "react/jsx-runtime";
 import IA, { useRef as u, useEffect as V, useState as h, useMemo as PA } from "react";
-var m = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, AA = {}, y = {}, O = {};
+import './GameInterface.css';var m = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, AA = {}, y = {}, O = {};
 (function(B) {
   Object.defineProperty(B, "__esModule", { value: !0 }), B.JoystickShape = void 0, function(C) {
     C.Circle = "circle", C.Square = "square", C.AxisY = "axisY", C.AxisX = "axisX";

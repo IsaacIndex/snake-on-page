@@ -2,11 +2,16 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import { resolve } from 'path'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
+import { libInjectCss } from 'vite-plugin-lib-inject-css'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    port: 1111
+  },
   plugins: [
     react(),
+    libInjectCss(),
     // viteStaticCopy({
     //   targets: [
     //     { src: 'src/assets/*', dest: 'images' }
@@ -14,6 +19,7 @@ export default defineConfig({
     // })
   ],
   build: {
+    cssCodeSplit: false,
     sourcemap: process.env.NODE_ENV !== 'production',
     copyPublicDir: true,
     lib: {
