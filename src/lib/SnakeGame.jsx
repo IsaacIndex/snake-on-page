@@ -26,7 +26,7 @@ const SnakeGame = ({ mapImporterName, nextMap, addScore }) => {
   const spriteRef = useRef()
 
   const [isMobile, setIsMobile] = useState(false);
-  const [spriteSize, setSpriteSize] = useState(30)
+  const [spriteSize, setSpriteSize] = useState(25)
 
   const onComplete = after(5, () => {
     console.log(loaded)
@@ -312,13 +312,25 @@ const SnakeGame = ({ mapImporterName, nextMap, addScore }) => {
     // loadMapImages();
 
     // apple position
-    appleRef.current = [
-      ["protanopia", [0.3, 0.3]],
-      ["achromatopsia", [0.4, 0.35]],
-      ["deuteranopia", [0.4, 0.45]],
-      ["tritanopia", [0.4, 0.55]],
-      ["normal", [0.4, 0.65]]
-    ]
+
+    const randomPosition = () => {
+      return Math.random() * (0.9 - 0.1) + 0.1
+    }
+
+    const colorVisionTypes = [
+      "protanopia",
+      "achromatopsia",
+      "deuteranopia",
+      "tritanopia",
+      "normal"
+    ];
+
+    appleRef.current = colorVisionTypes.map((type, index) => [
+      type,
+      [randomPosition(), 0.1 * (index + 0.5 * index + 1)]
+    ])
+
+    console.log(appleRef.current)
 
     appleRef.current.forEach(a => {
       a[1][0] *= containerRef.current.offsetWidth
