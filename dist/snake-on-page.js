@@ -59,14 +59,14 @@ var G = function(B, C) {
     }
     C.prototype = g === null ? Object.create(g) : (A.prototype = g.prototype, new A());
   };
-}(), l = m && m.__assign || function() {
-  return l = Object.assign || function(B) {
+}(), z = m && m.__assign || function() {
+  return z = Object.assign || function(B) {
     for (var C, g = 1, A = arguments.length; g < A; g++) {
       C = arguments[g];
       for (var D in C) Object.prototype.hasOwnProperty.call(C, D) && (B[D] = C[D]);
     }
     return B;
-  }, l.apply(this, arguments);
+  }, z.apply(this, arguments);
 };
 Object.defineProperty(y, "__esModule", { value: !0 });
 y.Joystick = void 0;
@@ -196,10 +196,10 @@ var sA = (
       var g = this.props.stickShape || N.JoystickShape.Circle;
       return (0, T.shapeFactory)(g, this._baseSize);
     }, C.prototype._getBaseStyle = function() {
-      var g = this.props.baseColor !== void 0 ? this.props.baseColor : "#000033", A = "".concat(this._baseSize, "px"), D = l(l({}, this.getBaseShapeStyle()), { height: A, width: A, background: g, display: "flex", justifyContent: "center", alignItems: "center" });
+      var g = this.props.baseColor !== void 0 ? this.props.baseColor : "#000033", A = "".concat(this._baseSize, "px"), D = z(z({}, this.getBaseShapeStyle()), { height: A, width: A, background: g, display: "flex", justifyContent: "center", alignItems: "center" });
       return this.props.baseImage && (D.background = "url(".concat(this.props.baseImage, ")"), D.backgroundSize = "100%"), D;
     }, C.prototype._getStickStyle = function() {
-      var g = this.props.stickColor !== void 0 ? this.props.stickColor : "#3D59AB", A = this._stickSize ? "".concat(this._stickSize, "px") : "".concat(this._baseSize / 1.5, "px"), D = l(l({}, this.getStickShapeStyle()), { background: g, cursor: "move", height: A, width: A, border: "none", flexShrink: 0, touchAction: "none" });
+      var g = this.props.stickColor !== void 0 ? this.props.stickColor : "#3D59AB", A = this._stickSize ? "".concat(this._stickSize, "px") : "".concat(this._baseSize / 1.5, "px"), D = z(z({}, this.getStickShapeStyle()), { background: g, cursor: "move", height: A, width: A, border: "none", flexShrink: 0, touchAction: "none" });
       return this.props.stickImage && (D.background = "url(".concat(this.props.stickImage, ")"), D.backgroundSize = "100%"), this.props.pos && (D = Object.assign({}, D, {
         position: "absolute",
         transform: "translate3d(".concat(this.props.pos.x * this._baseSize / 2, "px, ").concat(-(this.props.pos.y * this._baseSize) / 2, "px, 0)")
@@ -269,7 +269,7 @@ const tA = ({ onDirectionChange: B }) => {
 }, uA = ({ mapImporterName: B, nextMap: C, addScore: g }) => {
   const A = window.location.pathname.split("/")[1], D = A ? "/" + A + "/" : "";
   F("");
-  const Q = u(), o = u(), e = u(), w = u("right"), Y = u(), a = u(), b = u(), [L, gA] = F("normal"), [k, Z] = F(!1), z = u(), d = u(), [BA, DA] = F(!1), [v, MA] = F(25), R = QA(5, () => {
+  const Q = u(), o = u(), e = u(), w = u("right"), Y = u(), a = u(), b = u(), [L, gA] = F("normal"), [k, Z] = F(!1), l = u(), d = u(), [BA, DA] = F(!1), [v, MA] = F(25), R = QA(5, () => {
     console.log(k), Z(!0), console.log("loaded");
   });
   function QA(f, E) {
@@ -342,7 +342,7 @@ const tA = ({ onDirectionChange: B }) => {
         n.src = _[M], a.current = n, gA(M), I--;
       }
     }
-    P || Q.current.pop(), console.log(window.innerHeight + window.scrollY, z.current.offsetHeight), w.current == "down" ? (window.innerHeight + window.scrollY < z.current.offsetHeight - v && Q.current.forEach((I) => I[1] -= v), scrollBy(0, v + 1)) : w.current == "up" && (window.scrollY > 0 && Q.current.forEach((I) => I[1] += v), scrollBy(0, -v + 1));
+    P || Q.current.pop(), console.log(window.innerHeight + window.scrollY, l.current.offsetHeight), w.current == "down" ? (window.innerHeight + window.scrollY < l.current.offsetHeight - v && Q.current.forEach((I) => I[1] -= v), scrollBy(0, v + 1)) : w.current == "up" && (window.scrollY > 0 && Q.current.forEach((I) => I[1] += v), scrollBy(0, -v + 1));
   }, U = () => {
     const E = Y.current.getContext("2d");
     E.clearRect(0, 0, E.canvas.width, E.canvas.height);
@@ -384,7 +384,7 @@ const tA = ({ onDirectionChange: B }) => {
       I,
       [f(), 0.1 * (M + 0.5 * M + 1)]
     ]), console.log(o.current), o.current.forEach((I) => {
-      I[1][0] *= z.current.offsetWidth, I[1][1] *= z.current.offsetHeight;
+      I[1][0] *= l.current.offsetWidth, I[1][1] *= l.current.offsetHeight;
     }), Q.current = [
       [Math.round(window.innerWidth / 2), Math.round(window.innerHeight / 2)],
       [Math.round(window.innerWidth / 2) - v, Math.round(window.innerHeight / 2)],
@@ -400,7 +400,7 @@ const tA = ({ onDirectionChange: B }) => {
       Math.ceil(document.documentElement.offsetHeight * 0.9)
     ];
     const P = () => {
-      const I = Y.current, M = b.current, t = z.current;
+      const I = Y.current, M = b.current, t = l.current;
       I.width = Math.min(window.innerWidth, 1920), I.height = window.innerHeight, M.width = t.offsetWidth, M.height = t.offsetHeight, DA(window.innerWidth <= 768), U(), W();
     };
     return P(), U(), W(), window.addEventListener("resize", P), window.addEventListener("keydown", K), () => {
@@ -412,7 +412,7 @@ const tA = ({ onDirectionChange: B }) => {
     f.src = a.current.src, f.onload = () => {
       W(), U();
     };
-  }, [a.current]), /* @__PURE__ */ $("div", { ref: z, className: "snakeGame", children: [
+  }, [a.current]), /* @__PURE__ */ $("div", { ref: l, className: "snakeGame", children: [
     /* @__PURE__ */ i("img", { src: "", hidden: !0, style: { position: "fixed" }, ref: d }),
     /* @__PURE__ */ i("canvas", { className: "mapCanvas", ref: b }),
     /* @__PURE__ */ i("canvas", { className: "snakeCanvas", ref: Y }),
@@ -430,7 +430,7 @@ const tA = ({ onDirectionChange: B }) => {
     0: "forest_map",
     1: "desert_map"
   };
-  return window.location.pathname.split("/")[1], /* @__PURE__ */ $("div", { children: [
+  return window.location.pathname.split("/")[1], /* @__PURE__ */ $("div", { className: "game-interface", children: [
     /* @__PURE__ */ i("span", { style: { position: "fixed", zIndex: 999, top: 0, backgroundColor: "white" }, children: g }),
     /* @__PURE__ */ i(uA, { mapImporterName: D[B], nextMap: () => C(B + 1), addScore: () => A((Q) => Q + 1) })
   ] });
