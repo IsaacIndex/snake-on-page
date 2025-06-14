@@ -25,9 +25,13 @@ const GameInterface = () => {
 
   return (
     <div className='game-interface'>
-      <span style={{ position: 'fixed', zIndex: 999, top: 0, backgroundColor: "white" }}>{score}</span>
+      <div className='score-board'>Score: {score}</div>
       {/* <img src={`${(baseURL)}mountain.jpg`} alt="My Image" /> */}
-      <SnakeGame mapImporterName={maps[mapIndex]} nextMap={() => setMapIndex(mapIndex + 1)} addScore={() => setScore(prev => prev + 1)} />
+      <SnakeGame
+        mapImporterName={maps[mapIndex]}
+        nextMap={() => setMapIndex(mapIndex + 1)}
+        addScore={() => setScore(prev => prev + 1)}
+      />
     </div>
   );
 }
