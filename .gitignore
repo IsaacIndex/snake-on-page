@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # manually created test file
-dist/index.html
+dist
