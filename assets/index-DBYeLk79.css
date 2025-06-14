@@ -1,0 +1,1 @@
+.snakeGame{position:relative;display:flex;justify-content:center}.snakeGame img{width:100vw;height:100vh;object-fit:cover}.snakeCanvas{position:fixed;top:0;left:0;width:100vw;height:100vh}.mapCanvas{position:absolute}.game-interface{margin:0;-moz-user-select:-moz-none;-khtml-user-select:none;-webkit-user-select:none;-ms-user-select:none;user-select:none;overflow:hidden}
