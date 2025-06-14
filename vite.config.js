@@ -21,11 +21,6 @@ export default defineConfig(({ mode }) => {
     plugins: [
       react(),
       libInjectCss(),
-      // viteStaticCopy({
-      //   targets: [
-      //     { src: 'src/assets/*', dest: 'images' }
-      //   ]
-      // })
     ],
     build: {
       cssCodeSplit: false,
