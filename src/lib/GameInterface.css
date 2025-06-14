@@ -7,3 +7,16 @@
   user-select: none;
   overflow: hidden;
 }
+
+.score-board {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 1.25rem;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+}
