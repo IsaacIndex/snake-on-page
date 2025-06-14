@@ -1,6 +1,9 @@
 import { jsx as i, jsxs as $ } from "react/jsx-runtime";
+import "./SnakeGame.css";
 import IA, { useRef as u, useEffect as V, useState as F, useMemo as PA } from "react";
-import './GameInterface.css';var m = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, AA = {}, y = {}, O = {};
+import "../LoadingScreen.module.css";
+import "./GameInterface.css";
+var m = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {}, AA = {}, y = {}, O = {};
 (function(B) {
   Object.defineProperty(B, "__esModule", { value: !0 }), B.JoystickShape = void 0, function(C) {
     C.Circle = "circle", C.Square = "square", C.AxisY = "axisY", C.AxisX = "axisX";
@@ -269,7 +272,7 @@ const tA = ({ onDirectionChange: B }) => {
 }, uA = ({ mapImporterName: B, nextMap: C, addScore: g }) => {
   const A = window.location.pathname.split("/")[1], D = A ? "/" + A + "/" : "";
   F("");
-  const Q = u(), o = u(), e = u(), w = u("right"), Y = u(), a = u(), b = u(), [L, gA] = F("normal"), [k, Z] = F(!1), l = u(), d = u(), [BA, DA] = F(!1), [v, MA] = F(25), R = QA(5, () => {
+  const Q = u(), o = u(), e = u(), w = u("right"), Y = u(), a = u(), b = u(), [L, gA] = F("normal"), [k, Z] = F(!1), l = u(), d = u(), [BA, DA] = F(!1), [v, MA] = F(25), p = QA(5, () => {
     console.log(k), Z(!0), console.log("loaded");
   });
   function QA(f, E) {
@@ -278,7 +281,7 @@ const tA = ({ onDirectionChange: B }) => {
       s = s + 1, f === s && E(...P);
     };
   }
-  const p = PA(() => ({
+  const R = PA(() => ({
     normal: L !== "normal",
     achromatopsia: L !== "achromatopsia",
     deuteranopia: L !== "deuteranopia",
@@ -416,14 +419,14 @@ const tA = ({ onDirectionChange: B }) => {
     /* @__PURE__ */ i("img", { src: "", hidden: !0, style: { position: "fixed" }, ref: d }),
     /* @__PURE__ */ i("canvas", { className: "mapCanvas", ref: b }),
     /* @__PURE__ */ i("canvas", { className: "snakeCanvas", ref: Y }),
-    /* @__PURE__ */ i("img", { src: `${D}maps/${B}/map.png`, hidden: p.normal, alt: "normal", onLoad: R }),
-    /* @__PURE__ */ i("img", { src: `${D}maps/${B}/map_achromatopsia.png`, hidden: p.achromatopsia, alt: "normal", onLoad: R }),
-    /* @__PURE__ */ i("img", { src: `${D}maps/${B}/map_deuteranopia.png`, hidden: p.deuteranopia, alt: "normal", onLoad: R }),
-    /* @__PURE__ */ i("img", { src: `${D}maps/${B}/map_protanopia.png`, hidden: p.protanopia, alt: "normal", onLoad: R }),
-    /* @__PURE__ */ i("img", { src: `${D}maps/${B}/map_tritanopia.png`, hidden: p.tritanopia, alt: "normal", onLoad: R }),
+    /* @__PURE__ */ i("img", { src: `${D}maps/${B}/map.png`, hidden: R.normal, alt: "normal", onLoad: p }),
+    /* @__PURE__ */ i("img", { src: `${D}maps/${B}/map_achromatopsia.png`, hidden: R.achromatopsia, alt: "normal", onLoad: p }),
+    /* @__PURE__ */ i("img", { src: `${D}maps/${B}/map_deuteranopia.png`, hidden: R.deuteranopia, alt: "normal", onLoad: p }),
+    /* @__PURE__ */ i("img", { src: `${D}maps/${B}/map_protanopia.png`, hidden: R.protanopia, alt: "normal", onLoad: p }),
+    /* @__PURE__ */ i("img", { src: `${D}maps/${B}/map_tritanopia.png`, hidden: R.tritanopia, alt: "normal", onLoad: p }),
     BA && /* @__PURE__ */ i(tA, { onDirectionChange: K })
   ] });
-}, hA = () => {
+}, LA = () => {
   const [B, C] = F(0), [g, A] = F(0);
   console.log(g);
   const D = {
@@ -436,5 +439,5 @@ const tA = ({ onDirectionChange: B }) => {
   ] });
 };
 export {
-  hA as default
+  LA as default
 };
