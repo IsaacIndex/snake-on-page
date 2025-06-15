@@ -21,16 +21,13 @@ const LoadingScreen = ({ item, loaded, total }) => (
     <pre className={styles.asciiArt} aria-hidden="true">{ASCII_SNAKE}</pre>
     <div className={styles.spinner} />
     <div className={styles.loadingText}>
-      Loading {item} ({total - loaded} left) <span role="img" aria-label="snake">🐍</span>
+      Loading {item} ({total - loaded} left)
     </div>
     <div className={styles.progressBar}>
       <div
         className={styles.progressFill}
         style={{ width: `${(loaded / total) * 100}%` }}
       />
-    </div>
-    <div className={styles.loadingInfo}>
-      <span role="img" aria-label="eye">👁️</span> color-blind friendly
     </div>
   </div>
 )
