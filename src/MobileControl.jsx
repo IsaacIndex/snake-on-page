@@ -1,5 +1,6 @@
 import { Joystick } from 'react-joystick-component'
-import { useRef, useEffect } from "react";
+import { useRef, useEffect } from 'react'
+import PropTypes from 'prop-types'
 
 const MobileControl = ({ onDirectionChange }) => {
   const componentStyle = {
@@ -21,9 +22,6 @@ const MobileControl = ({ onDirectionChange }) => {
   const controlRef = useRef();
   const timeRef = useRef(0);
 
-  const handleButtonClick = (direction) => {
-    onDirectionChange(direction);
-  }
 
   const handleMove = (event) => {
     console
@@ -50,18 +48,11 @@ const MobileControl = ({ onDirectionChange }) => {
     return () => {
       window.cancelAnimationFrame(animationId)
     }
-  }, [])
+  }, [onDirectionChange])
 
   return (
     <div style={componentStyle}>
-      {/* <div className={styles.container} style={componentStyle}>
-        <div className={styles['arrow-key-container']}>
-          <div className={`${styles['arrow-key']} ${styles.up}`} onClick={() => handleButtonClick('up')}></div>
-          <div className={`${styles['arrow-key']} ${styles.down}`} onClick={() => handleButtonClick('down')}></div>
-          <div className={`${styles['arrow-key']} ${styles.left}`} onClick={() => handleButtonClick('left')}></div>
-          <div className={`${styles['arrow-key']} ${styles.right}`} onClick={() => handleButtonClick('right')}></div>
-        </div>
-      </div> */}
+      {/* Mobile directional buttons could go here if needed */}
 
 
       <Joystick ref={controlRef} minDistance={50} move={handleMove} stop={handleStop} />
@@ -69,4 +60,9 @@ const MobileControl = ({ onDirectionChange }) => {
     </div>
   )
 }
+
+MobileControl.propTypes = {
+  onDirectionChange: PropTypes.func.isRequired,
+}
+
 export default MobileControl
