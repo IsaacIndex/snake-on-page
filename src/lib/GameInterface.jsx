@@ -8,6 +8,7 @@ import "./GameInterface.css"
 const GameInterface = () => {
   const [mapIndex, setMapIndex] = useState(0)
   const [score, setScore] = useState(0)
+  const [animateScore, setAnimateScore] = useState(false)
   const [loading, setLoading] = useState(true)
   const [status, setStatus] = useState({ loaded: 0, total: 0, item: '' })
   const maps = useMemo(() => ({
@@ -15,9 +16,11 @@ const GameInterface = () => {
     1: 'desert_map',
   }), [])
 
-  const basePath = window.location.pathname.split("/")[1]
-  const baseURL = (basePath) ? ("/" + basePath + "/") : ("")
-
+  const addScore = () => {
+    setScore(prev => prev + 1)
+    setAnimateScore(true)
+  }
+  
   useEffect(() => {
     const mapList = Object.values(maps)
     const types = [
@@ -55,6 +58,11 @@ const GameInterface = () => {
     Promise.all(items.map(loadImage)).then(() => setLoading(false))
   }, [baseURL, maps])
 
+  useEffect(() => {
+    if (!animateScore) return
+    const timeout = setTimeout(() => setAnimateScore(false), 300)
+    return () => clearTimeout(timeout)
+  }, [animateScore])
 
   return (
     <>
@@ -62,12 +70,12 @@ const GameInterface = () => {
         <LoadingScreen item={status.item} loaded={status.loaded} total={status.total} />
       )}
       <div className='game-interface'>
-        <div className='score-board'>Score: {score}</div>
+        <div className={`score-board${animateScore ? ' animate' : ''}`}>Score: {score}</div>
         {/* <img src={`${(baseURL)}mountain.jpg`} alt="My Image" /> */}
         <SnakeGame
           mapImporterName={maps[mapIndex]}
           nextMap={() => setMapIndex(mapIndex + 1)}
-          addScore={() => setScore(prev => prev + 1)}
+          addScore={addScore}
         />
       </div>
     </>
