@@ -13,8 +13,6 @@ const GameInterface = () => {
     1: "desert_map",
   }
 
-  const basePath = window.location.pathname.split("/")[1]
-  const baseURL = (basePath) ? ("/" + basePath + "/") : ("")
 
   const addScore = () => {
     setScore(prev => prev + 1)
@@ -30,7 +28,6 @@ const GameInterface = () => {
   return (
     <div className='game-interface'>
       <div className={`score-board${animateScore ? ' animate' : ''}`}>Score: {score}</div>
-      {/* <img src={`${(baseURL)}mountain.jpg`} alt="My Image" /> */}
       <SnakeGame
         mapImporterName={maps[mapIndex]}
         nextMap={() => setMapIndex(mapIndex + 1)}
