@@ -21,4 +21,3 @@ LoadingScreen.propTypes = {
   loaded: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
 }
-
