@@ -28,32 +28,31 @@ const GameInterface = () => {
       'tritanopia',
     ]
 
-    const items = []
-    mapList.forEach(name => {
-      types.forEach(type => {
-        items.push({ name, type })
-      })
-    })
+    const items = mapList.flatMap(name =>
+      types.map(type => ({ name, type })))
 
     const totalImages = items.length
     setStatus({ loaded: 0, total: totalImages, item: '' })
+    let loadedCount = 0
 
-    const loadNext = (index) => {
-      if (index >= items.length) {
-        setLoading(false)
-        return
-      }
-      const { name, type } = items[index]
+    const loadImage = ({ name, type }) => {
       const suffix = type === 'normal' ? '' : `_${type}`
       const img = new Image()
       img.src = `${baseURL}maps/${name}/map${suffix}.png`
-      setStatus({ loaded: index, total: totalImages, item: `${name}${suffix}` })
-      img.onload = img.onerror = () => {
-        loadNext(index + 1)
-      }
+      return new Promise(resolve => {
+        img.onload = img.onerror = () => {
+          loadedCount += 1
+          setStatus({
+            loaded: loadedCount,
+            total: totalImages,
+            item: `${name}${suffix}`,
+          })
+          resolve()
+        }
+      })
     }
 
-    loadNext(0)
+    Promise.all(items.map(loadImage)).then(() => setLoading(false))
   }, [baseURL, maps])
 
 
