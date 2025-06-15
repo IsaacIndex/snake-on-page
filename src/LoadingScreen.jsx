@@ -1,10 +1,10 @@
 import styles from './LoadingScreen.module.css'
 
-const LoadingScreen = () => {
-  return (
-    <div className={styles.loadingDiv}>
-      <h1>Loading...</h1>
-    </div>
-  );
-}
+const LoadingScreen = () => (
+  <div className={styles.loadingDiv}>
+    <div className={styles.spinner} />
+    <div className={styles.loadingText}>Loading...</div>
+  </div>
+)
 export default LoadingScreen
+
