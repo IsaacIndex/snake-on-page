@@ -1,6 +1,6 @@
 import SnakeGame from './SnakeGame'
 import LoadingScreen from '../LoadingScreen'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import "./GameInterface.css"
 
 // import MyImage from "/mountain.png"
@@ -10,10 +10,10 @@ const GameInterface = () => {
   const [score, setScore] = useState(0)
   const [loading, setLoading] = useState(true)
   const [status, setStatus] = useState({ loaded: 0, total: 0, item: '' })
-  const maps = {
-    0: "forest_map",
-    1: "desert_map",
-  }
+  const maps = useMemo(() => ({
+    0: 'forest_map',
+    1: 'desert_map',
+  }), [])
 
   const basePath = window.location.pathname.split("/")[1]
   const baseURL = (basePath) ? ("/" + basePath + "/") : ("")
