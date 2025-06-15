@@ -1,5 +1,4 @@
 import { useRef, useEffect, useState, useMemo } from "react";
-import React from 'react';
 import styles from './Snake.module.css'
 import {
   SNAKE,
@@ -144,41 +143,41 @@ const Snake = () => {
         }
       } else if (i == snakeRef.current.length - 1) {
         // Tail; Determine the correct image
-        var pseg = snakeRef.current[i - 1]; // Prev segment
-        if (pseg[1] < segy) {
+        const tailPrevSeg = snakeRef.current[i - 1]
+        if (tailPrevSeg[1] < segy) {
           // Up
           clipx = 3; clipy = 2;
-        } else if (pseg[0] > segx) {
+        } else if (tailPrevSeg[0] > segx) {
           // Right
           // TODO: problem when across board
           clipx = 4; clipy = 2;
-        } else if (pseg[1] > segy) {
+        } else if (tailPrevSeg[1] > segy) {
           // Down
           clipx = 4; clipy = 3;
-        } else if (pseg[0] < segx) {
+        } else if (tailPrevSeg[0] < segx) {
           // Left
           clipx = 3; clipy = 3;
         }
       } else {
         // Body; Determine the correct image
-        var pseg = snakeRef.current[i - 1]; // Previous segment
-        var nseg = snakeRef.current[i + 1]; // Next segment
-        if (pseg[0] < segx && nseg[0] > segx || nseg[0] < segx && pseg[0] > segx) {
+        const prevSeg = snakeRef.current[i - 1]
+        const nextSeg = snakeRef.current[i + 1]
+        if (prevSeg[0] < segx && nextSeg[0] > segx || nextSeg[0] < segx && prevSeg[0] > segx) {
           // Horizontal Left-Right
           clipx = 1; clipy = 0;
-        } else if (pseg[0] < segx && nseg[1] > segy || nseg[0] < segx && pseg[1] > segy) {
+        } else if (prevSeg[0] < segx && nextSeg[1] > segy || nextSeg[0] < segx && prevSeg[1] > segy) {
           // Angle Left-Down
           clipx = 2; clipy = 0;
-        } else if (pseg[1] < segy && nseg[1] > segy || nseg[1] < segy && pseg[1] > segy) {
+        } else if (prevSeg[1] < segy && nextSeg[1] > segy || nextSeg[1] < segy && prevSeg[1] > segy) {
           // Vertical Up-Down
           clipx = 2; clipy = 1;
-        } else if (pseg[1] < segy && nseg[0] < segx || nseg[1] < segy && pseg[0] < segx) {
+        } else if (prevSeg[1] < segy && nextSeg[0] < segx || nextSeg[1] < segy && prevSeg[0] < segx) {
           // Angle Top-Left
           clipx = 2; clipy = 2;
-        } else if (pseg[0] > segx && nseg[1] < segy || nseg[0] > segx && pseg[1] < segy) {
+        } else if (prevSeg[0] > segx && nextSeg[1] < segy || nextSeg[0] > segx && prevSeg[1] < segy) {
           // Angle Right-Up
           clipx = 0; clipy = 1;
-        } else if (pseg[1] > segy && nseg[0] > segx || nseg[1] > segy && pseg[0] > segx) {
+        } else if (prevSeg[1] > segy && nextSeg[0] > segx || nextSeg[1] > segy && prevSeg[0] > segx) {
           // Angle Down-Right
           clipx = 0; clipy = 0;
         } else {

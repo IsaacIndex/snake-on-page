@@ -28,6 +28,21 @@
   font-size: 1.25rem;
 }
 
+.progressBar {
+  width: 80%;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  margin-top: 12px;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: #fff;
+  width: 0;
+  border-radius: 4px;
+  transition: width 0.2s;
+}
 @keyframes spin {
   from {
     transform: rotate(0deg);
