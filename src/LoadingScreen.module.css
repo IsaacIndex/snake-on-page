@@ -1,6 +1,72 @@
 .loadingDiv {
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
   z-index: 999;
+  font-family: Arial, sans-serif;
+}
+
+.asciiArt {
+  font-family: monospace;
+  white-space: pre;
+  line-height: 1;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .asciiArt {
+    display: none;
+  }
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+.loadingText {
+  font-size: 1.25rem;
+}
+
+.progressBar {
+  width: 80%;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  margin-top: 12px;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: #fff;
+  width: 0;
+  border-radius: 4px;
+  transition: width 0.2s;
+}
+
+.loadingInfo {
+  font-size: 0.85rem;
+  margin-top: 8px;
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

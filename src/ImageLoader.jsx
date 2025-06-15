@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react'
+import PropTypes from 'prop-types'
 
 function ImageLoader({ src, alt, hidden, onLoad }) {
 
@@ -13,7 +14,7 @@ function ImageLoader({ src, alt, hidden, onLoad }) {
       // Clean up the image object if the component is unmounted
       image.onload = null;
     };
-  }, [src]);
+  }, [onLoad, src])
 
   // if (!loaded) {
   //   return null; // Render nothing while the image is loading
@@ -23,4 +24,16 @@ function ImageLoader({ src, alt, hidden, onLoad }) {
     <img src={src} alt={alt} hidden={hidden} />
   );
 }
+
+ImageLoader.propTypes = {
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  hidden: PropTypes.bool,
+  onLoad: PropTypes.func.isRequired,
+}
+
+ImageLoader.defaultProps = {
+  hidden: false,
+}
+
 export default ImageLoader

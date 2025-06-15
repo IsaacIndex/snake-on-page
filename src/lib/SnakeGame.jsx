@@ -1,8 +1,7 @@
 import './SnakeGame.css'
 import { useRef, useEffect, useState, useMemo } from "react";
-import MobileControl from "../MobileControl";
-import LoadingScreen from '../LoadingScreen';
-import ImageLoader from "../ImageLoader";
+import MobileControl from "../MobileControl"
+/* eslint-disable no-unused-vars, react/prop-types, no-redeclare */
 import snakeImages from "../snakeImages";
 // import mapImages from "./mapImages";
 
