@@ -77,6 +77,7 @@ const GameInterface = () => {
           <span className="score-label">Score:</span>
           <span className={`score-value${animateScore ? ' animate' : ''}`}>{score}</span>
         </div>
+        <div className="map-name-box">{maps[mapIndex]}</div>
         {/* <img src={`${(baseURL)}mountain.jpg`} alt="My Image" /> */}
         <SnakeGame
           mapImporterName={maps[mapIndex]}
