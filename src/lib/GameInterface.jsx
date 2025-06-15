@@ -16,6 +16,9 @@ const GameInterface = () => {
     1: 'desert_map',
   }), [])
 
+  const basePath = window.location.pathname.split("/")[1]
+  const baseURL = (basePath) ? ("/" + basePath + "/") : ("")
+  
   const addScore = () => {
     setScore(prev => prev + 1)
     setAnimateScore(true)
