@@ -73,7 +73,10 @@ const GameInterface = () => {
         <LoadingScreen item={status.item} loaded={status.loaded} total={status.total} />
       )}
       <div className='game-interface'>
-        <div className={`score-board${animateScore ? ' animate' : ''}`}>Score: {score}</div>
+        <div className="score-board">
+          <span className="score-label">Score:</span>
+          <span className={`score-value${animateScore ? ' animate' : ''}`}>{score}</span>
+        </div>
         {/* <img src={`${(baseURL)}mountain.jpg`} alt="My Image" /> */}
         <SnakeGame
           mapImporterName={maps[mapIndex]}

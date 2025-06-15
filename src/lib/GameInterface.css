@@ -13,15 +13,28 @@
   top: 10px;
   left: 10px;
   z-index: 999;
-  background-color: rgba(0, 0, 0, 0.6);
-  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(#222, #000);
+  color: #7fff00;
   font-size: 1.25rem;
-  padding: 4px 12px;
+  padding: 6px 12px;
   border-radius: 8px;
-  font-family: Arial, sans-serif;
+  border: 2px solid #7fff00;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  font-family: 'Courier New', monospace;
 }
 
-.score-board.animate {
+.score-label {
+  color: #fff;
+}
+
+.score-value {
+  font-weight: bold;
+}
+
+.score-value.animate {
   animation: score-bump 0.3s ease;
 }
 
