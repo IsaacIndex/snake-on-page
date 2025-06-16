@@ -1,0 +1,36 @@
+.endScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #7fff00;
+  font-family: 'Courier New', monospace;
+  z-index: 999;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
+
+.scoreList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+}
+
+.scoreItem {
+  margin: 4px 0;
+  display: flex;
+  gap: 8px;
+}
+
+.mapName {
+  color: #fff;
+}

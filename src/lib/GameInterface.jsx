@@ -1,5 +1,6 @@
 import SnakeGame from './SnakeGame'
 import LoadingScreen from '../LoadingScreen'
+import EndScreen from '../EndScreen'
 import { useState, useEffect, useMemo } from 'react'
 import "./GameInterface.css"
 
@@ -8,7 +9,9 @@ import "./GameInterface.css"
 const GameInterface = () => {
   const [mapIndex, setMapIndex] = useState(0)
   const [score, setScore] = useState(0)
+  const [mapScores, setMapScores] = useState({})
   const [animateScore, setAnimateScore] = useState(false)
+  const [showEnd, setShowEnd] = useState(false)
   const [loading, setLoading] = useState(true)
   const [status, setStatus] = useState({ loaded: 0, total: 0, item: '' })
   const maps = useMemo(() => ({
@@ -28,7 +31,19 @@ const GameInterface = () => {
 
   const addScore = () => {
     setScore(prev => prev + 1)
+    setMapScores(prev => ({
+      ...prev,
+      [maps[mapIndex]]: (prev[maps[mapIndex]] || 0) + 1,
+    }))
     setAnimateScore(true)
+  }
+
+  const handleNextMap = () => {
+    if (mapIndex + 1 >= Object.keys(maps).length) {
+      setShowEnd(true)
+    } else {
+      setMapIndex(mapIndex + 1)
+    }
   }
 
   useEffect(() => {
@@ -79,19 +94,23 @@ const GameInterface = () => {
       {loading && (
         <LoadingScreen item={status.item} loaded={status.loaded} total={status.total} />
       )}
-      <div className='game-interface'>
-        <div className="score-board">
-          <span className="score-label">Score:</span>
-          <span className={`score-value${animateScore ? ' animate' : ''}`}>{score}</span>
+      {showEnd ? (
+        <EndScreen scores={mapScores} maps={Object.values(maps)} />
+      ) : (
+        <div className='game-interface'>
+          <div className="score-board">
+            <span className="score-label">Score:</span>
+            <span className={`score-value${animateScore ? ' animate' : ''}`}>{score}</span>
+          </div>
+          <div className="map-name-box">{formatMapName(maps[mapIndex])}</div>
+          {/* <img src={`${(baseURL)}mountain.jpg`} alt="My Image" /> */}
+          <SnakeGame
+            mapImporterName={maps[mapIndex]}
+            nextMap={handleNextMap}
+            addScore={addScore}
+          />
         </div>
-        <div className="map-name-box">{formatMapName(maps[mapIndex])}</div>
-        {/* <img src={`${(baseURL)}mountain.jpg`} alt="My Image" /> */}
-        <SnakeGame
-          mapImporterName={maps[mapIndex]}
-          nextMap={() => setMapIndex(mapIndex + 1)}
-          addScore={addScore}
-        />
-      </div>
+      )}
     </>
   );
 }
