@@ -1,4 +1,5 @@
 import { createCanvas, loadImage } from 'canvas';
+/* eslint-env node */
 import { simulate } from '@bjornlu/colorblind'
 import fs from 'fs';
 
