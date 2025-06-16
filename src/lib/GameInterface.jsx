@@ -14,6 +14,7 @@ const GameInterface = () => {
   const maps = useMemo(() => ({
     0: 'forest_map',
     1: 'desert_map',
+    2: 'beach_map',
   }), [])
 
   const basePath = window.location.pathname.split("/")[1]
@@ -24,12 +25,12 @@ const GameInterface = () => {
       .split('_')
       .map(w => w.charAt(0).toUpperCase() + w.slice(1))
       .join(' ')
-  
+
   const addScore = () => {
     setScore(prev => prev + 1)
     setAnimateScore(true)
   }
-  
+
   useEffect(() => {
     const mapList = Object.values(maps)
     const types = [

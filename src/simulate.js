@@ -4,10 +4,11 @@ import fs from 'fs';
 
 // URL of the image you want to import
 // const imageUrl = 'https://img.freepik.com/free-vector/large-school-building-scene_1308-32058.jpg';
-const imageUrl = './src/assets/snake_sprite/snake-graphics.png';
+const [inputPath = './src/assets/snake_sprite/snake-graphics.png', outputDir = 'src/assets/snake_sprite/'] = process.argv.slice(2)
+const imageUrl = inputPath
 
 // Path where you want to save the output PNG file
-const outputPath = 'src/assets/snake_sprite/';
+const outputPath = outputDir.endsWith('/') ? outputDir : `${outputDir}/`
 
 // Function to simulate the image and export it as PNG inside a canvas
 const processImage = (context, image, deficiency) => {
