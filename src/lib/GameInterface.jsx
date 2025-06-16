@@ -46,6 +46,14 @@ const GameInterface = () => {
     }
   }
 
+  const handleRestart = () => {
+    setMapIndex(0)
+    setScore(0)
+    setMapScores({})
+    setShowEnd(false)
+    window.scrollTo(0, 0)
+  }
+
   useEffect(() => {
     const mapList = Object.values(maps)
     const types = [
@@ -95,7 +103,11 @@ const GameInterface = () => {
         <LoadingScreen item={status.item} loaded={status.loaded} total={status.total} />
       )}
       {showEnd ? (
-        <EndScreen scores={mapScores} maps={Object.values(maps)} />
+        <EndScreen
+          scores={mapScores}
+          maps={Object.values(maps)}
+          onRestart={handleRestart}
+        />
       ) : (
         <div className='game-interface'>
           <div className="score-board">

@@ -3,7 +3,7 @@ import styles from './EndScreen.module.css'
 
 const formatMapName = name => name.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
 
-const EndScreen = ({ scores, maps }) => (
+const EndScreen = ({ scores, maps, onRestart }) => (
   <div className={styles.endScreen}>
     <div className={styles.title}>Game Over</div>
     <ul className={styles.scoreList}>
@@ -14,12 +14,16 @@ const EndScreen = ({ scores, maps }) => (
         </li>
       ))}
     </ul>
+    <button className={styles.restartButton} onClick={onRestart}>
+      Start Over
+    </button>
   </div>
 )
 
 EndScreen.propTypes = {
   scores: PropTypes.object.isRequired,
   maps: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onRestart: PropTypes.func.isRequired,
 }
 
 export default EndScreen
