@@ -34,3 +34,18 @@
 .mapName {
   color: #fff;
 }
+
+.restartButton {
+  background: linear-gradient(#222, #000);
+  color: #7fff00;
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  padding: 8px 16px;
+  border: 2px solid #7fff00;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.restartButton:hover {
+  background: linear-gradient(#333, #111);
+}
