@@ -1,0 +1,35 @@
+name: Run simulate on PNG Change
+
+on:
+  push:
+    paths:
+      - '**/*.png'
+  pull_request:
+    paths:
+      - '**/*.png'
+
+jobs:
+  run-simulate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run simulate script
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          CHANGED=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA" -- '**/*.png')
+          for file in $CHANGED; do
+            dir=$(dirname "$file")
+            npm run simulate -- "$file" "$dir"
+          done
