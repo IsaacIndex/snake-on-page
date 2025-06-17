@@ -14,6 +14,7 @@ const GameInterface = () => {
   const [showEnd, setShowEnd] = useState(false)
   const [loading, setLoading] = useState(true)
   const [status, setStatus] = useState({ loaded: 0, total: 0, item: '' })
+  const [deficiency, setDeficiency] = useState('normal')
   const maps = useMemo(() => ({
     0: 'forest_map',
     1: 'desert_map',
@@ -51,8 +52,11 @@ const GameInterface = () => {
     setScore(0)
     setMapScores({})
     setShowEnd(false)
+    setDeficiency('normal')
     window.scrollTo(0, 0)
   }
+
+  const handleDeficiencyChange = type => setDeficiency(type)
 
   useEffect(() => {
     const mapList = Object.values(maps)
@@ -107,6 +111,7 @@ const GameInterface = () => {
           scores={mapScores}
           maps={Object.values(maps)}
           onRestart={handleRestart}
+          deficiency={deficiency}
         />
       ) : (
         <div className='game-interface'>
@@ -120,6 +125,7 @@ const GameInterface = () => {
             mapImporterName={maps[mapIndex]}
             nextMap={handleNextMap}
             addScore={addScore}
+            onDeficiencyChange={handleDeficiencyChange}
           />
         </div>
       )}

@@ -5,7 +5,7 @@ import MobileControl from "../MobileControl"
 import snakeImages from "../snakeImages";
 // import mapImages from "./mapImages";
 
-const SnakeGame = ({ mapImporterName, nextMap, addScore }) => {
+const SnakeGame = ({ mapImporterName, nextMap, addScore, onDeficiencyChange }) => {
 
   const basePath = window.location.pathname.split("/")[1]
   const baseURL = (basePath) ? ("/" + basePath + "/") : ("")
@@ -146,6 +146,7 @@ const SnakeGame = ({ mapImporterName, nextMap, addScore }) => {
         SnakeSpriteImg.src = snakeImages[deficiency]
         snakeSpriteImgRef.current = SnakeSpriteImg
         setMapDeficiency(deficiency)
+        if (onDeficiencyChange) onDeficiencyChange(deficiency)
         index--
       }
     }
@@ -287,6 +288,7 @@ const SnakeGame = ({ mapImporterName, nextMap, addScore }) => {
   // Reset States when change map
   useEffect(() => {
     setLoaded(false)
+    if (onDeficiencyChange) onDeficiencyChange('normal')
   }, [mapImporterName])
 
   // Setup useEffect
